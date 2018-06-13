@@ -1,0 +1,37 @@
+{
+  "name": "js-chess",
+  "version": "1.0.0",
+  "description": "Chinese Chess",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cailiangsheng/js-chess.git"
+  },
+  "author": "Larry Cai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cailiangsheng/js-chess/issues"
+  },
+  "homepage": "https://github.com/cailiangsheng/js-chess#readme",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.10",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-istanbul": "^4.1.6",
+    "babel-plugin-module-alias": "^1.6.0",
+    "babel-plugin-resolver": "^1.1.0",
+    "babel-plugin-rewire": "^1.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0"
+  }
+}
