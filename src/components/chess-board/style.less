@@ -1,0 +1,107 @@
+@board-cell-size: 30px;
+
+.chess-board {
+  border: solid 1px black;
+  border-spacing: 0;
+
+  .cell {
+    background-color: white;
+    width: @board-cell-size; 
+    height: @board-cell-size;
+    border-right: solid 1px black;
+    border-bottom: solid 1px black;
+    padding: 0;
+        
+    &:last-child {
+      border-right: none;
+    }
+  }
+ 
+  .row:last-child .cell {
+    border-bottom: none;
+  }
+  
+  .row:nth-child(5) .cell {
+    border-right: none;
+  }
+  
+  .row:nth-child(1) .cell:nth-child(4),
+  .row:nth-child(2) .cell:nth-child(5),
+  .row:nth-child(8) .cell:nth-child(4),
+  .row:nth-child(9) .cell:nth-child(5),
+  .row:nth-child(1) .cell:nth-child(5),
+  .row:nth-child(2) .cell:nth-child(4),
+  .row:nth-child(8) .cell:nth-child(5),
+  .row:nth-child(9) .cell:nth-child(4), {
+    &:before {
+      content: "";
+      display: block;
+      position: relative;
+      top: -50%;
+      width: 143%;
+      border-bottom: 1px solid black;
+      transform-origin: top left;
+      transform: rotateZ(45deg);
+    }
+  }
+
+  .row:nth-child(1) .cell:nth-child(5),
+  .row:nth-child(2) .cell:nth-child(4),
+  .row:nth-child(8) .cell:nth-child(5),
+  .row:nth-child(9) .cell:nth-child(4) {
+    &:before {
+      top: 50%;
+      left: -0.5px;
+      transform-orgin: bottom left;
+      transform: rotateZ(-45deg);
+    }
+  }
+  
+  .row:nth-child(2) .cell:nth-child(1),
+  .row:nth-child(2) .cell:nth-child(7),
+  .row:nth-child(3) .cell:nth-child(2),
+  .row:nth-child(3) .cell:nth-child(4),
+  .row:nth-child(3) .cell:nth-child(6),
+  .row:nth-child(3) .cell:nth-child(8),
+  .row:nth-child(7) .cell:nth-child(1),
+  .row:nth-child(7) .cell:nth-child(7),
+  .row:nth-child(6) .cell:nth-child(2),
+  .row:nth-child(6) .cell:nth-child(4),
+  .row:nth-child(6) .cell:nth-child(6),
+  .row:nth-child(6) .cell:nth-child(8) {
+    &:before {
+      content: "";
+      display: block;
+      width: 30%;
+      height: 30%;
+      margin-left: 60%;
+      margin-top: 50%;
+      border-right: solid 1px black;
+      border-bottom: solid 1px black;
+    }
+  }
+
+  .row:nth-child(2) .cell:nth-child(2),
+  .row:nth-child(2) .cell:nth-child(8),
+  .row:nth-child(3) .cell:nth-child(1),
+  .row:nth-child(3) .cell:nth-child(3),
+  .row:nth-child(3) .cell:nth-child(5),
+  .row:nth-child(3) .cell:nth-child(7),
+  .row:nth-child(7) .cell:nth-child(2),
+  .row:nth-child(7) .cell:nth-child(8),
+  .row:nth-child(6) .cell:nth-child(1),
+  .row:nth-child(6) .cell:nth-child(3),
+  .row:nth-child(6) .cell:nth-child(5),
+  .row:nth-child(6) .cell:nth-child(7) {
+    &:before {
+      content: "";
+      display: block;
+      width: 30%;
+      height: 30%;
+      margin-left: 10%;
+      margin-top: 50%;
+      border-left: solid 1px black;
+      border-bottom: solid 1px black;
+    }
+  }
+}

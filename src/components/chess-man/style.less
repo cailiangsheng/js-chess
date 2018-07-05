@@ -1,0 +1,23 @@
+@chess-man-size: 50px;
+
+.chess-man {
+  background-color: white;
+  text-align: center;
+  width: @chess-man-size;
+  height: @chess-man-size;
+  line-height: @chess-man-size;
+  font-size: 38px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+  
+  &.black {
+    color: black;
+    border-color: black;
+  }
+  
+  &.red {
+    color: red;
+    border-color: red;
+  }
+}
