@@ -1,0 +1,21 @@
+{
+	"preset": ["env", "react", "stage-2"],
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"root": ["."],
+				"alias": {
+
+				}
+			}
+		],
+		"transform-runtime"
+	],
+	"env": {
+		"test": {
+			"istanbul",
+			"rewire"
+		}
+	}
+}
