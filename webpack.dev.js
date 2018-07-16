@@ -23,18 +23,18 @@ module.exports = merge(common, {
 				exclude: /node_modules/,
 				loader: ['style-loader', 'css-loader', 'less-loader']
 			}
-		],
-		stats: {
-			colors: true,
-			errors: true,
-			warnings: true,
-			modules: true,
-			source: true,
-			assets: true
-		},
-		devtool: 'inline-source-map',
-		plugins: [
-			new webpack.HotModuleRelacementPlugin()
 		]
-	}
+	},
+	stats: {
+		colors: true,
+		errors: true,
+		warnings: true,
+		modules: true,
+		source: true,
+		assets: true
+	},
+	devtool: 'inline-source-map',
+	plugins: [
+		new webpack.HotModuleReplacementPlugin()
+	]
 })

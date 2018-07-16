@@ -13,9 +13,9 @@
 		"transform-runtime"
 	],
 	"env": {
-		"test": {
+		"test": [
 			"istanbul",
 			"rewire"
-		}
+		]
 	}
 }
