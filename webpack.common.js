@@ -39,7 +39,8 @@ module.exports = {
 			$: 'jquery',
 			jQuery: 'jquery',
 			'window.$': 'jquery',
-			'window.jQuery': 'jquery'
+			'window.jQuery': 'jquery',
+			Popper: ['popper.js', 'default']
 		}),
 		new HtmlWebpackPlugin({
 			template: 'src/index.ejs',
