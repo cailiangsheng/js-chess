@@ -10,5 +10,5 @@ ReactDOM.render(
         <ChessMan name='车' isBlack />
         <ChessBoard />
     </div>,
-    document.querySelector("#app")
+    document.querySelector("#root")
 )

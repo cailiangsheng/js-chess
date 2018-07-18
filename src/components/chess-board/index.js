@@ -1,3 +1,5 @@
+import React from 'react'
+
 const numColumns = 8
 const numRows = 9
 
@@ -15,6 +17,10 @@ const getRows = () => {
 
 const ChessBoard = () => {
 	return <table className='chess-board'>
-	  {getRows()}
+    <tbody>
+      {getRows()}
+    </tbody>
 	</table>
 }
+
+export default ChessBoard
