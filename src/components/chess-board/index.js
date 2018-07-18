@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.less'
 
 const numColumns = 8
 const numRows = 9
