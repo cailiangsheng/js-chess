@@ -1,20 +1,24 @@
 {
-	"presets": ["env", "react", "stage-2"],
+	"presets": [
+		"env",
+		"react",
+		"stage-2"
+	],
 	"plugins": [
 		[
 			"module-resolver",
 			{
-				"root": ["."],
-				"alias": {
-
-				}
+				"root": [
+					"./src"
+				],
+				"alias": {}
 			}
 		],
 		"transform-runtime"
 	],
 	"env": {
 		"test": {
-			plugins: [
+			"plugins": [
 				"istanbul",
 				"rewire"
 			]

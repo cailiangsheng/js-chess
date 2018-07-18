@@ -1,3 +1,8 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ChessMan from 'components/chess-man'
+import ChessBoard from 'components/chess-board'
+
 ReactDOM.render(
     <div>
         <ChessMan />

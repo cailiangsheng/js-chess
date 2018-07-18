@@ -62,7 +62,7 @@ module.exports = {
 			path.resolve('./node_modules')
 		],
 		alias: {
-			HOCS: 'components/hocs'
+			HOCS: path.resolve(__dirname, 'components/hocs')
 		}
 	}
 }
