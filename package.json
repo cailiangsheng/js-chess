@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "set NODE_ENV=dev && webpack --config webpack.dev.js",
+    "dev-server": "set NODE_ENV=dev && webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "repository": {
@@ -115,7 +116,7 @@
     "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4",
+    "webpack-dev-server": "^2.11.1",
     "webpack-merge": "^4.1.3",
     "webpack-node-externals": "^1.7.2"
   }
