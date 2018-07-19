@@ -70,7 +70,7 @@ function getPlugins (dllManifest) {
 		}))
 	} else {
 		plugins.unshift(new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}))
-		plugins.push(new webpack.optimize.CommonsChunkPlugin('vendor'))
+		plugins.push(new webpack.optimize.CommonsChunkPlugin('libs'))
 	}
 
 	return plugins
