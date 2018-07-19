@@ -7,15 +7,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const exec = require('child_process').exec
 
 const packageJSON = require('./package.json')
+const dependencies = Object.keys(packageJSON.dependencies).concat(['babel-polyfill'])
 
 const outputDir = './dist'
 
 module.exports = function (dllManifest) {
+	const entry = dllManifest ? {} : { libs: dependencies }
 	return {
-		entry: {
-			vendor: Object.keys(packageJSON.dependencies).concat(['babel-polyfill']),
+		entry: Object.assign(entry, {
 			app: 'src/index.js'
-		},
+		}),
 		output: {
 			filename: '[name].[hash].js',
 			chunkFilename: '[name].[chunkhash].js',
