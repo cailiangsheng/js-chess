@@ -6,11 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dll": "webpack --config webpack.dll.js",
-    "dll-dev": "webpack --config webpack.dll-dev.js",
+    "dll-dev": "set NODE_ENV=dev && webpack --config webpack.dll-dev.js",
     "dll-dev-server": "set NODE_ENV=dev && npm run dll && webpack-dev-server --config webpack.dll-dev.js",
     "dev": "set NODE_ENV=dev && webpack --config webpack.dev.js",
     "dev-server": "set NODE_ENV=dev && webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "prod": "webpack --config webpack.prod.js",
+    "dll-prod": "npm run dll && webpack --config webpack.dll-prod.js",
+    "build": "npm run dll-prod"
   },
   "repository": {
     "type": "git",
