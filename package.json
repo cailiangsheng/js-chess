@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dll": "webpack --config webpack.dll.js",
-    "dll-dev": "npm run dll && npm run dev",
-    "dll-dev-server": "npm run dll && npm run dev-server",
+    "dll-dev": "webpack --config webpack.dll-dev.js",
+    "dll-dev-server": "npm run dll && webpack-dev-server --config webpack.dll-dev.js",
     "dev": "set NODE_ENV=dev && webpack --config webpack.dev.js",
     "dev-server": "set NODE_ENV=dev && webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
