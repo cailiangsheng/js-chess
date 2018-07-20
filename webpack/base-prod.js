@@ -1,9 +1,9 @@
 const merge = require('webpack-merge')
-const common = require('./common')
+const base = require('./base')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = function (dllManifest) {
-	return merge(common(dllManifest), {
+	return merge(base(dllManifest), {
 		devtool: "#cheap-module-eval-source-map",
 		module: {
 			rules: [

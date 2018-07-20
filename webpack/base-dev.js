@@ -1,12 +1,12 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const common = require('./common')
+const base = require('./base')
 
 const fs = require('fs')
 const exec = require('child_process').exec
 
 module.exports = function (dllManifest) {
-	return merge(common(dllManifest), {
+	return merge(base(dllManifest), {
 		devServer: {
 			publicPath: '/',
 			contentBase: '../dist',
