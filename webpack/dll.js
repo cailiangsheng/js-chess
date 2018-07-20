@@ -24,7 +24,7 @@ module.exports = {
     new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
     new webpack.DllPlugin({
       path: path.resolve(__dirname, outputDir, '[name].manifest.json'),
-      context: path.resolve(__dirname, outputDir),
+      context: '..',
       name: '[name]'
     }),
     new UglifyJsPlugin({

@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 const exec = require('child_process').exec
 
@@ -50,23 +51,30 @@ module.exports = function (dllManifest) {
 
 function getPlugins (dllManifest) {
 	const plugins = [
-			new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
-			new webpack.ProvidePlugin({
-				$: 'jquery',
-				jQuery: 'jquery',
-				'window.$': 'jquery',
-				'window.jQuery': 'jquery',
-				Popper: ['popper.js', 'default']
-			}),
-			new HtmlWebpackPlugin({
-				template: 'src/index.ejs',
-				inject: 'body'
-			}),
-			new webpack.HashedModuleIdsPlugin(),
+		new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.$': 'jquery',
+			'window.jQuery': 'jquery',
+			Popper: ['popper.js', 'default']
+		}),
+		new HtmlWebpackPlugin({
+			template: 'src/index.ejs',
+			inject: 'body'
+		}),
+		new webpack.HashedModuleIdsPlugin(),
 	]
 
 	if (dllManifest) {
+		plugins.unshift(new AddAssetHtmlPlugin([
+			{
+				filepath: 'dll/libs.js',
+				includeSourcemap: false
+			}
+    ]))
 		plugins.unshift(new webpack.DllReferencePlugin({
+			context: '..',
 			manifest: dllManifest
 		}))
 	} else {
