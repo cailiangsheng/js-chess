@@ -70,7 +70,8 @@ function getPlugins (dllManifest) {
 		plugins.unshift(new AddAssetHtmlPlugin([
 			{
 				filepath: 'dll/libs.js',
-				includeSourcemap: false
+				includeSourcemap: false,
+				hash: true
 			}
     ]))
 		plugins.unshift(new webpack.DllReferencePlugin({

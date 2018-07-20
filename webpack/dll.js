@@ -17,9 +17,9 @@ module.exports = {
     path: path.resolve(__dirname, outputDir),
     filename: '[name].js',
     library: '[name]',
-    sourceMapFilename: '[name].map.json'
+    // sourceMapFilename: '[name].map.json'
   },
-  devtool: '#cheap-module-eval-source-map',
+  // devtool: '#cheap-module-eval-source-map',
   plugins: [
     new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
     new webpack.DllPlugin({
@@ -28,7 +28,7 @@ module.exports = {
       name: '[name]'
     }),
     new UglifyJsPlugin({
-      sourceMap: true
+      // sourceMap: true
     })
   ]
 }
