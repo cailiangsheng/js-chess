@@ -35,7 +35,7 @@ module.exports = function (dllManifest) {
 			source: true,
 			assets: true
 		},
-		devtool: 'inline-source-map',
+		devtool: '#cheap-module-eval-source-map',
 		plugins: [
 			new webpack.HotModuleReplacementPlugin()
 		]

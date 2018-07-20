@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = function (dllManifest) {
 	return merge(common(dllManifest), {
-		devtool: "inline-source-map",
+		devtool: "#cheap-module-eval-source-map",
 		module: {
 			rules: [
 				{

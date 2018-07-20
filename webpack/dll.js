@@ -19,7 +19,7 @@ module.exports = {
     library: '[name]',
     sourceMapFilename: '[name].map.json'
   },
-  devtool: '#source-map',
+  devtool: '#cheap-module-eval-source-map',
   plugins: [
     new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
     new webpack.DllPlugin({
