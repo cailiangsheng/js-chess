@@ -4,10 +4,10 @@ const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const packageJSON = require('./package.json')
+const packageJSON = require('../package.json')
 const dependencies = Object.keys(packageJSON.dependencies).concat(['babel-polyfill'])
 
-const outputDir = './dist'
+const outputDir = '../dist'
 
 module.exports = {
   entry: {

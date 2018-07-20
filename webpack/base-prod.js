@@ -1,5 +1,5 @@
 const merge = require('webpack-merge')
-const common = require('./webpack.common')
+const common = require('./common')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = function (dllManifest) {
