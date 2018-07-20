@@ -50,6 +50,7 @@ module.exports = function (dllManifest) {
 
 function getPlugins (dllManifest) {
 	const plugins = [
+			new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
 			new webpack.ProvidePlugin({
 				$: 'jquery',
 				jQuery: 'jquery',
@@ -69,7 +70,6 @@ function getPlugins (dllManifest) {
 			manifest: dllManifest
 		}))
 	} else {
-		plugins.unshift(new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}))
 		plugins.push(new webpack.optimize.CommonsChunkPlugin('libs'))
 	}
 

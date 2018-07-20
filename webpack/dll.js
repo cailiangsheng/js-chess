@@ -7,7 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const packageJSON = require('../package.json')
 const dependencies = Object.keys(packageJSON.dependencies).concat(['babel-polyfill'])
 
-const outputDir = '../dist'
+const outputDir = '../dll'
 
 module.exports = {
   entry: {
@@ -15,17 +15,17 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, outputDir),
-    filename: '[name].dll.js',
-    library: '[name]_dll',
-    sourceMapFilename: '[name].dll.map.json'
+    filename: '[name].js',
+    library: '[name]',
+    sourceMapFilename: '[name].map.json'
   },
   devtool: '#source-map',
   plugins: [
     new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
     new webpack.DllPlugin({
-      path: path.resolve(__dirname, outputDir, '[name].dll.manifest.json'),
+      path: path.resolve(__dirname, outputDir, '[name].manifest.json'),
       context: path.resolve(__dirname, outputDir),
-      name: '[name]_dll'
+      name: '[name]'
     }),
     new UglifyJsPlugin({
       sourceMap: true

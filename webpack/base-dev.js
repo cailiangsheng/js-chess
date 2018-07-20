@@ -11,6 +11,7 @@ module.exports = function (dllManifest) {
 			publicPath: '/',
 			contentBase: '../dist',
 			hot: true,
+			open: true,
 			port: 8080
 		},
 		module: {
