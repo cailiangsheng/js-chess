@@ -12,7 +12,8 @@
     "dev-server": "webpack-dev-server --config webpack/dev.js",
     "prod": "webpack --config webpack/prod.js",
     "dll-prod": "npm run dll && cross-env DLL=true webpack --config webpack/prod.js",
-    "build": "npm run dll-prod"
+    "build": "npm run dll-prod",
+    "prod-server": "npm run build && http-server dist -o -p 8888"
   },
   "repository": {
     "type": "git",
