@@ -10,9 +10,17 @@
     &:before {
       content: "";
       display: block;
-      width: 50%;
-      height: 50%;
+      width: 60%;
+      height: 60%;
       position: absolute;
+    }
+
+    .cell:first-child &.left {
+      visibility: hidden;
+    }
+
+    .cell:last-child &.right {
+      visibility: hidden;
     }
   }
 
