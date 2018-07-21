@@ -3,10 +3,10 @@ import './style.less'
 
 const ChessTattoo = () => {
   return <div className='chess-tattoo'>
-    <div className='top-left' />
-    <div className='top-right' />
-    <div className='bottom-left' />
-    <div className='bottom-right' />
+    <div className='corner top left' />
+    <div className='corner top right' />
+    <div className='corner bottom left' />
+    <div className='corner bottom right' />
   </div>
 }
 
