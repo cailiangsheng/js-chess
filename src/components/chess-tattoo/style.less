@@ -1,12 +1,19 @@
 .chess-tattoo {
   width: 100%;
   height: 100%;
-  background-color: green;
 
   .corner {
     width: 50%;
     height: 50%;
-    background-color: yellow;
+    position: relative;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 50%;
+      position: absolute;
+    }
   }
 
   .left {
@@ -17,11 +24,23 @@
     float: right;
   }
 
-  .top {
-
+  .left:before {
+    border-right: solid 1px black;
+    left: 0;
   }
 
-  .bottom {
+  .right:before {
+    border-left: solid 1px black;
+    right: 0;
+  }
 
+  .top:before {
+    border-bottom: solid 1px black;
+    top: 0;
+  }
+
+  .bottom::before {
+    border-top: solid 1px black;
+    bottom: 0;
   }
 }
