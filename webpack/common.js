@@ -11,45 +11,44 @@ const packageJSON = require('../package.json')
 const dependencies = Object.keys(packageJSON.dependencies).concat(['babel-polyfill'])
 
 const outputDir = '../dist'
+const useDLL = process.env.DLL !== undefined
+const entry = useDLL ? {} : { libs: dependencies }
 
-module.exports = function (dllManifest) {
-	const entry = dllManifest ? {} : { libs: dependencies }
-	return {
-		entry: Object.assign(entry, {
-			app: 'src/index.js'
-		}),
-		output: {
-			filename: '[name].[hash].js',
-			chunkFilename: '[name].[chunkhash].js',
-			path: path.resolve(__dirname, outputDir)
-		},
-		module: {
-			rules: [
-				{
-					test: /\.js$/,
-					loader: ['cache-loader', 'babel-loader'],
-					exclude: [/node_modules/, /assets/]
-				},
-				{
-					test: /\.(svg|gif|png|jpg|ico|woff|woff2|eot|ttf|otf)$/,
-					loader: 'file-loader'
-				}
-			]
-		},
-		plugins: getPlugins(dllManifest),
-		resolve: {
-			modules: [
-				path.resolve('./'),
-				path.resolve('./node_modules')
-			],
-			alias: {
-				HOCS: path.resolve(__dirname, 'components/hocs')
+module.exports = {
+	entry: Object.assign(entry, {
+		app: 'src/index.js'
+	}),
+	output: {
+		filename: '[name].[hash].js',
+		chunkFilename: '[name].[chunkhash].js',
+		path: path.resolve(__dirname, outputDir)
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				loader: ['cache-loader', 'babel-loader'],
+				exclude: [/node_modules/, /assets/]
+			},
+			{
+				test: /\.(svg|gif|png|jpg|ico|woff|woff2|eot|ttf|otf)$/,
+				loader: 'file-loader'
 			}
+		]
+	},
+	plugins: getPlugins(),
+	resolve: {
+		modules: [
+			path.resolve('./'),
+			path.resolve('./node_modules')
+		],
+		alias: {
+			HOCS: path.resolve(__dirname, 'components/hocs')
 		}
 	}
 }
 
-function getPlugins (dllManifest) {
+function getPlugins () {
 	const plugins = [
 		new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
 		new webpack.ProvidePlugin({
@@ -66,7 +65,7 @@ function getPlugins (dllManifest) {
 		new webpack.HashedModuleIdsPlugin(),
 	]
 
-	if (dllManifest) {
+	if (useDLL) {
 		plugins.unshift(new AddAssetHtmlPlugin([
 			{
 				filepath: 'dll/libs.js',
@@ -76,7 +75,7 @@ function getPlugins (dllManifest) {
     ]))
 		plugins.unshift(new webpack.DllReferencePlugin({
 			context: '..',
-			manifest: dllManifest
+			manifest: require('../dll/libs.manifest.json')
 		}))
 	} else {
 		plugins.push(new webpack.optimize.CommonsChunkPlugin('libs'))
