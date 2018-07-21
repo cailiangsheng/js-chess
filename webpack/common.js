@@ -7,12 +7,9 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 const exec = require('child_process').exec
 
-const packageJSON = require('../package.json')
-const dependencies = Object.keys(packageJSON.dependencies).concat(['babel-polyfill'])
-
 const outputDir = '../dist'
 const useDLL = process.env.DLL !== undefined
-const entry = useDLL ? {} : { libs: dependencies }
+const entry = useDLL ? {} : { libs: require('./libs') }
 
 module.exports = {
 	entry: Object.assign(entry, {
