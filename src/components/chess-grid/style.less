@@ -1,0 +1,16 @@
+@board-cell-size: 28px;
+
+.chess-grid {
+  border-spacing: 1px;
+  margin: -1px;
+
+  .cell {
+    width: @board-cell-size;
+    height: @board-cell-size;
+  }
+
+  .cell.pao-pos,
+  .cell.zu-pos {
+    background-color: red;
+  }
+}
