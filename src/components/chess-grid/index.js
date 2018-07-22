@@ -1,30 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import _ from 'lodash'
 import ChessTattoo from 'components/chess-tattoo'
 import ChessMan from 'components/chess-man'
+import {needsTattoo, findChessMan} from './util'
 import './style.less'
 
 const numColumns = 8 + 1
 const numRows = 9 + 1
-
-const isPaoPosition = (rowIndex, cellIndex) => {
-  return [2, 7].includes(rowIndex) && [1, 7].includes(cellIndex)
-}
-const isZuPosition = (rowIndex, cellIndex) => {
-  return [3, 6].includes(rowIndex) && [0, 2, 4, 6, 8].includes(cellIndex)
-}
-
-const needsTattoo = (rowIndex, cellIndex) => {
-  return isPaoPosition(rowIndex, cellIndex)
-    || isZuPosition(rowIndex, cellIndex)
-}
-
-const findChessMan = (props, rowIndex, cellIndex) => {
-  return props.chessmans.find(chessman =>
-    chessman.rowIndex === rowIndex && chessman.cellIndex === cellIndex
-  )
-}
 
 const onClickHandler = (props, rowIndex, cellIndex, name) => {
   const {onClick} = props
@@ -39,7 +23,7 @@ const renderCells = (props, rowIndex) => {
   return Array
     .from({length: numColumns})
     .map((v, i) => {
-      const chessman = findChessMan(props, rowIndex, i)
+      const chessman = findChessMan(props.chessmans, rowIndex, i)
       const chessmanName = chessman && chessman.name
       return <td key={i} index={i} className='cell' onClick={onClickHandler(props, rowIndex, i, chessmanName)}>
         { !chessman && needsTattoo(rowIndex, i) && <ChessTattoo /> }

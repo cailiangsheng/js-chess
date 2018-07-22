@@ -5,7 +5,8 @@ const dependencies = [
 	'react',
 	'react-dom',
 	'prop-types',
-	'classnames'
+	'classnames',
+	'lodash'
 ]
 
 module.exports = dependencies.concat(['babel-polyfill'])
