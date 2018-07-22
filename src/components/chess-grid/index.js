@@ -26,29 +26,24 @@ const findChessMan = (props, rowIndex, cellIndex) => {
   )
 }
 
-const renderChessMan = (props, rowIndex, cellIndex, name) => {
-  const {onChessManClick} = props
-  const onClick = () => onChessManClick && onChessManClick({
+const onClickHandler = (props, rowIndex, cellIndex, name) => {
+  const {onClick} = props
+  return () => onClick && onClick({
     name,
     rowIndex,
     cellIndex
   })
-  return <ChessMan name={name} onClick={onClick} />
 }
 
 const renderCells = (props, rowIndex) => {
-  const {onChessGridClick} = props
   return Array
     .from({length: numColumns})
     .map((v, i) => {
       const chessman = findChessMan(props, rowIndex, i)
-      const onClick = () => !chessman && onChessGridClick && onChessGridClick({
-        rowIndex,
-        cellIndex: i
-      })
-      return <td key={i} index={i} className='cell' onClick={onClick}>
+      const chessmanName = chessman && chessman.name
+      return <td key={i} index={i} className='cell' onClick={onClickHandler(props, rowIndex, i, chessmanName)}>
         { needsTattoo(rowIndex, i) && <ChessTattoo /> }
-        { chessman && renderChessMan(props, rowIndex, i, chessman.name) }
+        { chessmanName && <ChessMan name={chessmanName} /> }
       </td>
     })
 }
@@ -75,8 +70,7 @@ ChessGrid.propTypes = {
       cellIndex: PropTypes.number.isRequired
     })
   ),
-  onChessManClick: PropTypes.func,
-  onChessGridClick: PropTypes.func
+  onClick: PropTypes.func
 }
 
 ChessGrid.defaultProps = {
