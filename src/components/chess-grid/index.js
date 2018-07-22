@@ -22,7 +22,7 @@ const needsTattoo = (rowIndex, cellIndex) => {
 }
 
 const findChessMan = (props, rowIndex, cellIndex) => {
-  return props.chessmans.find(chessman => 
+  return props.chessmans.find(chessman =>
     chessman.rowIndex === rowIndex && chessman.cellIndex === cellIndex
   )
 }
@@ -56,10 +56,9 @@ const ChessGrid = (props) => {
 ChessGrid.propTypes = {
   chessmans: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string,
-      isBlack: PropTypes.bool,
-      rowIndex: PropTypes.number,
-      cellIndex: PropTypes.number
+      name: PropTypes.string.isRequired,
+      rowIndex: PropTypes.number.isRequired,
+      cellIndex: PropTypes.number.isRequired
     })
   )
 }

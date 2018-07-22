@@ -1,109 +1,91 @@
 [
 	{
-		"name": "A",
-		"isBlack": true,
+		"name": "俥",
 		"rowIndex": 0,
 		"cellIndex": 0
 	},
 	{
-		"name": "B",
-		"isBlack": true,
+		"name": "傌",
 		"rowIndex": 0,
 		"cellIndex": 1
 	},
 	{
-		"name": "C",
-		"isBlack": true,
+		"name": "相",
 		"rowIndex": 0,
 		"cellIndex": 2
 	},
 	{
-		"name": "D",
-		"isBlack": true,
+		"name": "仕",
 		"rowIndex": 0,
 		"cellIndex": 3
 	},
 	{
-		"name": "E",
-		"isBlack": true,
+		"name": "帥",
 		"rowIndex": 0,
 		"cellIndex": 4
 	},
 	{
-		"name": "F",
-		"isBlack": true,
+		"name": "仕",
 		"rowIndex": 0,
 		"cellIndex": 5
 	},
 	{
-		"name": "G",
-		"isBlack": true,
+		"name": "相",
 		"rowIndex": 0,
 		"cellIndex": 6
 	},
 	{
-		"name": "H",
-		"isBlack": true,
+		"name": "傌",
 		"rowIndex": 0,
 		"cellIndex": 7
 	},
 	{
-		"name": "I",
-		"isBlack": true,
+		"name": "俥",
 		"rowIndex": 0,
 		"cellIndex": 8
 	},
 	{
-		"name": "A",
-		"isBlack": true,
+		"name": "車",
 		"rowIndex": 9,
 		"cellIndex": 0
 	},
 	{
-		"name": "B",
-		"isBlack": true,
+		"name": "馬",
 		"rowIndex": 9,
 		"cellIndex": 1
 	},
 	{
-		"name": "C",
-		"isBlack": true,
+		"name": "象",
 		"rowIndex": 9,
 		"cellIndex": 2
 	},
 	{
-		"name": "D",
-		"isBlack": true,
+		"name": "士",
 		"rowIndex": 9,
 		"cellIndex": 3
 	},
 	{
-		"name": "E",
-		"isBlack": true,
+		"name": "將",
 		"rowIndex": 9,
 		"cellIndex": 4
 	},
 	{
-		"name": "F",
-		"isBlack": true,
+		"name": "士",
 		"rowIndex": 9,
 		"cellIndex": 5
 	},
 	{
-		"name": "G",
-		"isBlack": true,
+		"name": "象",
 		"rowIndex": 9,
 		"cellIndex": 6
 	},
 	{
-		"name": "H",
-		"isBlack": true,
+		"name": "馬",
 		"rowIndex": 9,
 		"cellIndex": 7
 	},
 	{
-		"name": "I",
-		"isBlack": true,
+		"name": "車",
 		"rowIndex": 9,
 		"cellIndex": 8
 	}
