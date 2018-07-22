@@ -55,6 +55,31 @@
 		"cellIndex": 7
 	},
 	{
+		"name": "兵",
+		"rowIndex": 3,
+		"cellIndex": 0
+	},
+	{
+		"name": "兵",
+		"rowIndex": 3,
+		"cellIndex": 2
+	},
+	{
+		"name": "兵",
+		"rowIndex": 3,
+		"cellIndex": 4
+	},
+	{
+		"name": "兵",
+		"rowIndex": 3,
+		"cellIndex": 6
+	},
+	{
+		"name": "兵",
+		"rowIndex": 3,
+		"cellIndex": 8
+	},
+	{
 		"name": "車",
 		"rowIndex": 9,
 		"cellIndex": 0
@@ -108,5 +133,30 @@
 		"name": "砲",
 		"rowIndex": 7,
 		"cellIndex": 7
+	},
+	{
+		"name": "卒",
+		"rowIndex": 6,
+		"cellIndex": 0
+	},
+	{
+		"name": "卒",
+		"rowIndex": 6,
+		"cellIndex": 2
+	},
+	{
+		"name": "卒",
+		"rowIndex": 6,
+		"cellIndex": 4
+	},
+	{
+		"name": "卒",
+		"rowIndex": 6,
+		"cellIndex": 6
+	},
+	{
+		"name": "卒",
+		"rowIndex": 6,
+		"cellIndex": 8
 	}
 ]
