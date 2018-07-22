@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ChessTattoo from 'components/chess-tattoo'
 import ChessMan from 'components/chess-man'
-import defaultChessmans from './chessmans.json'
 import './style.less'
 
 const numColumns = 8 + 1
@@ -64,7 +63,7 @@ ChessGrid.propTypes = {
 }
 
 ChessGrid.defaultProps = {
-  chessmans: defaultChessmans
+  chessmans: []
 }
 
 export default ChessGrid
