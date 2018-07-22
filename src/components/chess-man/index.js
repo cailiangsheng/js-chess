@@ -5,6 +5,8 @@ import redNames from './red-names'
 import blackNames from './black-names'
 import './style.less'
 
+const validNames = redNames.concat(blackNames)
+
 const ChessMan = ({name}) => {
 	const isRed = redNames.includes(name)
 	const isBlack = blackNames.includes(name)
@@ -14,7 +16,7 @@ const ChessMan = ({name}) => {
 }
 
 ChessMan.propTypes = {
-	name: PropTypes.string
+	name: PropTypes.oneOf(validNames)
 }
 
 ChessMan.defaultProps = {
