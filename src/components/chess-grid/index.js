@@ -1,6 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ChessTattoo from 'components/chess-tattoo'
+import ChessMan from 'components/chess-man'
+import defaultChessmans from './chessmans.json'
 import './style.less'
 
 const numColumns = 8 + 1
@@ -18,26 +21,51 @@ const needsTattoo = (rowIndex, cellIndex) => {
     || isZuPosition(rowIndex, cellIndex)
 }
 
-const getCells = (rowIndex) => {
+const findChessMan = (props, rowIndex, cellIndex) => {
+  return props.chessmans.find(chessman => 
+    chessman.rowIndex === rowIndex && chessman.cellIndex === cellIndex
+  )
+}
+
+const getCells = (props, rowIndex) => {
   return Array
     .from({length: numColumns})
-    .map((v, i) => <td key={i} index={i} className='cell'>
-      { needsTattoo(rowIndex, i) && <ChessTattoo /> }
-    </td>)
+    .map((v, i) => {
+      const chessman = findChessMan(props, rowIndex, i)
+      return <td key={i} index={i} className='cell'>
+        { needsTattoo(rowIndex, i) && <ChessTattoo /> }
+        { chessman && <ChessMan name={chessman.name} isBlack={chessman.isBlack} /> }
+      </td>
+    })
 }
 
-const getRows = () => {
+const getRows = (props) => {
   return Array
     .from({length: numRows})
-    .map((v, i) => <tr key={i} index={i}  className='row'>{getCells(i)}</tr>)
+    .map((v, i) => <tr key={i} index={i}  className='row'>{getCells(props, i)}</tr>)
 }
 
-const ChessGrid = () => {
+const ChessGrid = (props) => {
 	return <table className='chess-grid'>
     <tbody>
-      {getRows()}
+      {getRows(props)}
     </tbody>
 	</table>
+}
+
+ChessGrid.propTypes = {
+  chessmans: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      isBlack: PropTypes.bool,
+      rowIndex: PropTypes.number,
+      cellIndex: PropTypes.number
+    })
+  )
+}
+
+ChessGrid.defaultProps = {
+  chessmans: defaultChessmans
 }
 
 export default ChessGrid
