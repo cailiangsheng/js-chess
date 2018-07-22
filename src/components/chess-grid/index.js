@@ -42,8 +42,8 @@ const renderCells = (props, rowIndex) => {
       const chessman = findChessMan(props, rowIndex, i)
       const chessmanName = chessman && chessman.name
       return <td key={i} index={i} className='cell' onClick={onClickHandler(props, rowIndex, i, chessmanName)}>
-        { needsTattoo(rowIndex, i) && <ChessTattoo /> }
-        { chessmanName && <ChessMan name={chessmanName} /> }
+        { !chessman && needsTattoo(rowIndex, i) && <ChessTattoo /> }
+        { chessman && <ChessMan name={chessmanName} /> }
       </td>
     })
 }
