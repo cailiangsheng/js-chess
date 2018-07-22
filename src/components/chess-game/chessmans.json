@@ -45,6 +45,16 @@
 		"cellIndex": 8
 	},
 	{
+		"name": "炮",
+		"rowIndex": 2,
+		"cellIndex": 1
+	},
+	{
+		"name": "炮",
+		"rowIndex": 2,
+		"cellIndex": 7
+	},
+	{
 		"name": "車",
 		"rowIndex": 9,
 		"cellIndex": 0
@@ -88,5 +98,15 @@
 		"name": "車",
 		"rowIndex": 9,
 		"cellIndex": 8
+	},
+	{
+		"name": "砲",
+		"rowIndex": 7,
+		"cellIndex": 1
+	},
+	{
+		"name": "砲",
+		"rowIndex": 7,
+		"cellIndex": 7
 	}
 ]
