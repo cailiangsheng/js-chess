@@ -26,28 +26,38 @@ const findChessMan = (props, rowIndex, cellIndex) => {
   )
 }
 
-const getCells = (props, rowIndex) => {
+const renderChessMan = (props, rowIndex, cellIndex) => {
+  const chessman = findChessMan(props, rowIndex, cellIndex)
+  const {onChessManClick} = props
+  const onClick = () => onChessManClick && onChessManClick({
+    name: chessman.name,
+    rowIndex,
+    cellIndex
+  })
+  return chessman && <ChessMan name={chessman.name} onClick={onClick} />
+}
+
+const renderCells = (props, rowIndex) => {
   return Array
     .from({length: numColumns})
     .map((v, i) => {
-      const chessman = findChessMan(props, rowIndex, i)
       return <td key={i} index={i} className='cell'>
         { needsTattoo(rowIndex, i) && <ChessTattoo /> }
-        { chessman && <ChessMan name={chessman.name} /> }
+        { renderChessMan(props, rowIndex, i) }
       </td>
     })
 }
 
-const getRows = (props) => {
+const renderRows = (props) => {
   return Array
     .from({length: numRows})
-    .map((v, i) => <tr key={i} index={i}  className='row'>{getCells(props, i)}</tr>)
+    .map((v, i) => <tr key={i} index={i}  className='row'>{renderCells(props, i)}</tr>)
 }
 
 const ChessGrid = (props) => {
 	return <table className='chess-grid'>
     <tbody>
-      {getRows(props)}
+      {renderRows(props)}
     </tbody>
 	</table>
 }
@@ -59,7 +69,8 @@ ChessGrid.propTypes = {
       rowIndex: PropTypes.number.isRequired,
       cellIndex: PropTypes.number.isRequired
     })
-  )
+  ),
+  onChessManClick: PropTypes.func
 }
 
 ChessGrid.defaultProps = {

@@ -7,7 +7,7 @@ import './style.less'
 const ChessGame = () => {
 	return <div className='chess-game'>
       <ChessBoard />
-      <ChessGrid chessmans={chessmans} />
+      <ChessGrid chessmans={chessmans} onChessManClick={console.log} />
 	</div>
 }
 

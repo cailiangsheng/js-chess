@@ -7,16 +7,18 @@ import './style.less'
 
 const validNames = redNames.concat(blackNames)
 
-const ChessMan = ({name}) => {
+const ChessMan = ({name, onClick}) => {
 	const isRed = redNames.includes(name)
 	const isBlack = blackNames.includes(name)
-	return <div className={classNames('chess-man', {red: isRed, black: isBlack})}>
+	return <div className={classNames('chess-man', {red: isRed, black: isBlack})}
+		onClick={onClick}>
 	  <span>{name}</span>
 	</div>
 }
 
 ChessMan.propTypes = {
-	name: PropTypes.oneOf(validNames)
+	name: PropTypes.oneOf(validNames),
+	onClick: PropTypes.func
 }
 
 ChessMan.defaultProps = {

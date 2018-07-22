@@ -4,22 +4,22 @@ import './style.less'
 const numColumns = 8
 const numRows = 9
 
-const getCells = () => {
+const renderCells = () => {
   return Array
     .from({length: numColumns})
     .map((v, i) => <td key={i} index={i} className='cell' />)
 }
 
-const getRows = () => {
+const renderRows = () => {
   return Array
     .from({length: numRows})
-    .map((v, i) => <tr key={i} index={i}  className='row'>{getCells()}</tr>)
+    .map((v, i) => <tr key={i} index={i}  className='row'>{renderCells()}</tr>)
 }
 
 const ChessBoard = () => {
 	return <table className='chess-board'>
     <tbody>
-      {getRows()}
+      {renderRows()}
     </tbody>
 	</table>
 }
