@@ -1,8 +1,110 @@
 [
 	{
-		"name": "",
+		"name": "A",
 		"isBlack": true,
 		"rowIndex": 0,
 		"cellIndex": 0
+	},
+	{
+		"name": "B",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 1
+	},
+	{
+		"name": "C",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 2
+	},
+	{
+		"name": "D",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 3
+	},
+	{
+		"name": "E",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 4
+	},
+	{
+		"name": "F",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 5
+	},
+	{
+		"name": "G",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 6
+	},
+	{
+		"name": "H",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 7
+	},
+	{
+		"name": "I",
+		"isBlack": true,
+		"rowIndex": 0,
+		"cellIndex": 8
+	},
+	{
+		"name": "A",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 0
+	},
+	{
+		"name": "B",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 1
+	},
+	{
+		"name": "C",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 2
+	},
+	{
+		"name": "D",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 3
+	},
+	{
+		"name": "E",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 4
+	},
+	{
+		"name": "F",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 5
+	},
+	{
+		"name": "G",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 6
+	},
+	{
+		"name": "H",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 7
+	},
+	{
+		"name": "I",
+		"isBlack": true,
+		"rowIndex": 9,
+		"cellIndex": 8
 	}
 ]
