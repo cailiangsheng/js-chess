@@ -34,7 +34,7 @@ const getCells = (props, rowIndex) => {
       const chessman = findChessMan(props, rowIndex, i)
       return <td key={i} index={i} className='cell'>
         { needsTattoo(rowIndex, i) && <ChessTattoo /> }
-        { chessman && <ChessMan name={chessman.name} isBlack={chessman.isBlack} /> }
+        { chessman && <ChessMan name={chessman.name} /> }
       </td>
     })
 }
