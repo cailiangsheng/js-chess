@@ -1,7 +1,9 @@
-import redNames from './names-red'
-import blackNames from './names-black'
+import CONSTS from './consts'
 
+const redNames = CONSTS.RED_NAMES
+const blackNames = CONSTS.BLACK_NAMES
 const validNames = redNames.concat(blackNames)
+
 const isValid = (name) => validNames.includes(name)
 const isRed = (name) => redNames.includes(name)
 const isBlack = (name) => blackNames.includes(name)
@@ -11,10 +13,28 @@ const isSameColor = (name1, name2) => {
 		|| isBlack(name1) && isBlack(name2)
 }
 
+const getColor = (name) => {
+	if (isRed(name)) return CONSTS.COLOR.RED
+	if (isBlack(name)) return CONSTS.COLOR.BLACK
+	return CONSTS.COLOR.INVALID
+}
+
+const getType = (name) => {
+	const redIndex = redNames.indexOf(name)
+	if (redIndex >= 0) return redIndex
+
+	const blackIndex = blackNames.indexOf(name)
+	if (blackIndex >= 0) return blackIndex
+
+	return CONSTS.TYPE.INVALID
+}
+
 export {
   validNames,
   isValid,
   isRed,
   isBlack,
-  isSameColor
+  isSameColor,
+	getColor,
+	getType
 }

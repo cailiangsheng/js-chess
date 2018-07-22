@@ -4,7 +4,7 @@ import ChessGrid from 'components/chess-grid'
 import {isValid, isSameColor} from 'components/chess-man/util'
 import {findChessMan} from 'components/chess-grid/util'
 import {canGo} from './util'
-import chessmans from './chessmans.json'
+import chessmans from './chessmans'
 import './style.less'
 
 class ChessGame extends React.Component {

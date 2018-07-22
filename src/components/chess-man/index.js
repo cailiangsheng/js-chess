@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import {validNames, isRed, isBlack} from './util'
+import {validNames, getColor} from './util'
 import './style.less'
 
 const ChessMan = ({name}) => {
-	return <div className={classNames('chess-man', {red: isRed(name), black: isBlack(name)})}>
+	return <div className={classNames('chess-man', getColor(name))}>
 	  <span>{name}</span>
 	</div>
 }
