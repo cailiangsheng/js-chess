@@ -39,7 +39,8 @@ const canGo = (from, to) => {
 }
 
 const isSamePosition = (position1, position2) => {
-  return position1.rowIndex === position2.rowIndex
+  return position1 && position2
+    && position1.rowIndex === position2.rowIndex
     && position1.cellIndex === position2.cellIndex
 }
 

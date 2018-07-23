@@ -11,37 +11,37 @@ describe('chess-game.util', () => {
 
     it('cannot go with same color', () => {
       expect(canGo(
-        {rowIndex: 0, cellIndex: 1, name: '車'},
-        {rowIndex: 0, cellIndex: 2, name: '馬'},
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 0, cellIndex: 2}, name: '馬'},
       )).to.be.false
     })
 
     it('cannot go to same position', () => {
       expect(canGo(
-        {rowIndex: 0, cellIndex: 1, name: '車'},
-        {rowIndex: 0, cellIndex: 1},
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 0, cellIndex: 1}},
       )).to.be.false
     })
 
     it('cannot go outside boundary', () => {
       expect(canGo(
-        {rowIndex: 0, cellIndex: 1, name: '車'},
-        {rowIndex: 0, cellIndex: 100},
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 0, cellIndex: 100}},
+      )).to.be.false
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 100, cellIndex: 1}},
       )).to.be.false
     })
-    expect(canGo(
-      {rowIndex: 0, cellIndex: 1, name: '車'},
-      {rowIndex: 100, cellIndex: 1},
-    )).to.be.false
 
     it('JU can go straight forward', () => {
       expect(canGo(
-        {rowIndex: 0, cellIndex: 1, name: '車'},
-        {rowIndex: 0, cellIndex: 5}
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 0, cellIndex: 5}}
       )).to.be.true
       expect(canGo(
-        {rowIndex: 0, cellIndex: 1, name: '車'},
-        {rowIndex: 5, cellIndex: 1}
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 5, cellIndex: 1}}
       )).to.be.true
     })
   })

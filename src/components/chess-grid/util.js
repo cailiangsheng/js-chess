@@ -1,6 +1,8 @@
 import CONSTS from './consts'
 
-const isValidPosition = ({rowIndex, cellIndex}) => {
+const isValidPosition = (position) => {
+  if (!position) return false
+  const {rowIndex, cellIndex} = position
   return rowIndex >= 0 && rowIndex < CONSTS.NUM_ROWS
     && cellIndex >=0 && cellIndex < CONSTS.NUM_COLUMNS
 }
