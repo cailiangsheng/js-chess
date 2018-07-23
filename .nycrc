@@ -1,0 +1,13 @@
+{
+    "require": [
+        "babel-register",
+        "babel-polyfill",
+        "./test.spec.js"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "all": false,
+    "include": [
+        "src"
+    ]
+}

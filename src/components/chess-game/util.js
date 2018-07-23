@@ -6,6 +6,8 @@ import {
 import CONSTS from 'components/chess-man/consts'
 
 const canGo = (from, to) => {
+  if (!from || !to) return false
+
   if (isSameColor(from.name, to.name)) return false
 
   switch (getType(from.name)) {

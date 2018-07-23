@@ -4,7 +4,10 @@
   "description": "Chinese Chess",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-register ./src/**/*.test.js",
+    "coverage": "cross-env BABEL_ENV=test nyc mocha ./src/**/*.test.js",
+    "coverage:report": "cross-env BABEL_ENV=test nyc --reporter=lcov --report-dir=./coverage mocha ./src/**/*.test.js",
+    "prepublish": "npm run coverage:report && npm run build",
     "dll": "webpack --config webpack/dll.js",
     "dll-dev": "cross-env DLL=true webpack --config webpack/dev.js",
     "dll-dev-server": "npm run dll && cross-env DLL=true webpack-dev-server --config webpack/dev.js",
