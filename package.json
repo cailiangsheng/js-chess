@@ -4,8 +4,8 @@
   "description": "Chinese Chess",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register ./src/**/*.test.js",
-    "coverage": "cross-env BABEL_ENV=test nyc mocha ./src/**/*.test.js",
+    "test": "cross-env BABEL_ENV=test nyc mocha",
+    "coverage": "cross-env BABEL_ENV=test nyc mocha",
     "coverage:report": "cross-env BABEL_ENV=test nyc --reporter=lcov --report-dir=./coverage mocha ./src/**/*.test.js",
     "prepublish": "npm run coverage:report && npm run build",
     "dll": "webpack --config webpack/dll.js",
