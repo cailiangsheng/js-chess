@@ -15,35 +15,35 @@ class ChessGame extends React.Component {
 		}
 	}
 
-	_goTo = (info) => {
+	_goTo = (target) => {
 		let chessmans = _.cloneDeep(this.state.chessmans)
 
 		const chessmanKilled = findChessMan(
 			chessmans,
-			info.rowIndex,
-			info.cellIndex
+			target.rowIndex,
+			target.cellIndex
 		)
 		chessmans = _.without(chessmans, chessmanKilled)
 
-		const chessmanGo = findChessMan(
+		const chessmanGoing = findChessMan(
 			chessmans,
-			this.goFrom.rowIndex,
-			this.goFrom.cellIndex
+			this.targetFrom.rowIndex,
+			this.targetFrom.cellIndex
 		)
-		chessmanGo.rowIndex = info.rowIndex
-		chessmanGo.cellIndex = info.cellIndex
+		chessmanGoing.rowIndex = target.rowIndex
+		chessmanGoing.cellIndex = target.cellIndex
 
 		this.setState({chessmans}, () => {
-			this.goFrom = null
+			this.targetFrom = null
 		})
 	}
 
-	_onClick = (info) => {
-		if (!this.goFrom && isValid(info.name)
-			|| isSameColor(this.goFrom.name, info.name)) {
-			this.goFrom = info
-		} else if(canGo(this.goFrom, info)) {
-			this._goTo(info)
+	_onClick = (target) => {
+		if (!this.targetFrom && isValid(target.name)
+			|| isSameColor(this.targetFrom.name, target.name)) {
+			this.targetFrom = target
+		} else if(canGo(this.targetFrom, target)) {
+			this._goTo(target)
 		}
 	}
 
