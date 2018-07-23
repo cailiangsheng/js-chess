@@ -14,9 +14,9 @@ const canGo = (from, to) => {
 
   if (isSameColor(from.name, to.name)) return false
 
-  if (isSamePosition(from, to)) return false
+  if (isSamePosition(from.position, to.position)) return false
 
-  if (!isValidPosition(from) || !isValidPosition(to)) return false
+  if (!isValidPosition(from.position) || !isValidPosition(to.position)) return false
 
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:

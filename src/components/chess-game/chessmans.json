@@ -1,162 +1,226 @@
 [
 	{
 		"name": "俥",
-		"rowIndex": 0,
-		"cellIndex": 0
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 0
+		}
 	},
 	{
 		"name": "傌",
-		"rowIndex": 0,
-		"cellIndex": 1
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 1
+		}
 	},
 	{
 		"name": "相",
-		"rowIndex": 0,
-		"cellIndex": 2
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 2
+		}
 	},
 	{
 		"name": "仕",
-		"rowIndex": 0,
-		"cellIndex": 3
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 3
+		}
 	},
 	{
 		"name": "帥",
-		"rowIndex": 0,
-		"cellIndex": 4
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 4
+		}
 	},
 	{
 		"name": "仕",
-		"rowIndex": 0,
-		"cellIndex": 5
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 5
+		}
 	},
 	{
 		"name": "相",
-		"rowIndex": 0,
-		"cellIndex": 6
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 6
+		}
 	},
 	{
 		"name": "傌",
-		"rowIndex": 0,
-		"cellIndex": 7
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 7
+		}
 	},
 	{
 		"name": "俥",
-		"rowIndex": 0,
-		"cellIndex": 8
+		"position": {
+			"rowIndex": 0,
+			"cellIndex": 8
+		}
 	},
 	{
 		"name": "炮",
-		"rowIndex": 2,
-		"cellIndex": 1
+		"position": {
+			"rowIndex": 2,
+			"cellIndex": 1
+		}
 	},
 	{
 		"name": "炮",
-		"rowIndex": 2,
-		"cellIndex": 7
+		"position": {
+			"rowIndex": 2,
+			"cellIndex": 7
+		}
 	},
 	{
 		"name": "兵",
-		"rowIndex": 3,
-		"cellIndex": 0
+		"position": {
+			"rowIndex": 3,
+			"cellIndex": 0
+		}
 	},
 	{
 		"name": "兵",
-		"rowIndex": 3,
-		"cellIndex": 2
+		"position": {
+			"rowIndex": 3,
+			"cellIndex": 2
+		}
 	},
 	{
 		"name": "兵",
-		"rowIndex": 3,
-		"cellIndex": 4
+		"position": {
+			"rowIndex": 3,
+			"cellIndex": 4
+		}
 	},
 	{
 		"name": "兵",
-		"rowIndex": 3,
-		"cellIndex": 6
+		"position": {
+			"rowIndex": 3,
+			"cellIndex": 6
+		}
 	},
 	{
 		"name": "兵",
-		"rowIndex": 3,
-		"cellIndex": 8
+		"position": {
+			"rowIndex": 3,
+			"cellIndex": 8
+		}
 	},
 	{
 		"name": "車",
-		"rowIndex": 9,
-		"cellIndex": 0
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 0
+		}
 	},
 	{
 		"name": "馬",
-		"rowIndex": 9,
-		"cellIndex": 1
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 1
+		}
 	},
 	{
 		"name": "象",
-		"rowIndex": 9,
-		"cellIndex": 2
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 2
+		}
 	},
 	{
 		"name": "士",
-		"rowIndex": 9,
-		"cellIndex": 3
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 3
+		}
 	},
 	{
 		"name": "將",
-		"rowIndex": 9,
-		"cellIndex": 4
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 4
+		}
 	},
 	{
 		"name": "士",
-		"rowIndex": 9,
-		"cellIndex": 5
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 5
+		}
 	},
 	{
 		"name": "象",
-		"rowIndex": 9,
-		"cellIndex": 6
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 6
+		}
 	},
 	{
 		"name": "馬",
-		"rowIndex": 9,
-		"cellIndex": 7
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 7
+		}
 	},
 	{
 		"name": "車",
-		"rowIndex": 9,
-		"cellIndex": 8
+		"position": {
+			"rowIndex": 9,
+			"cellIndex": 8
+		}
 	},
 	{
 		"name": "砲",
-		"rowIndex": 7,
-		"cellIndex": 1
+		"position": {
+			"rowIndex": 7,
+			"cellIndex": 1
+		}
 	},
 	{
 		"name": "砲",
-		"rowIndex": 7,
-		"cellIndex": 7
+		"position": {
+			"rowIndex": 7,
+			"cellIndex": 7
+		}
 	},
 	{
 		"name": "卒",
-		"rowIndex": 6,
-		"cellIndex": 0
+		"position": {
+			"rowIndex": 6,
+			"cellIndex": 0
+		}
 	},
 	{
 		"name": "卒",
-		"rowIndex": 6,
-		"cellIndex": 2
+		"position": {
+			"rowIndex": 6,
+			"cellIndex": 2
+		}
 	},
 	{
 		"name": "卒",
-		"rowIndex": 6,
-		"cellIndex": 4
+		"position": {
+			"rowIndex": 6,
+			"cellIndex": 4
+		}
 	},
 	{
 		"name": "卒",
-		"rowIndex": 6,
-		"cellIndex": 6
+		"position": {
+			"rowIndex": 6,
+			"cellIndex": 6
+		}
 	},
 	{
 		"name": "卒",
-		"rowIndex": 6,
-		"cellIndex": 8
+		"position": {
+			"rowIndex": 6,
+			"cellIndex": 8
+		}
 	}
 ]

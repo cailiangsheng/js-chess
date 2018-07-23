@@ -20,18 +20,15 @@ class ChessGame extends React.Component {
 
 		const chessmanKilled = findChessMan(
 			chessmans,
-			target.rowIndex,
-			target.cellIndex
+			target.position
 		)
 		chessmans = _.without(chessmans, chessmanKilled)
 
 		const chessmanGoing = findChessMan(
 			chessmans,
-			this.targetFrom.rowIndex,
-			this.targetFrom.cellIndex
+			this.targetFrom.position
 		)
-		chessmanGoing.rowIndex = target.rowIndex
-		chessmanGoing.cellIndex = target.cellIndex
+		chessmanGoing.position = target.position
 
 		this.setState({chessmans}, () => {
 			this.targetFrom = null

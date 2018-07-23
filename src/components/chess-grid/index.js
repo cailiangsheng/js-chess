@@ -11,23 +11,17 @@ import './style.less'
 const numColumns = CONSTS.NUM_COLUMNS
 const numRows = CONSTS.NUM_ROWS
 
-const onClickHandler = (props, rowIndex, cellIndex, name) => {
-  const {onClick} = props
-  return () => onClick && onClick({
-    name,
-    rowIndex,
-    cellIndex
-  })
-}
-
 const renderCells = (props, rowIndex) => {
+  const {onClick} = props
   return Array
     .from({length: numColumns})
-    .map((v, i) => {
-      const chessman = findChessMan(props.chessmans, rowIndex, i)
+    .map((v, cellIndex) => {
+      const position = {rowIndex, cellIndex}
+      const chessman = findChessMan(props.chessmans, position)
       const chessmanName = chessman && chessman.name
-      return <td key={i} index={i} className='cell' onClick={onClickHandler(props, rowIndex, i, chessmanName)}>
-        { !chessman && needsTattoo(rowIndex, i) && <ChessTattoo /> }
+      const target = {name: chessmanName, position}
+      return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
+        { !chessman && needsTattoo(position) && <ChessTattoo /> }
         { chessman && <ChessMan name={chessmanName} /> }
       </td>
     })
@@ -51,8 +45,10 @@ ChessGrid.propTypes = {
   chessmans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      rowIndex: PropTypes.number.isRequired,
-      cellIndex: PropTypes.number.isRequired
+      position: PropTypes.shape({
+        rowIndex: PropTypes.number.isRequired,
+        cellIndex: PropTypes.number.isRequired
+      }).isRequired
     })
   ),
   onClick: PropTypes.func

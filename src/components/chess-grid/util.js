@@ -5,22 +5,23 @@ const isValidPosition = ({rowIndex, cellIndex}) => {
     && cellIndex >=0 && cellIndex < CONSTS.NUM_COLUMNS
 }
 
-const isPaoPosition = (rowIndex, cellIndex) => {
+const isPaoPosition = ({rowIndex, cellIndex}) => {
   return [2, 7].includes(rowIndex) && [1, 7].includes(cellIndex)
 }
 
-const isZuPosition = (rowIndex, cellIndex) => {
+const isZuPosition = ({rowIndex, cellIndex}) => {
   return [3, 6].includes(rowIndex) && [0, 2, 4, 6, 8].includes(cellIndex)
 }
 
-const needsTattoo = (rowIndex, cellIndex) => {
+const needsTattoo = ({rowIndex, cellIndex}) => {
   return isPaoPosition(rowIndex, cellIndex)
     || isZuPosition(rowIndex, cellIndex)
 }
 
-const findChessMan = (chessmans, rowIndex, cellIndex) => {
+const findChessMan = (chessmans, {rowIndex, cellIndex}) => {
   return chessmans.find(chessman =>
-    chessman.rowIndex === rowIndex && chessman.cellIndex === cellIndex
+    chessman.position.rowIndex === rowIndex && 
+    chessman.position.cellIndex === cellIndex
   )
 }
 
