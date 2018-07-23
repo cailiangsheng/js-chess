@@ -9,7 +9,7 @@
 			"command": "npm run coverage \"${file}\"",
 			"group": "test",
 			"options": {
-				"cwd": "${workspaceFolder}/src"
+				"cwd": "${workspaceFolder}"
 			},
 			"presentation": {
 				"echo": true,

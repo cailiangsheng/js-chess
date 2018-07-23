@@ -1,8 +1,12 @@
 import {
-  isValid,
   isSameColor,
   getType
 } from 'components/chess-man/util'
+
+import {
+  isValidPosition
+} from 'components/chess-grid/util'
+
 import CONSTS from 'components/chess-man/consts'
 
 const canGo = (from, to) => {
@@ -11,6 +15,8 @@ const canGo = (from, to) => {
   if (isSameColor(from.name, to.name)) return false
 
   if (isSamePosition(from, to)) return false
+
+  if (!isValidPosition(from) || !isValidPosition(to)) return false
 
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:

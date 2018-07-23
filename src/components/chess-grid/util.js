@@ -1,3 +1,10 @@
+import CONSTS from './consts'
+
+const isValidPosition = ({rowIndex, cellIndex}) => {
+  return rowIndex >= 0 && rowIndex < CONSTS.NUM_ROWS
+    && cellIndex >=0 && cellIndex < CONSTS.NUM_COLUMNS
+}
+
 const isPaoPosition = (rowIndex, cellIndex) => {
   return [2, 7].includes(rowIndex) && [1, 7].includes(cellIndex)
 }
@@ -19,5 +26,6 @@ const findChessMan = (chessmans, rowIndex, cellIndex) => {
 
 export {
   needsTattoo,
-  findChessMan
+  findChessMan,
+  isValidPosition
 }

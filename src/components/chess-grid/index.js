@@ -4,11 +4,12 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import ChessTattoo from 'components/chess-tattoo'
 import ChessMan from 'components/chess-man'
+import CONSTS from './consts'
 import {needsTattoo, findChessMan} from './util'
 import './style.less'
 
-const numColumns = 8 + 1
-const numRows = 9 + 1
+const numColumns = CONSTS.NUM_COLUMNS
+const numRows = CONSTS.NUM_ROWS
 
 const onClickHandler = (props, rowIndex, cellIndex, name) => {
   const {onClick} = props
