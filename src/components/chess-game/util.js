@@ -10,6 +10,8 @@ const canGo = (from, to) => {
 
   if (isSameColor(from.name, to.name)) return false
 
+  if (isSamePosition(from, to)) return false
+
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:
       return canGoJu(from, to)
@@ -28,6 +30,11 @@ const canGo = (from, to) => {
     default:
       return false
   }
+}
+
+const isSamePosition = (position1, position2) => {
+  return position1.rowIndex === position2.rowIndex
+    && position1.cellIndex === position2.cellIndex
 }
 
 const canGoJu = (from, to) => {
