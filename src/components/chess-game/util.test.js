@@ -1,7 +1,12 @@
 import {canGo} from './util'
 
-describe('util', () => {
-  it('canGo', () => {
-    expect(canGo(null, null)).to.be.false
+describe('chess-game.util', () => {
+  describe('canGo', () => {
+    it('cannot go with invalid info', () => {
+      expect(canGo(null, null)).to.be.false
+      expect(canGo({}, null)).to.be.false
+      expect(canGo(null, {})).to.be.false
+      expect(canGo({}, {})).to.be.false
+    })
   })
 })
