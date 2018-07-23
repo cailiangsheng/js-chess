@@ -1,3 +1,11 @@
 import {expect} from 'chai'
+import sinon from 'sinon'
+import jsdom from 'jsdom'
+import nock from 'nock'
 
-global.expect = expect
+Object.assign(global, {
+	expect,
+	sinon,
+	jsdom,
+	nock
+})
