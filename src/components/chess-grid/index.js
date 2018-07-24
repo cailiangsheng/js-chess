@@ -31,7 +31,7 @@ const renderCells = (props, rowIndex) => {
 const renderRows = (props) => {
   return Array
     .from({length: numRows})
-    .map((v, i) => <tr key={i} index={i}  className='row'>{renderCells(props, i)}</tr>)
+    .map((v, i) => <tr key={i} className='row'>{renderCells(props, i)}</tr>)
 }
 
 const ChessGrid = (props) => {
