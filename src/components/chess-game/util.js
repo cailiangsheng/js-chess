@@ -54,20 +54,20 @@ const getDeltaPosition = (position1, position2) => ({
   cellIndex: Math.abs(position1.cellIndex - position2.cellIndex)
 })
 
-const canGoStraight = (deltaPosition) => {
+const isStraight = (deltaPosition) => {
   return deltaPosition.rowIndex * deltaPosition.cellIndex === 0
 }
 
-const canGoStraightByOneStep = (deltaPosition) => {
+const isStraightByOneStep = (deltaPosition) => {
   return deltaPosition.rowIndex + deltaPosition.cellIndex === 1
 }
 
-const canGoSlantByOneStep = (deltaPosition) => {
+const isSlantByOneStep = (deltaPosition) => {
   return deltaPosition.rowIndex * deltaPosition.cellIndex === 1
 }
 
 const canGoJu = (fromPosition, toPosition, deltaPosition) => {
-  return canGoStraight(deltaPosition)
+  return isStraight(deltaPosition)
 }
 
 const canGoMa = (fromPosition, toPosition, deltaPosition) => {
@@ -75,7 +75,7 @@ const canGoMa = (fromPosition, toPosition, deltaPosition) => {
 }
 
 const canGoPao = (fromPosition, toPosition, deltaPosition) => {
-  return canGoStraight(deltaPosition)
+  return isStraight(deltaPosition)
 }
 
 const canGoXiang = (fromPosition, toPosition, deltaPosition) => {
@@ -94,7 +94,7 @@ const canGoShi = (fromPosition, toPosition, deltaPosition) => {
   } else if (!isShiPosition(toPosition)) {
     return false
   } else {
-    return canGoSlantByOneStep(deltaPosition)
+    return isSlantByOneStep(deltaPosition)
   }
 }
 
@@ -104,12 +104,12 @@ const canGoJiang = (fromPosition, toPosition, deltaPosition) => {
   } else if (!isJiangPosition(toPosition)) {
     return false
   } else {
-    return canGoStraightByOneStep(deltaPosition)
+    return isStraightByOneStep(deltaPosition)
   }
 }
 
 const canGoZu = (fromPosition, toPosition, deltaPosition) => {
-  return canGoStraightByOneStep(deltaPosition)
+  return isStraightByOneStep(deltaPosition)
 }
 
 export {

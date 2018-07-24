@@ -12,17 +12,18 @@ const numColumns = CONSTS.NUM_COLUMNS
 const numRows = CONSTS.NUM_ROWS
 
 const renderCells = (props, rowIndex) => {
-  const {onClick} = props
+  const {onClick, activeChessman} = props
   return Array
     .from({length: numColumns})
     .map((v, cellIndex) => {
       const position = {rowIndex, cellIndex}
       const chessman = findChessMan(props.chessmans, position)
       const chessmanName = chessman && chessman.name
+      const isActive = activeChessman && _.isEqual(position, activeChessman.position)
       const target = {name: chessmanName, position}
       return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
         { !chessman && needsTattoo(position) && <ChessTattoo /> }
-        { chessman && <ChessMan name={chessmanName} /> }
+        { chessman && <ChessMan name={chessmanName} isActive={isActive} /> }
       </td>
     })
 }
@@ -51,6 +52,13 @@ ChessGrid.propTypes = {
       }).isRequired
     })
   ),
+  activeChessman: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.shape({
+      rowIndex: PropTypes.number.isRequired,
+      cellIndex: PropTypes.number.isRequired
+    }).isRequired
+  }),
   onClick: PropTypes.func
 }
 

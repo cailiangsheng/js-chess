@@ -11,7 +11,8 @@ class ChessGame extends React.Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			chessmans
+			chessmans,
+			activeChessman: null
 		}
 	}
 
@@ -26,28 +27,33 @@ class ChessGame extends React.Component {
 
 		const chessmanGoing = findChessMan(
 			chessmans,
-			this.targetFrom.position
+			this.state.activeChessman.position
 		)
 		chessmanGoing.position = target.position
 
-		this.setState({chessmans}, () => {
-			this.targetFrom = null
+		this.setState({
+			chessmans,
+			activeChessman: null
 		})
 	}
 
 	_onClick = (target) => {
-		if (!this.targetFrom && isValid(target.name)
-			|| isSameColor(this.targetFrom.name, target.name)) {
-			this.targetFrom = target
-		} else if(canGo(this.targetFrom, target)) {
+		const {activeChessman} = this.state
+		if (!activeChessman && isValid(target.name)
+			|| isSameColor(activeChessman.name, target.name)) {
+			this.setState({
+				activeChessman: target
+			})
+		} else if(canGo(activeChessman, target)) {
 			this._goTo(target)
 		}
 	}
 
 	render () {
+		const {chessmans, activeChessman} = this.state
 		return <div className='chess-game'>
 	      <ChessBoard />
-	      <ChessGrid chessmans={this.state.chessmans} onClick={this._onClick} />
+	      <ChessGrid chessmans={chessmans} activeChessman={activeChessman} onClick={this._onClick} />
 		</div>
 	}
 }

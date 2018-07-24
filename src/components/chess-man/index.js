@@ -4,18 +4,22 @@ import classNames from 'classnames'
 import {validNames, getColor} from './util'
 import './style.less'
 
-const ChessMan = ({name}) => {
-	return <div className={classNames('chess-man', getColor(name))}>
+const ChessMan = ({name, isActive}) => {
+	return <div className={
+		classNames('chess-man', getColor(name), {'active': isActive})
+	}>
 	  <span>{name}</span>
 	</div>
 }
 
 ChessMan.propTypes = {
-	name: PropTypes.oneOf(validNames)
+	name: PropTypes.oneOf(validNames),
+	isActive: PropTypes.bool
 }
 
 ChessMan.defaultProps = {
-	name: '象'
+	name: '象',
+	isActive: false
 }
 
 export default ChessMan
