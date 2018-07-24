@@ -1,10 +1,13 @@
+import _ from 'lodash'
+
 import {
   isSameColor,
   getType
 } from 'components/chess-man/util'
 
 import {
-  isValidPosition
+  isValidPosition,
+  isSamePosition
 } from 'components/chess-grid/util'
 
 import CONSTS from 'components/chess-man/consts'
@@ -36,12 +39,6 @@ const canGo = (from, to) => {
     default:
       return false
   }
-}
-
-const isSamePosition = (position1, position2) => {
-  return position1 && position2
-    && position1.rowIndex === position2.rowIndex
-    && position1.cellIndex === position2.cellIndex
 }
 
 const canGoJu = (from, to) => {

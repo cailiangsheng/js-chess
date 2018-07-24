@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import CONSTS from './consts'
 
 const isValidPosition = (position) => {
@@ -15,20 +16,21 @@ const isZuPosition = ({rowIndex, cellIndex}) => {
   return [3, 6].includes(rowIndex) && [0, 2, 4, 6, 8].includes(cellIndex)
 }
 
-const needsTattoo = ({rowIndex, cellIndex}) => {
-  return isPaoPosition(rowIndex, cellIndex)
-    || isZuPosition(rowIndex, cellIndex)
+const needsTattoo = (position) => {
+  return isPaoPosition(position) || isZuPosition(position)
 }
 
-const findChessMan = (chessmans, {rowIndex, cellIndex}) => {
-  return chessmans.find(chessman =>
-    chessman.position.rowIndex === rowIndex && 
-    chessman.position.cellIndex === cellIndex
-  )
+const isSamePosition = (position1, position2) => {
+  return position1 && position2 && _.isEqual(position1, position2)
+}
+
+const findChessMan = (chessmans, position) => {
+  return chessmans.find(chessman => isSamePosition(chessman.position, position))
 }
 
 export {
   needsTattoo,
   findChessMan,
+  isSamePosition,
   isValidPosition
 }
