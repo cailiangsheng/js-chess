@@ -7,7 +7,10 @@ import {
 
 import {
   isValidPosition,
-  isSamePosition
+  isSamePosition,
+  isJiangPosition,
+  isShiPosition,
+  isXiangPosition
 } from 'components/chess-grid/util'
 
 import CONSTS from 'components/chess-man/consts'
@@ -76,15 +79,33 @@ const canGoPao = (fromPosition, toPosition, deltaPosition) => {
 }
 
 const canGoXiang = (fromPosition, toPosition, deltaPosition) => {
-  return deltaPosition.rowIndex === 2 && deltaPosition.cellIndex === 2
+  if (!isXiangPosition(fromPosition)) {
+    throw new Error('XIANG is at invalid position')
+  } else if (!isXiangPosition(toPosition)) {
+    return false
+  } else {
+    return deltaPosition.rowIndex === 2 && deltaPosition.cellIndex === 2
+  }
 }
 
 const canGoShi = (fromPosition, toPosition, deltaPosition) => {
-  return canGoSlantByOneStep(deltaPosition)
+  if (!isShiPosition(fromPosition)) {
+    throw new Error('SHI is at invalid position')
+  } else if (!isShiPosition(toPosition)) {
+    return false
+  } else {
+    return canGoSlantByOneStep(deltaPosition)
+  }
 }
 
 const canGoJiang = (fromPosition, toPosition, deltaPosition) => {
-  return canGoStraightByOneStep(deltaPosition)
+  if (!isJiangPosition(fromPosition)) {
+    throw new Error('JIANG is at invalid position')
+  } else if (!isJiangPosition(toPosition)) {
+    return false
+  } else {
+    return canGoStraightByOneStep(deltaPosition)
+  }
 }
 
 const canGoZu = (fromPosition, toPosition, deltaPosition) => {

@@ -8,6 +8,20 @@ const isValidPosition = (position) => {
     && cellIndex >=0 && cellIndex < CONSTS.NUM_COLUMNS
 }
 
+const isJiangPosition = ({rowIndex, cellIndex}) => {
+  return [0, 1, 2, 7, 8, 9].includes(rowIndex) && [3, 4, 5].includes(cellIndex)
+}
+
+const isShiPosition = ({rowIndex, cellIndex}) => {
+  return [0, 2, 7, 9].includes(rowIndex) && [3, 5].includes(cellIndex)
+    || [1, 8].includes(rowIndex) && cellIndex === 4
+}
+
+const isXiangPosition =({rowIndex, cellIndex}) => {
+  return [0, 4, 5, 9].includes(rowIndex) && [2, 6].includes(cellIndex)
+    || [2, 7].includes(rowIndex) && [0, 4, 8].includes(cellIndex)
+}
+
 const isPaoPosition = ({rowIndex, cellIndex}) => {
   return [2, 7].includes(rowIndex) && [1, 7].includes(cellIndex)
 }
@@ -32,5 +46,8 @@ export {
   needsTattoo,
   findChessMan,
   isSamePosition,
-  isValidPosition
+  isValidPosition,
+  isJiangPosition,
+  isShiPosition,
+  isXiangPosition
 }

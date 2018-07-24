@@ -101,102 +101,102 @@ describe('chess-game.util', () => {
 
     it('XIANG can go in TIAN direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
-        {position: {rowIndex: 2, cellIndex: 3}}
+        {position: {rowIndex: 2, cellIndex: 4}, name: '相'},
+        {position: {rowIndex: 4, cellIndex: 6}}
       )).to.be.true
     })
 
     it('XIANG cannot go in RI direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
-        {position: {rowIndex: 2, cellIndex: 0}}
+        {position: {rowIndex: 2, cellIndex: 4}, name: '相'},
+        {position: {rowIndex: 3, cellIndex: 6}}
       )).to.be.false
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
-        {position: {rowIndex: 2, cellIndex: 2}}
+        {position: {rowIndex: 2, cellIndex: 4}, name: '相'},
+        {position: {rowIndex: 4, cellIndex: 5}}
       )).to.be.false
     })
 
     it('XIANG cannot go straight forward', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
-        {position: {rowIndex: 0, cellIndex: 5}}
+        {position: {rowIndex: 2, cellIndex: 4}, name: '相'},
+        {position: {rowIndex: 2, cellIndex: 6}}
       )).to.be.false
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
-        {position: {rowIndex: 5, cellIndex: 1}}
+        {position: {rowIndex: 2, cellIndex: 4}, name: '相'},
+        {position: {rowIndex: 6, cellIndex: 4}}
       )).to.be.false
     })
 
     it('SHI can go in slant direction by one step', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
-        {position: {rowIndex: 1, cellIndex: 2}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '士'},
+        {position: {rowIndex: 2, cellIndex: 5}}
       )).to.be.true
     })
 
     it('SHI cannot go in RI direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
-        {position: {rowIndex: 2, cellIndex: 0}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '士'},
+        {position: {rowIndex: 2, cellIndex: 6}}
       )).to.be.false
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
-        {position: {rowIndex: 2, cellIndex: 2}}
+        {position: {rowIndex: 0, cellIndex: 5}, name: '士'},
+        {position: {rowIndex: 2, cellIndex: 6}}
       )).to.be.false
     })
 
     it('SHI cannot go in TIAN direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
-        {position: {rowIndex: 2, cellIndex: 3}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '士'},
+        {position: {rowIndex: 3, cellIndex: 6}}
       )).to.be.false
     })
 
     it('SHI cannot go straight forward', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
-        {position: {rowIndex: 0, cellIndex: 5}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '士'},
+        {position: {rowIndex: 1, cellIndex: 5}}
       )).to.be.false
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
-        {position: {rowIndex: 5, cellIndex: 1}}
+        {position: {rowIndex: 0, cellIndex: 5}, name: '士'},
+        {position: {rowIndex: 1, cellIndex: 5}}
       )).to.be.false
     })
 
     it('JIANG can go straight forward by one step', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
-        {position: {rowIndex: 0, cellIndex: 2}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+        {position: {rowIndex: 1, cellIndex: 5}}
       )).to.be.true
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
-        {position: {rowIndex: 1, cellIndex: 1}}
+        {position: {rowIndex: 0, cellIndex: 5}, name: '將'},
+        {position: {rowIndex: 1, cellIndex: 5}}
       )).to.be.true
     })
 
     it('JIANG cannot go in slant direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
-        {position: {rowIndex: 1, cellIndex: 2}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+        {position: {rowIndex: 2, cellIndex: 5}}
       )).to.be.false
     })
 
     it('JIANG cannot go in RI direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
-        {position: {rowIndex: 2, cellIndex: 0}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+        {position: {rowIndex: 2, cellIndex: 6}}
       )).to.be.false
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
-        {position: {rowIndex: 2, cellIndex: 2}}
+        {position: {rowIndex: 0, cellIndex: 5}, name: '將'},
+        {position: {rowIndex: 2, cellIndex: 6}}
       )).to.be.false
     })
 
     it('JIANG cannot go in TIAN direction', () => {
       expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
-        {position: {rowIndex: 2, cellIndex: 3}}
+        {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+        {position: {rowIndex: 3, cellIndex: 6}}
       )).to.be.false
     })
 
