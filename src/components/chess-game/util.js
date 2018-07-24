@@ -17,55 +17,59 @@ const canGo = (from, to) => {
 
   if (isSameColor(from.name, to.name)) return false
 
-  if (isSamePosition(from.position, to.position)) return false
+  const fromPosition = from.position
+  const toPosition = to.position
 
-  if (!isValidPosition(from.position) || !isValidPosition(to.position)) return false
+  if (!isValidPosition(fromPosition) || !isValidPosition(toPosition)) return false
+
+  if (isSamePosition(fromPosition, toPosition)) return false
 
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:
-      return canGoJu(from, to)
+      return canGoJu(fromPosition, toPosition)
     case CONSTS.TYPE.MA:
-      return canGoMa(from, to)
+      return canGoMa(fromPosition, toPosition)
     case CONSTS.TYPE.PAO:
-      return canGoPao(from, to)
+      return canGoPao(fromPosition, toPosition)
     case CONSTS.TYPE.XIANG:
-      return canGoXiang(from, to)
+      return canGoXiang(fromPosition, toPosition)
     case CONSTS.TYPE.SHI:
-      return canGoShi(from, to)
+      return canGoShi(fromPosition, toPosition)
     case CONSTS.TYPE.JIANG:
-      return canGoJiang(from, to)
+      return canGoJiang(fromPosition, toPosition)
     case CONSTS.TYPE.ZU:
-      return canGoZu(from, to)
+      return canGoZu(fromPosition, toPosition)
     default:
       return false
   }
 }
 
-const canGoJu = (from, to) => {
+const canGoJu = (fromPosition, toPosition) => {
+  return fromPosition.rowIndex !== toPosition.rowIndex && fromPosition.cellIndex === toPosition.cellIndex
+    || fromPosition.rowIndex === toPosition.rowIndex && fromPosition.cellIndex !== toPosition.cellIndex
+}
+
+const canGoMa = (fromPosition, toPosition) => {
   return true
 }
 
-const canGoMa = (from, to) => {
+const canGoPao = (fromPosition, toPosition) => {
   return true
 }
 
-const canGoPao = (from, to) => {
+const canGoXiang = (fromPosition, toPosition) => {
   return true
 }
 
-const canGoXiang = (from, to) => {
+const canGoShi = (fromPosition, toPosition) => {
   return true
 }
 
-const canGoShi = (from, to) => {
+const canGoJiang = (fromPosition, toPosition) => {
   return true
 }
 
-const canGoJiang = (from, to) => {
-  return true
-}
-
-const canGoZu = (from, to) => {
+const canGoZu = (fromPosition, toPosition) => {
   return true
 }
 

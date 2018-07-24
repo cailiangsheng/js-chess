@@ -44,5 +44,12 @@ describe('chess-game.util', () => {
         {position: {rowIndex: 5, cellIndex: 1}}
       )).to.be.true
     })
+
+    it('JU cannot go in slant direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 2, cellIndex: 2}}
+      )).to.be.false
+    })
   })
 })
