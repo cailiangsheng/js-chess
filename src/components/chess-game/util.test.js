@@ -163,5 +163,41 @@ describe('chess-game.util', () => {
         {position: {rowIndex: 5, cellIndex: 1}}
       )).to.be.false
     })
+
+    it('JIANG can go straight forward by one step', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
+        {position: {rowIndex: 0, cellIndex: 2}}
+      )).to.be.true
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
+        {position: {rowIndex: 1, cellIndex: 1}}
+      )).to.be.true
+    })
+
+    it('JIANG cannot go in slant direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
+        {position: {rowIndex: 1, cellIndex: 2}}
+      )).to.be.false
+    })
+
+    it('JIANG cannot go in RI direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
+        {position: {rowIndex: 2, cellIndex: 0}}
+      )).to.be.false
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
+        {position: {rowIndex: 2, cellIndex: 2}}
+      )).to.be.false
+    })
+
+    it('JIANG cannot go in TIAN direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '將'},
+        {position: {rowIndex: 2, cellIndex: 3}}
+      )).to.be.false
+    })
   })
 })
