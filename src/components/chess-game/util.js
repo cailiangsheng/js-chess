@@ -84,7 +84,10 @@ const canGoJiang = (fromPosition, toPosition) => {
 }
 
 const canGoZu = (fromPosition, toPosition) => {
-  return true
+  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
+  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
+  return deltaRowIndex * deltaCellIndex === 0
+    && deltaRowIndex + deltaCellIndex === 1
 }
 
 export {
