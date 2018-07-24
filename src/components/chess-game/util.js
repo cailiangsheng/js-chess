@@ -44,10 +44,14 @@ const canGo = (from, to) => {
   }
 }
 
-const canGoJu = (fromPosition, toPosition) => {
+const canGoStraight = (fromPosition, toPosition) => {
   const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
   const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
   return deltaRowIndex * deltaCellIndex === 0
+}
+
+const canGoJu = (fromPosition, toPosition) => {
+  return canGoStraight(fromPosition, toPosition)
 }
 
 const canGoMa = (fromPosition, toPosition) => {
@@ -57,11 +61,13 @@ const canGoMa = (fromPosition, toPosition) => {
 }
 
 const canGoPao = (fromPosition, toPosition) => {
-  return true
+  return canGoStraight(fromPosition, toPosition)
 }
 
 const canGoXiang = (fromPosition, toPosition) => {
-  return true
+  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
+  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
+  return deltaRowIndex * deltaCellIndex === 4
 }
 
 const canGoShi = (fromPosition, toPosition) => {
