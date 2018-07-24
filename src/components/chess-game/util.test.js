@@ -51,5 +51,34 @@ describe('chess-game.util', () => {
         {position: {rowIndex: 2, cellIndex: 2}}
       )).to.be.false
     })
+
+    it('MA can go in RI direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '馬'},
+        {position: {rowIndex: 2, cellIndex: 0}}
+      )).to.be.true
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '馬'},
+        {position: {rowIndex: 2, cellIndex: 2}}
+      )).to.be.true
+    })
+
+    it('MA cannot go in TIAN direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '馬'},
+        {position: {rowIndex: 2, cellIndex: 3}}
+      )).to.be.false
+    })
+
+    it('MA cannot go straight forward', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '馬'},
+        {position: {rowIndex: 0, cellIndex: 5}}
+      )).to.be.false
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '馬'},
+        {position: {rowIndex: 5, cellIndex: 1}}
+      )).to.be.false
+    })
   })
 })

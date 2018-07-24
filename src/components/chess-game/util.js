@@ -45,12 +45,15 @@ const canGo = (from, to) => {
 }
 
 const canGoJu = (fromPosition, toPosition) => {
-  return fromPosition.rowIndex !== toPosition.rowIndex && fromPosition.cellIndex === toPosition.cellIndex
-    || fromPosition.rowIndex === toPosition.rowIndex && fromPosition.cellIndex !== toPosition.cellIndex
+  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
+  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
+  return deltaRowIndex * deltaCellIndex === 0
 }
 
 const canGoMa = (fromPosition, toPosition) => {
-  return true
+  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
+  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
+  return deltaRowIndex * deltaCellIndex === 2
 }
 
 const canGoPao = (fromPosition, toPosition) => {
