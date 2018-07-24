@@ -24,70 +24,71 @@ const canGo = (from, to) => {
 
   if (isSamePosition(fromPosition, toPosition)) return false
 
+  const deltaPosition = getDeltaPosition(fromPosition, toPosition)
+
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:
-      return canGoJu(fromPosition, toPosition)
+      return canGoJu(fromPosition, toPosition, deltaPosition)
     case CONSTS.TYPE.MA:
-      return canGoMa(fromPosition, toPosition)
+      return canGoMa(fromPosition, toPosition, deltaPosition)
     case CONSTS.TYPE.PAO:
-      return canGoPao(fromPosition, toPosition)
+      return canGoPao(fromPosition, toPosition, deltaPosition)
     case CONSTS.TYPE.XIANG:
-      return canGoXiang(fromPosition, toPosition)
+      return canGoXiang(fromPosition, toPosition, deltaPosition)
     case CONSTS.TYPE.SHI:
-      return canGoShi(fromPosition, toPosition)
+      return canGoShi(fromPosition, toPosition, deltaPosition)
     case CONSTS.TYPE.JIANG:
-      return canGoJiang(fromPosition, toPosition)
+      return canGoJiang(fromPosition, toPosition, deltaPosition)
     case CONSTS.TYPE.ZU:
-      return canGoZu(fromPosition, toPosition)
+      return canGoZu(fromPosition, toPosition, deltaPosition)
     default:
       return false
   }
 }
 
-const canGoStraight = (fromPosition, toPosition) => {
-  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
-  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
-  return deltaRowIndex * deltaCellIndex === 0
+const getDeltaPosition = (position1, position2) => ({
+  rowIndex: Math.abs(position1.rowIndex - position2.rowIndex),
+  cellIndex: Math.abs(position1.cellIndex - position2.cellIndex)
+})
+
+const canGoStraight = (deltaPosition) => {
+  return deltaPosition.rowIndex * deltaPosition.cellIndex === 0
 }
 
-const canGoJu = (fromPosition, toPosition) => {
-  return canGoStraight(fromPosition, toPosition)
+const canGoStraightByOneStep = (deltaPosition) => {
+  return deltaPosition.rowIndex + deltaPosition.cellIndex === 1
 }
 
-const canGoMa = (fromPosition, toPosition) => {
-  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
-  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
-  return deltaRowIndex * deltaCellIndex === 2
+const canGoSlantByOneStep = (deltaPosition) => {
+  return deltaPosition.rowIndex * deltaPosition.cellIndex === 1
 }
 
-const canGoPao = (fromPosition, toPosition) => {
-  return canGoStraight(fromPosition, toPosition)
+const canGoJu = (fromPosition, toPosition, deltaPosition) => {
+  return canGoStraight(deltaPosition)
 }
 
-const canGoXiang = (fromPosition, toPosition) => {
-  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
-  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
-  return deltaRowIndex * deltaCellIndex === 4
+const canGoMa = (fromPosition, toPosition, deltaPosition) => {
+  return deltaPosition.rowIndex * deltaPosition.cellIndex === 2
 }
 
-const canGoShi = (fromPosition, toPosition) => {
-  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
-  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
-  return deltaRowIndex * deltaCellIndex === 1
+const canGoPao = (fromPosition, toPosition, deltaPosition) => {
+  return canGoStraight(deltaPosition)
 }
 
-const canGoJiang = (fromPosition, toPosition) => {
-  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
-  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
-  return deltaRowIndex * deltaCellIndex === 0
-    && deltaRowIndex + deltaCellIndex === 1
+const canGoXiang = (fromPosition, toPosition, deltaPosition) => {
+  return deltaPosition.rowIndex === 2 && deltaPosition.cellIndex === 2
 }
 
-const canGoZu = (fromPosition, toPosition) => {
-  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
-  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
-  return deltaRowIndex * deltaCellIndex === 0
-    && deltaRowIndex + deltaCellIndex === 1
+const canGoShi = (fromPosition, toPosition, deltaPosition) => {
+  return canGoSlantByOneStep(deltaPosition)
+}
+
+const canGoJiang = (fromPosition, toPosition, deltaPosition) => {
+  return canGoStraightByOneStep(deltaPosition)
+}
+
+const canGoZu = (fromPosition, toPosition, deltaPosition) => {
+  return canGoStraightByOneStep(deltaPosition)
 }
 
 export {
