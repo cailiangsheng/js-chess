@@ -71,7 +71,9 @@ const canGoXiang = (fromPosition, toPosition) => {
 }
 
 const canGoShi = (fromPosition, toPosition) => {
-  return true
+  const deltaRowIndex = Math.abs(fromPosition.rowIndex - toPosition.rowIndex)
+  const deltaCellIndex = Math.abs(fromPosition.cellIndex - toPosition.cellIndex)
+  return deltaRowIndex * deltaCellIndex === 1
 }
 
 const canGoJiang = (fromPosition, toPosition) => {

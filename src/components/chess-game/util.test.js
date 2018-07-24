@@ -99,6 +99,13 @@ describe('chess-game.util', () => {
       )).to.be.false
     })
 
+    it('XIANG can go in TIAN direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
+        {position: {rowIndex: 2, cellIndex: 3}}
+      )).to.be.true
+    })
+
     it('XIANG cannot go in RI direction', () => {
       expect(canGo(
         {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
@@ -110,13 +117,6 @@ describe('chess-game.util', () => {
       )).to.be.false
     })
 
-    it('XIANG can go in TIAN direction', () => {
-      expect(canGo(
-        {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
-        {position: {rowIndex: 2, cellIndex: 3}}
-      )).to.be.true
-    })
-
     it('XIANG cannot go straight forward', () => {
       expect(canGo(
         {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
@@ -124,6 +124,42 @@ describe('chess-game.util', () => {
       )).to.be.false
       expect(canGo(
         {position: {rowIndex: 0, cellIndex: 1}, name: '相'},
+        {position: {rowIndex: 5, cellIndex: 1}}
+      )).to.be.false
+    })
+
+    it('SHI can go in slant direction by one step', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
+        {position: {rowIndex: 1, cellIndex: 2}}
+      )).to.be.true
+    })
+
+    it('SHI cannot go in RI direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
+        {position: {rowIndex: 2, cellIndex: 0}}
+      )).to.be.false
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
+        {position: {rowIndex: 2, cellIndex: 2}}
+      )).to.be.false
+    })
+
+    it('SHI cannot go in TIAN direction', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
+        {position: {rowIndex: 2, cellIndex: 3}}
+      )).to.be.false
+    })
+
+    it('SHI cannot go straight forward', () => {
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
+        {position: {rowIndex: 0, cellIndex: 5}}
+      )).to.be.false
+      expect(canGo(
+        {position: {rowIndex: 0, cellIndex: 1}, name: '士'},
         {position: {rowIndex: 5, cellIndex: 1}}
       )).to.be.false
     })
