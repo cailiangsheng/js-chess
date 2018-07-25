@@ -71,7 +71,7 @@ const isSlantByOneStep = (differ) => {
   return differ.deltaRow * differ.deltaCell === 1
 }
 
-const countBlockers = ({fromPosition, toPosition, differ, chessmans}) => {
+const countStraightBlockers = ({fromPosition, toPosition, differ, chessmans}) => {
   const numSteps = Math.max(differ.deltaRow, differ.deltaCell) - 1
   const position = {
     rowIndex: fromPosition.rowIndex,
@@ -89,17 +89,25 @@ const countBlockers = ({fromPosition, toPosition, differ, chessmans}) => {
 }
 
 const canGoJu = (params) => {
-  return isStraight(params.differ) && countBlockers(params) === 0
+  return isStraight(params.differ) && countStraightBlockers(params) === 0
 }
 
 const canGoMa = ({fromPosition, toPosition, differ, chessmans}) => {
-  return differ.deltaRow * differ.deltaCell === 2
+  return differ.deltaRow * differ.deltaCell === 2 && (
+    !findChessMan(chessmans,
+      (
+        differ.deltaRow > differ.deltaCell
+        ? {rowIndex: fromPosition.rowIndex + differ.stepRow, cellIndex: fromPosition.cellIndex}
+        : {rowIndex: fromPosition.rowIndex, cellIndex: fromPosition.cellIndex + differ.stepCell}
+      )
+    )
+  )
 }
 
 const canGoPao = (params) => {
   return isStraight(params.differ) && (
-    params.isEmptyTarget && countBlockers(params) === 0 ||
-    !params.isEmptyTarget && countBlockers(params) === 1
+    params.isEmptyTarget && countStraightBlockers(params) === 0 ||
+    !params.isEmptyTarget && countStraightBlockers(params) === 1
   )
 }
 
