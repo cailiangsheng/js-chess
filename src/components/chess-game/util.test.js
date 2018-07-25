@@ -60,16 +60,35 @@ describe('chess-game.util', () => {
             {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
             {position: {rowIndex: 0, cellIndex: 5}},
             [
-              {position: {rowIndex: 0, cellIndex: 3}, name: '車'}
+              {position: {rowIndex: 0, cellIndex: 3}, name: '馬'}
             ]
           )).to.be.false
           expect(canGo(
             {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
-            {position: {rowIndex: 5, cellIndex: 1}},
+            {position: {rowIndex: 6, cellIndex: 1}},
             [
-              {position: {rowIndex: 2, cellIndex: 1}, name: '車'}
+              {position: {rowIndex: 2, cellIndex: 1}, name: '馬'},
+              {position: {rowIndex: 4, cellIndex: 1}, name: '砲'}
             ]
           )).to.be.false
+      })
+
+      it('can go straight forward if there\'s no blocker ahead', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+            {position: {rowIndex: 0, cellIndex: 5}},
+            [
+              {position: {rowIndex: 3, cellIndex: 2}, name: '馬'}
+            ]
+          )).to.be.true
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+            {position: {rowIndex: 6, cellIndex: 1}},
+            [
+              {position: {rowIndex: 2, cellIndex: 2}, name: '馬'},
+              {position: {rowIndex: 4, cellIndex: 3}, name: '砲'}
+            ]
+          )).to.be.true
       })
     })
 
