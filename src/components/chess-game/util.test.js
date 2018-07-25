@@ -110,6 +110,73 @@ describe('chess-game.util', () => {
           {position: {rowIndex: 2, cellIndex: 2}}
         )).to.be.false
       })
+
+      it('can jump straight forward if there\'s 1 blocker ahead to non-empty target', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '砲'},
+            {position: {rowIndex: 0, cellIndex: 5}, name: '兵'},
+            [
+              {position: {rowIndex: 0, cellIndex: 3}, name: '馬'}
+            ]
+          )).to.be.true
+      })
+
+      it('cannot jump straight forward if there\'s 1 blocker ahead to empty target', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '砲'},
+            {position: {rowIndex: 0, cellIndex: 5}},
+            [
+              {position: {rowIndex: 0, cellIndex: 3}, name: '馬'}
+            ]
+          )).to.be.false
+      })
+
+      it('cannot jump straight forward if there\'s more than 1 blocker ahead to non-empty target', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+            {position: {rowIndex: 6, cellIndex: 1}, name: '兵'},
+            [
+              {position: {rowIndex: 2, cellIndex: 1}, name: '馬'},
+              {position: {rowIndex: 4, cellIndex: 1}, name: '砲'}
+            ]
+          )).to.be.false
+      })
+
+      it('can go straight forward if there\'s no blocker ahead to empty target', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '砲'},
+            {position: {rowIndex: 0, cellIndex: 5}},
+            [
+              {position: {rowIndex: 3, cellIndex: 2}, name: '馬'}
+            ]
+          )).to.be.true
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '砲'},
+            {position: {rowIndex: 6, cellIndex: 1}},
+            [
+              {position: {rowIndex: 2, cellIndex: 2}, name: '馬'},
+              {position: {rowIndex: 4, cellIndex: 3}, name: '卒'}
+            ]
+          )).to.be.true
+      })
+
+      it('cannot go straight forward if there\'s no blocker ahead to non-empty target', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '砲'},
+            {position: {rowIndex: 0, cellIndex: 5}, name: '兵'},
+            [
+              {position: {rowIndex: 3, cellIndex: 2}, name: '馬'}
+            ]
+          )).to.be.false
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '砲'},
+            {position: {rowIndex: 6, cellIndex: 1}, name: '兵'},
+            [
+              {position: {rowIndex: 2, cellIndex: 2}, name: '馬'},
+              {position: {rowIndex: 4, cellIndex: 3}, name: '卒'}
+            ]
+          )).to.be.false
+      })
     })
 
     describe('MA', () => {

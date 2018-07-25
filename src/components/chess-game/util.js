@@ -28,8 +28,9 @@ const canGo = (from, to, chessmans = []) => {
 
   if (isSamePosition(fromPosition, toPosition)) return false
 
+  const isEmptyTarget = !to.name
   const differ = differPositions({fromPosition, toPosition})
-  const params = {fromPosition, toPosition, differ, chessmans}
+  const params = {fromPosition, toPosition, differ, isEmptyTarget, chessmans}
 
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:
@@ -95,8 +96,11 @@ const canGoMa = ({fromPosition, toPosition, differ, chessmans}) => {
   return differ.deltaRow * differ.deltaCell === 2
 }
 
-const canGoPao = ({fromPosition, toPosition, differ, chessmans}) => {
-  return isStraight(differ)
+const canGoPao = (params) => {
+  return isStraight(params.differ) && (
+    params.isEmptyTarget && countBlockers(params) === 0 ||
+    !params.isEmptyTarget && countBlockers(params) === 1
+  )
 }
 
 const canGoXiang = ({fromPosition, toPosition, differ, chessmans}) => {
