@@ -15,7 +15,7 @@ import {
 
 import CONSTS from 'components/chess-man/consts'
 
-const canGo = (from, to) => {
+const canGo = (from, to, chessmans = []) => {
   if (!from || !to) return false
 
   if (isSameColor(from.name, to.name)) return false
@@ -27,89 +27,98 @@ const canGo = (from, to) => {
 
   if (isSamePosition(fromPosition, toPosition)) return false
 
-  const deltaPosition = getDeltaPosition(fromPosition, toPosition)
+  const differ = differPositions(fromPosition, toPosition)
+  const params = {fromPosition, toPosition, differ, chessmans}
 
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:
-      return canGoJu(fromPosition, toPosition, deltaPosition)
+      return canGoJu(params)
     case CONSTS.TYPE.MA:
-      return canGoMa(fromPosition, toPosition, deltaPosition)
+      return canGoMa(params)
     case CONSTS.TYPE.PAO:
-      return canGoPao(fromPosition, toPosition, deltaPosition)
+      return canGoPao(params)
     case CONSTS.TYPE.XIANG:
-      return canGoXiang(fromPosition, toPosition, deltaPosition)
+      return canGoXiang(params)
     case CONSTS.TYPE.SHI:
-      return canGoShi(fromPosition, toPosition, deltaPosition)
+      return canGoShi(params)
     case CONSTS.TYPE.JIANG:
-      return canGoJiang(fromPosition, toPosition, deltaPosition)
+      return canGoJiang(params)
     case CONSTS.TYPE.ZU:
-      return canGoZu(fromPosition, toPosition, deltaPosition)
+      return canGoZu(params)
     default:
       return false
   }
 }
 
-const getDeltaPosition = (position1, position2) => ({
-  rowIndex: Math.abs(position1.rowIndex - position2.rowIndex),
-  cellIndex: Math.abs(position1.cellIndex - position2.cellIndex)
+const differPositions = (position1, position2) => ({
+  deltaRow: Math.abs(position1.rowIndex - position2.rowIndex),
+  deltaCell: Math.abs(position1.cellIndex - position2.cellIndex),
+  stepRow: Math.sign(position1.rowIndex - position2.rowIndex),
+  stepCell: Math.sign(position1.cellIndex - position2.cellIndex),
 })
 
-const isStraight = (deltaPosition) => {
-  return deltaPosition.rowIndex * deltaPosition.cellIndex === 0
+const isStraight = (differ) => {
+  return differ.deltaRow * differ.deltaCell === 0
 }
 
-const isStraightByOneStep = (deltaPosition) => {
-  return deltaPosition.rowIndex + deltaPosition.cellIndex === 1
+const isStraightByOneStep = (differ) => {
+  return differ.deltaRow + differ.deltaCell === 1
 }
 
-const isSlantByOneStep = (deltaPosition) => {
-  return deltaPosition.rowIndex * deltaPosition.cellIndex === 1
+const isSlantByOneStep = (differ) => {
+  return differ.deltaRow * differ.deltaCell === 1
 }
 
-const canGoJu = (fromPosition, toPosition, deltaPosition) => {
-  return isStraight(deltaPosition)
+const canGoJu = ({fromPosition, toPosition, differ, chessmans}) => {
+  if (!isStraight(differ)) return false
+
+  const blockerPositions = []
+  if (differ.deltaRow === 0) {
+    // TODO
+  }
+  return true
 }
 
-const canGoMa = (fromPosition, toPosition, deltaPosition) => {
-  return deltaPosition.rowIndex * deltaPosition.cellIndex === 2
+const canGoMa = ({fromPosition, toPosition, differ, chessmans}) => {
+  return differ.deltaRow * differ.deltaCell === 2
 }
 
-const canGoPao = (fromPosition, toPosition, deltaPosition) => {
-  return isStraight(deltaPosition)
+const canGoPao = ({fromPosition, toPosition, differ, chessmans}) => {
+  return isStraight(differ)
 }
 
-const canGoXiang = (fromPosition, toPosition, deltaPosition) => {
+const canGoXiang = ({fromPosition, toPosition, differ, chessmans}) => {
   if (!isXiangPosition(fromPosition)) {
     throw new Error('XIANG is at invalid position')
   } else if (!isXiangPosition(toPosition)) {
     return false
   } else {
-    return deltaPosition.rowIndex === 2 && deltaPosition.cellIndex === 2
+    return differ.deltaRow === 2 && differ.deltaCell === 2
   }
 }
 
-const canGoShi = (fromPosition, toPosition, deltaPosition) => {
+const canGoShi = ({fromPosition, toPosition, differ, chessmans}) => {
   if (!isShiPosition(fromPosition)) {
     throw new Error('SHI is at invalid position')
   } else if (!isShiPosition(toPosition)) {
     return false
   } else {
-    return isSlantByOneStep(deltaPosition)
+    return isSlantByOneStep(differ)
   }
 }
 
-const canGoJiang = (fromPosition, toPosition, deltaPosition) => {
+const canGoJiang = ({fromPosition, toPosition, differ, chessmans}) => {
   if (!isJiangPosition(fromPosition)) {
     throw new Error('JIANG is at invalid position')
   } else if (!isJiangPosition(toPosition)) {
     return false
   } else {
-    return isStraightByOneStep(deltaPosition)
+    return isStraightByOneStep(differ)
   }
 }
 
-const canGoZu = (fromPosition, toPosition, deltaPosition) => {
-  return isStraightByOneStep(deltaPosition)
+const canGoZu = ({fromPosition, toPosition, differ, chessmans}) => {
+  return isStraightByOneStep(differ)
 }
 
 export {

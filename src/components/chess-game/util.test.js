@@ -54,6 +54,23 @@ describe('chess-game.util', () => {
           {position: {rowIndex: 2, cellIndex: 2}}
         )).to.be.false
       })
+
+      it('cannot go straight forward if there\'s blocker ahead', () => {
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+            {position: {rowIndex: 0, cellIndex: 5}},
+            [
+              {position: {rowIndex: 0, cellIndex: 3}, name: '車'}
+            ]
+          )).to.be.false
+          expect(canGo(
+            {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+            {position: {rowIndex: 5, cellIndex: 1}},
+            [
+              {position: {rowIndex: 2, cellIndex: 1}, name: '車'}
+            ]
+          )).to.be.false
+      })
     })
 
     describe('PAO', () => {
