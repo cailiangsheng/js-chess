@@ -38,13 +38,13 @@ class ChessGame extends React.Component {
 	}
 
 	_onClick = (target) => {
-		const {activeChessman} = this.state
+		const {chessmans, activeChessman} = this.state
 		if (!activeChessman && isValid(target.name)
 			|| isSameColor(activeChessman.name, target.name)) {
 			this.setState({
 				activeChessman: target
 			})
-		} else if(canGo(activeChessman, target)) {
+		} else if(canGo(activeChessman, target, chessmans)) {
 			this._goTo(target)
 		}
 	}

@@ -10,7 +10,8 @@ import {
   isSamePosition,
   isJiangPosition,
   isShiPosition,
-  isXiangPosition
+  isXiangPosition,
+  findChessMan
 } from 'components/chess-grid/util'
 
 import CONSTS from 'components/chess-man/consts'
@@ -27,7 +28,7 @@ const canGo = (from, to, chessmans = []) => {
 
   if (isSamePosition(fromPosition, toPosition)) return false
 
-  const differ = differPositions(fromPosition, toPosition)
+  const differ = differPositions({fromPosition, toPosition})
   const params = {fromPosition, toPosition, differ, chessmans}
 
   switch (getType(from.name)) {
@@ -50,11 +51,11 @@ const canGo = (from, to, chessmans = []) => {
   }
 }
 
-const differPositions = (position1, position2) => ({
-  deltaRow: Math.abs(position1.rowIndex - position2.rowIndex),
-  deltaCell: Math.abs(position1.cellIndex - position2.cellIndex),
-  stepRow: Math.sign(position1.rowIndex - position2.rowIndex),
-  stepCell: Math.sign(position1.cellIndex - position2.cellIndex),
+const differPositions = ({fromPosition, toPosition}) => ({
+  deltaRow: Math.abs(toPosition.rowIndex - fromPosition.rowIndex),
+  deltaCell: Math.abs(toPosition.cellIndex - fromPosition.cellIndex),
+  stepRow: Math.sign(toPosition.rowIndex - fromPosition.rowIndex),
+  stepCell: Math.sign(toPosition.cellIndex - fromPosition.cellIndex),
 })
 
 const isStraight = (differ) => {
@@ -69,14 +70,25 @@ const isSlantByOneStep = (differ) => {
   return differ.deltaRow * differ.deltaCell === 1
 }
 
-const canGoJu = ({fromPosition, toPosition, differ, chessmans}) => {
-  if (!isStraight(differ)) return false
-
-  const blockerPositions = []
-  if (differ.deltaRow === 0) {
-    // TODO
+const countBlockers = ({fromPosition, toPosition, differ, chessmans}) => {
+  const numSteps = Math.max(differ.deltaRow, differ.deltaCell) - 1
+  const position = {
+    rowIndex: fromPosition.rowIndex,
+    cellIndex: fromPosition.cellIndex
   }
-  return true
+  let numBlockers = 0
+  for (let i = 0; i < numSteps; i++) {
+    position.rowIndex += differ.stepRow
+    position.cellIndex += differ.stepCell
+    if (findChessMan(chessmans, position)) {
+      numBlockers++
+    }
+  }
+  return numBlockers
+}
+
+const canGoJu = (params) => {
+  return isStraight(params.differ) && countBlockers(params) === 0
 }
 
 const canGoMa = ({fromPosition, toPosition, differ, chessmans}) => {
