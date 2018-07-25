@@ -235,6 +235,16 @@ describe('chess-game.util', () => {
         )).to.be.true
       })
 
+      it('cannot go in TIAN direction if there\'s blocker nearby', () => {
+        expect(canGo(
+          {position: {rowIndex: 2, cellIndex: 4}, name: '相'},
+          {position: {rowIndex: 4, cellIndex: 6}},
+          [
+            {position: {rowIndex: 3, cellIndex: 5}, name: '卒'}
+          ]
+        )).to.be.false
+      })
+
       it('cannot go in RI direction', () => {
         expect(canGo(
           {position: {rowIndex: 2, cellIndex: 4}, name: '相'},

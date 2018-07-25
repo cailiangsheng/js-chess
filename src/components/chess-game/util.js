@@ -117,7 +117,12 @@ const canGoXiang = ({fromPosition, toPosition, differ, chessmans}) => {
   } else if (!isXiangPosition(toPosition)) {
     return false
   } else {
-    return differ.deltaRow === 2 && differ.deltaCell === 2
+    return differ.deltaRow === 2 && differ.deltaCell === 2 && (
+      !findChessMan(chessmans, {
+        rowIndex: fromPosition.rowIndex + differ.stepRow,
+        cellIndex: fromPosition.cellIndex + differ.stepCell
+      })
+    )
   }
 }
 
