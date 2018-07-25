@@ -17,11 +17,13 @@ const renderRows = () => {
 }
 
 const ChessBoard = () => {
-	return <table className='chess-board'>
-    <tbody>
-      {renderRows()}
-    </tbody>
-	</table>
+	return <div className='chess-board'>
+    <table>
+      <tbody>
+        {renderRows()}
+      </tbody>
+  	</table>
+  </div>
 }
 
 export default ChessBoard
