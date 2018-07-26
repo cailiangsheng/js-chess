@@ -20,6 +20,15 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid/consts'
 
+const isGameOver = (chessmans = []) => {
+  return canPlay(chessmans)
+}
+
+const canPlay = (chessmans = []) => {
+  const jiangChessmans = _.filter(chessmans, (chessman) => getType(chessman.name) === CHESS_MAN.TYPE.JIANG)
+  return jiangChessmans.length === 2 && !isSameColor(jiangChessmans[0].name, jiangChessmans[1].name)
+}
+
 const canGo = (from, to, chessmans = []) => {
   if (!from || !to) return false
 
@@ -178,5 +187,7 @@ const canGoZu = ({from, to, differ, chessmans}) => {
 }
 
 export {
+  isGameOver,
+  canPlay,
   canGo
 }

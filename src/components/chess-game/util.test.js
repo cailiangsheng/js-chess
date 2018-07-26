@@ -1,6 +1,43 @@
-import {canGo} from './util'
+import {
+  isGameOver,
+  canGo
+} from './util'
 
 describe('chess-game.util', () => {
+  describe('isGameOver', () => {
+    it('Game with empty chessmans is over', () => {
+      expect(isGameOver(null)).to.be.true
+      expect(isGameOver([])).to.be.true
+    })
+
+    it('Game with two JIANG chessmans is not over', () => {
+      expect(isGameOver([
+        {position: {rowIndex: 0, cellIndex: 4}, name: '將'},
+        {position: {rowIndex: 9, cellIndex: 4}, name: '帥'}
+      ])).to.be.false
+    })
+
+    it('Game with one JIANG chessman is over', () => {
+      expect(isGameOver([
+        {position: {rowIndex: 0, cellIndex: 4}, name: '將'}
+      ])).to.be.true
+      expect(isGameOver([
+        {position: {rowIndex: 9, cellIndex: 4}, name: '帥'}
+      ])).to.be.true
+    })
+
+    it('Game with no JIANG chessman is over', () => {
+      expect(isGameOver([
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'}
+      ])).to.be.true
+      expect(isGameOver([
+        {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
+        {position: {rowIndex: 0, cellIndex: 2}, name: '馬'},
+        {position: {rowIndex: 0, cellIndex: 3}, name: '砲'}
+      ])).to.be.true
+    })
+  })
+
   describe('canGo', () => {
     describe('All', () => {
       it('cannot go with empty target', () => {
