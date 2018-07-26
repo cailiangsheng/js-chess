@@ -345,39 +345,57 @@ describe('chess-game.util', () => {
     })
 
     describe('ZU', () => {
-      it('can go straight forward by one step', () => {
+      it('can go straight forward vertically by one step', () => {
         expect(canGo(
-          {position: {rowIndex: 0, cellIndex: 1}, name: '卒'},
-          {position: {rowIndex: 0, cellIndex: 2}}
+          {position: {rowIndex: 6, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 5, cellIndex: 6}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
         )).to.be.true
         expect(canGo(
-          {position: {rowIndex: 0, cellIndex: 1}, name: '卒'},
-          {position: {rowIndex: 1, cellIndex: 1}}
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 3, cellIndex: 6}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
         )).to.be.true
       })
 
       it('cannot go in slant direction', () => {
         expect(canGo(
-          {position: {rowIndex: 0, cellIndex: 1}, name: '卒'},
-          {position: {rowIndex: 1, cellIndex: 2}}
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 3, cellIndex: 5}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
         )).to.be.false
       })
 
       it('cannot go in RI direction', () => {
         expect(canGo(
-          {position: {rowIndex: 0, cellIndex: 1}, name: '卒'},
-          {position: {rowIndex: 2, cellIndex: 0}}
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 2, cellIndex: 5}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
         )).to.be.false
         expect(canGo(
-          {position: {rowIndex: 0, cellIndex: 1}, name: '卒'},
-          {position: {rowIndex: 2, cellIndex: 2}}
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 3, cellIndex: 4}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
         )).to.be.false
       })
 
       it('cannot go in TIAN direction', () => {
         expect(canGo(
-          {position: {rowIndex: 0, cellIndex: 1}, name: '卒'},
-          {position: {rowIndex: 2, cellIndex: 3}}
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 2, cellIndex: 4}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
         )).to.be.false
       })
     })

@@ -29,12 +29,25 @@ const getType = (name) => {
 	return CONSTS.TYPE.INVALID
 }
 
+const getName = ({color, type}) => {
+	switch (color) {
+	case CONSTS.COLOR.RED:
+		return CONSTS.RED_NAMES[type]
+	case CONSTS.COLOR.BLACK:
+		return CONSTS.BLACK_NAMES[type]
+	default:
+		throw new Error('Wrong color: ' + color)
+	}
+	return null
+}
+
 export {
   validNames,
   isValid,
   isRed,
   isBlack,
   isSameColor,
-	getColor,
-	getType
+  getColor,
+  getType,
+  getName
 }

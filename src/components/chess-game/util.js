@@ -2,7 +2,9 @@ import _ from 'lodash'
 
 import {
   isSameColor,
-  getType
+  getType,
+  getColor,
+  getName
 } from 'components/chess-man/util'
 
 import {
@@ -21,16 +23,12 @@ const canGo = (from, to, chessmans = []) => {
 
   if (isSameColor(from.name, to.name)) return false
 
-  const fromPosition = from.position
-  const toPosition = to.position
+  if (!isValidPosition(from.position) || !isValidPosition(to.position)) return false
 
-  if (!isValidPosition(fromPosition) || !isValidPosition(toPosition)) return false
+  if (isSamePosition(from.position, to.position)) return false
 
-  if (isSamePosition(fromPosition, toPosition)) return false
-
-  const isEmptyTarget = !to.name
-  const differ = differPositions({fromPosition, toPosition})
-  const params = {fromPosition, toPosition, differ, isEmptyTarget, chessmans}
+  const differ = differPositions({from, to})
+  const params = {from, to, differ, chessmans}
 
   switch (getType(from.name)) {
     case CONSTS.TYPE.JU:
@@ -52,11 +50,11 @@ const canGo = (from, to, chessmans = []) => {
   }
 }
 
-const differPositions = ({fromPosition, toPosition}) => ({
-  deltaRow: Math.abs(toPosition.rowIndex - fromPosition.rowIndex),
-  deltaCell: Math.abs(toPosition.cellIndex - fromPosition.cellIndex),
-  stepRow: Math.sign(toPosition.rowIndex - fromPosition.rowIndex),
-  stepCell: Math.sign(toPosition.cellIndex - fromPosition.cellIndex),
+const differPositions = ({from, to}) => ({
+  deltaRow: Math.abs(to.position.rowIndex - from.position.rowIndex),
+  deltaCell: Math.abs(to.position.cellIndex - from.position.cellIndex),
+  stepRow: Math.sign(to.position.rowIndex - from.position.rowIndex),
+  stepCell: Math.sign(to.position.cellIndex - from.position.cellIndex),
 })
 
 const isStraight = (differ) => {
@@ -71,12 +69,9 @@ const isSlantByOneStep = (differ) => {
   return differ.deltaRow * differ.deltaCell === 1
 }
 
-const countStraightBlockers = ({fromPosition, toPosition, differ, chessmans}) => {
+const countStraightBlockers = ({from, to, differ, chessmans}) => {
   const numSteps = Math.max(differ.deltaRow, differ.deltaCell) - 1
-  const position = {
-    rowIndex: fromPosition.rowIndex,
-    cellIndex: fromPosition.cellIndex
-  }
+  const position = _.cloneDeep(from.position)
   let numBlockers = 0
   for (let i = 0; i < numSteps; i++) {
     position.rowIndex += differ.stepRow
@@ -92,62 +87,72 @@ const canGoJu = (params) => {
   return isStraight(params.differ) && countStraightBlockers(params) === 0
 }
 
-const canGoMa = ({fromPosition, toPosition, differ, chessmans}) => {
+const canGoMa = ({from, to, differ, chessmans}) => {
   return differ.deltaRow * differ.deltaCell === 2 && (
     !findChessMan(chessmans,
       (
         differ.deltaRow > differ.deltaCell
-        ? {rowIndex: fromPosition.rowIndex + differ.stepRow, cellIndex: fromPosition.cellIndex}
-        : {rowIndex: fromPosition.rowIndex, cellIndex: fromPosition.cellIndex + differ.stepCell}
+        ? {rowIndex: from.position.rowIndex + differ.stepRow, cellIndex: from.position.cellIndex}
+        : {rowIndex: from.position.rowIndex, cellIndex: from.position.cellIndex + differ.stepCell}
       )
     )
   )
 }
 
 const canGoPao = (params) => {
+  const isEmptyTarget = !params.to.name
   return isStraight(params.differ) && (
-    params.isEmptyTarget && countStraightBlockers(params) === 0 ||
-    !params.isEmptyTarget && countStraightBlockers(params) === 1
+    isEmptyTarget && countStraightBlockers(params) === 0 ||
+    !isEmptyTarget && countStraightBlockers(params) === 1
   )
 }
 
-const canGoXiang = ({fromPosition, toPosition, differ, chessmans}) => {
-  if (!isXiangPosition(fromPosition)) {
+const canGoXiang = ({from, to, differ, chessmans}) => {
+  if (!isXiangPosition(from.position)) {
     throw new Error('XIANG is at invalid position')
-  } else if (!isXiangPosition(toPosition)) {
+  } else if (!isXiangPosition(to.position)) {
     return false
   } else {
     return differ.deltaRow === 2 && differ.deltaCell === 2 && (
       !findChessMan(chessmans, {
-        rowIndex: fromPosition.rowIndex + differ.stepRow,
-        cellIndex: fromPosition.cellIndex + differ.stepCell
+        rowIndex: from.position.rowIndex + differ.stepRow,
+        cellIndex: from.position.cellIndex + differ.stepCell
       })
     )
   }
 }
 
-const canGoShi = ({fromPosition, toPosition, differ, chessmans}) => {
-  if (!isShiPosition(fromPosition)) {
+const canGoShi = ({from, to, differ, chessmans}) => {
+  if (!isShiPosition(from.position)) {
     throw new Error('SHI is at invalid position')
-  } else if (!isShiPosition(toPosition)) {
+  } else if (!isShiPosition(to.position)) {
     return false
   } else {
     return isSlantByOneStep(differ)
   }
 }
 
-const canGoJiang = ({fromPosition, toPosition, differ, chessmans}) => {
-  if (!isJiangPosition(fromPosition)) {
+const canGoJiang = ({from, to, differ, chessmans}) => {
+  if (!isJiangPosition(from.position)) {
     throw new Error('JIANG is at invalid position')
-  } else if (!isJiangPosition(toPosition)) {
+  } else if (!isJiangPosition(to.position)) {
     return false
   } else {
     return isStraightByOneStep(differ)
   }
 }
 
-const canGoZu = ({fromPosition, toPosition, differ, chessmans}) => {
-  return isStraightByOneStep(differ)
+const canGoZu = ({from, to, differ, chessmans}) => {
+  const jiangName = getName({color: getColor(from.name), type: CONSTS.TYPE.JIANG})
+  const jiangChessman = chessmans.find(chessman => chessman.name === jiangName)
+  if (!jiangChessman) {
+    throw new Error('There\'s no ' + jiangName)
+  }
+
+  const differToJiang = differPositions({from, to: jiangChessman})
+  return isStraightByOneStep(differ) && (
+    differ.stepRow === -differToJiang.stepRow
+  )
 }
 
 export {
