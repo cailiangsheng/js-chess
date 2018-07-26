@@ -8,6 +8,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const exec = require('child_process').exec
 
 const outputDir = '../dist'
+const useDevServer = process.env.DEV_SERVER !== undefined
 const useDLL = process.env.DLL !== undefined
 const entry = useDLL ? {} : { libs: require('./libs') }
 
@@ -47,7 +48,6 @@ module.exports = {
 
 function getPlugins () {
 	const plugins = [
-		new CleanWebpackPlugin([path.basename(outputDir)], {root: path.dirname(path.resolve(__dirname, outputDir))}),
 		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',
@@ -62,6 +62,13 @@ function getPlugins () {
 		new webpack.HashedModuleIdsPlugin(),
 	]
 
+	if (!useDevServer) {
+		plugins.unshift(new CleanWebpackPlugin(
+			[path.basename(outputDir)],
+			{root: path.dirname(path.resolve(__dirname, outputDir))}
+		))
+	}
+
 	if (useDLL) {
 		plugins.unshift(new AddAssetHtmlPlugin([
 			{
@@ -69,7 +76,7 @@ function getPlugins () {
 				includeSourcemap: false,
 				hash: true
 			}
-    ]))
+		]))
 		plugins.unshift(new webpack.DllReferencePlugin({
 			context: '..',
 			manifest: require('../dll/libs.manifest.json')
