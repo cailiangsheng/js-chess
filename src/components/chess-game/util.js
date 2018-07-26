@@ -143,13 +143,15 @@ const canGoShi = ({from, to, differ, chessmans}) => {
   }
 }
 
-const canGoJiang = ({from, to, differ, chessmans}) => {
-  if (!isJiangPosition(from.position)) {
+const canGoJiang = (params) => {
+  if (!isJiangPosition(params.from.position)) {
     throw new Error('JIANG is at invalid position')
-  } else if (!isJiangPosition(to.position)) {
+  } else if (getType(params.to.name) === CHESS_MAN.TYPE.JIANG) {
+    return isStraight(params.differ) && countStraightBlockers(params) === 0
+  } else if (!isJiangPosition(params.to.position)) {
     return false
   } else {
-    return isStraightByOneStep(differ)
+    return isStraightByOneStep(params.differ)
   }
 }
 

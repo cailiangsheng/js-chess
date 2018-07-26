@@ -318,6 +318,74 @@ describe('chess-game.util', () => {
         )).to.be.true
       })
 
+      it('can go straight forward by more than 1 steps if target is JIANG and there\'s no blocker ahead', () => {
+        expect(canGo(
+          {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+          {position: {rowIndex: 9, cellIndex: 4}, name: '帥'},
+          [
+            {position: {rowIndex: 4, cellIndex: 3}, name: '砲'}
+          ]
+        )).to.be.true
+        expect(canGo(
+          {position: {rowIndex: 0, cellIndex: 5}, name: '將'},
+          {position: {rowIndex: 8, cellIndex: 5}, name: '帥'},
+          [
+            {position: {rowIndex: 5, cellIndex: 4}, name: '砲'}
+          ]
+        )).to.be.true
+      })
+
+      it('cannot go straight forward by more than 1 steps if target is JIANG and there\'s blocker ahead', () => {
+        expect(canGo(
+          {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+          {position: {rowIndex: 9, cellIndex: 4}, name: '帥'},
+          [
+            {position: {rowIndex: 4, cellIndex: 4}, name: '砲'}
+          ]
+        )).to.be.false
+        expect(canGo(
+          {position: {rowIndex: 0, cellIndex: 5}, name: '將'},
+          {position: {rowIndex: 8, cellIndex: 5}, name: '帥'},
+          [
+            {position: {rowIndex: 5, cellIndex: 5}, name: '砲'}
+          ]
+        )).to.be.false
+      })
+
+      it('cannot go straight forward by more than 1 steps if target is not JIANG and there\'s no blocker ahead', () => {
+        expect(canGo(
+          {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+          {position: {rowIndex: 9, cellIndex: 4}, name: '傌'},
+          [
+            {position: {rowIndex: 4, cellIndex: 3}, name: '砲'}
+          ]
+        )).to.be.false
+        expect(canGo(
+          {position: {rowIndex: 0, cellIndex: 5}, name: '將'},
+          {position: {rowIndex: 8, cellIndex: 5}, name: '傌'},
+          [
+            {position: {rowIndex: 5, cellIndex: 4}, name: '砲'}
+          ]
+        )).to.be.false
+      })
+
+      it('cannot go straight forward by more than 1 steps if target is not JIANG and there\'s blocker ahead', () => {
+        expect(canGo(
+          {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
+          {position: {rowIndex: 9, cellIndex: 4}, name: '傌'},
+          [
+            {position: {rowIndex: 4, cellIndex: 4}, name: '砲'}
+          ]
+        )).to.be.false
+        expect(canGo(
+          {position: {rowIndex: 0, cellIndex: 5}, name: '將'},
+          {position: {rowIndex: 8, cellIndex: 5}, name: '傌'},
+          [
+            {position: {rowIndex: 5, cellIndex: 5}, name: '砲'}
+          ]
+        )).to.be.false
+      })
+
       it('cannot go in slant direction', () => {
         expect(canGo(
           {position: {rowIndex: 1, cellIndex: 4}, name: '將'},
