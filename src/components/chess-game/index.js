@@ -12,7 +12,8 @@ class ChessGame extends React.Component {
 		super(props)
 		this.state = {
 			chessmans,
-			activeChessman: null
+			activeChessman: null,
+			playedChessman: null
 		}
 	}
 
@@ -33,16 +34,25 @@ class ChessGame extends React.Component {
 
 		this.setState({
 			chessmans,
-			activeChessman: null
+			activeChessman: null,
+			playedChessman: chessmanGoing
 		})
 	}
 
+	_canActivate = (target) => {
+		if (!isValid(target.name)) return false
+
+		const {activeChessman, playedChessman} = this.state
+		return !activeChessman && !playedChessman
+			|| !activeChessman && !isSameColor(playedChessman.name, target.name)
+			|| activeChessman && isSameColor(activeChessman.name, target.name)
+	}
+
 	_onClick = (target) => {
-		const {chessmans, activeChessman} = this.state
+		const {chessmans, activeChessman, playedChessman} = this.state
 		if (isGameOver(chessmans)) {
 			return
-		} else if (!activeChessman && isValid(target.name)
-			|| isSameColor(activeChessman.name, target.name)) {
+		} else if (this._canActivate(target)) {
 			this.setState({
 				activeChessman: target
 			})
