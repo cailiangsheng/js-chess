@@ -16,7 +16,9 @@ import {
   findChessMan
 } from 'components/chess-grid/util'
 
-import CONSTS from 'components/chess-man/consts'
+import CHESS_MAN from 'components/chess-man/consts'
+
+import CHESS_GRID from 'components/chess-grid/consts'
 
 const canGo = (from, to, chessmans = []) => {
   if (!from || !to) return false
@@ -31,19 +33,19 @@ const canGo = (from, to, chessmans = []) => {
   const params = {from, to, differ, chessmans}
 
   switch (getType(from.name)) {
-    case CONSTS.TYPE.JU:
+    case CHESS_MAN.TYPE.JU:
       return canGoJu(params)
-    case CONSTS.TYPE.MA:
+    case CHESS_MAN.TYPE.MA:
       return canGoMa(params)
-    case CONSTS.TYPE.PAO:
+    case CHESS_MAN.TYPE.PAO:
       return canGoPao(params)
-    case CONSTS.TYPE.XIANG:
+    case CHESS_MAN.TYPE.XIANG:
       return canGoXiang(params)
-    case CONSTS.TYPE.SHI:
+    case CHESS_MAN.TYPE.SHI:
       return canGoShi(params)
-    case CONSTS.TYPE.JIANG:
+    case CHESS_MAN.TYPE.JIANG:
       return canGoJiang(params)
-    case CONSTS.TYPE.ZU:
+    case CHESS_MAN.TYPE.ZU:
       return canGoZu(params)
     default:
       return false
@@ -81,6 +83,15 @@ const countStraightBlockers = ({from, to, differ, chessmans}) => {
     }
   }
   return numBlockers
+}
+
+const getCenterPosition = () => {
+  const maxRowIndex = CHESS_GRID.NUM_ROWS - 1
+  const maxCellIndex = CHESS_GRID.NUM_CELLS - 1
+  return {
+    rowIndex: maxRowIndex / 2,
+    cellIndex: maxCellIndex / 2
+  }
 }
 
 const canGoJu = (params) => {
@@ -143,15 +154,24 @@ const canGoJiang = ({from, to, differ, chessmans}) => {
 }
 
 const canGoZu = ({from, to, differ, chessmans}) => {
-  const jiangName = getName({color: getColor(from.name), type: CONSTS.TYPE.JIANG})
+  const jiangName = getName({color: getColor(from.name), type: CHESS_MAN.TYPE.JIANG})
   const jiangChessman = chessmans.find(chessman => chessman.name === jiangName)
   if (!jiangChessman) {
     throw new Error('There\'s no ' + jiangName)
   }
 
   const differToJiang = differPositions({from, to: jiangChessman})
+  const differToCenter = differPositions({from, to: { position: getCenterPosition() }})
+
+  const stepBackward = differToJiang.stepRow
+  const stepForward = -stepBackward
+
+  const isForward = (differ.stepRow === stepForward)
+  const isAfterRiver = (differToCenter.stepRow === differToJiang.stepRow)
+  const isHorizontal = differ.deltaCell > 0
+
   return isStraightByOneStep(differ) && (
-    differ.stepRow === -differToJiang.stepRow
+    isForward || isAfterRiver && isHorizontal
   )
 }
 

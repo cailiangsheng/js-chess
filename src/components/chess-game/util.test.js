@@ -379,6 +379,40 @@ describe('chess-game.util', () => {
         )).to.be.false
       })
 
+      it('cannot go straight horizontally by one step before the river', () => {
+        expect(canGo(
+          {position: {rowIndex: 6, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 6, cellIndex: 7}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
+        )).to.be.false
+          expect(canGo(
+            {position: {rowIndex: 6, cellIndex: 6}, name: '卒'},
+            {position: {rowIndex: 6, cellIndex: 5}},
+            [
+              {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+            ]
+          )).to.be.false
+      })
+
+      it('can go straight horizontally by one step after the river', () => {
+        expect(canGo(
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 4, cellIndex: 5}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
+        )).to.be.true
+        expect(canGo(
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 4, cellIndex: 7}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
+        )).to.be.true
+      })
+
       it('cannot go in slant direction', () => {
         expect(canGo(
           {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},

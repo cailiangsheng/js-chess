@@ -5,7 +5,7 @@ const isValidPosition = (position) => {
   if (!position) return false
   const {rowIndex, cellIndex} = position
   return rowIndex >= 0 && rowIndex < CONSTS.NUM_ROWS
-    && cellIndex >=0 && cellIndex < CONSTS.NUM_COLUMNS
+    && cellIndex >=0 && cellIndex < CONSTS.NUM_CELLS
 }
 
 const isJiangPosition = ({rowIndex, cellIndex}) => {

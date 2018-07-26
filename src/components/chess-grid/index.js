@@ -8,7 +8,7 @@ import CONSTS from './consts'
 import {needsTattoo, findChessMan} from './util'
 import './style.less'
 
-const numColumns = CONSTS.NUM_COLUMNS
+const numColumns = CONSTS.NUM_CELLS
 const numRows = CONSTS.NUM_ROWS
 
 const renderCells = (props, rowIndex) => {
