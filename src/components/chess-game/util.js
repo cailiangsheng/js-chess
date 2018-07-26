@@ -21,7 +21,7 @@ import CHESS_MAN from 'components/chess-man/consts'
 import CHESS_GRID from 'components/chess-grid/consts'
 
 const isGameOver = (chessmans = []) => {
-  return canPlay(chessmans)
+  return !canPlay(chessmans)
 }
 
 const canPlay = (chessmans = []) => {

@@ -1,40 +1,40 @@
 import {
-  isGameOver,
+  canPlay,
   canGo
 } from './util'
 
 describe('chess-game.util', () => {
-  describe('isGameOver', () => {
-    it('Game with empty chessmans is over', () => {
-      expect(isGameOver(null)).to.be.true
-      expect(isGameOver([])).to.be.true
+  describe('canPlay', () => {
+    it('cannot play with empty chessmans', () => {
+      expect(canPlay(null)).to.be.false
+      expect(canPlay([])).to.be.false
     })
 
-    it('Game with two JIANG chessmans is not over', () => {
-      expect(isGameOver([
+    it('can play with two JIANG chessmans', () => {
+      expect(canPlay([
         {position: {rowIndex: 0, cellIndex: 4}, name: '將'},
+        {position: {rowIndex: 9, cellIndex: 4}, name: '帥'}
+      ])).to.be.true
+    })
+
+    it('cannot play with one JIANG chessman', () => {
+      expect(canPlay([
+        {position: {rowIndex: 0, cellIndex: 4}, name: '將'}
+      ])).to.be.false
+      expect(canPlay([
         {position: {rowIndex: 9, cellIndex: 4}, name: '帥'}
       ])).to.be.false
     })
 
-    it('Game with one JIANG chessman is over', () => {
-      expect(isGameOver([
-        {position: {rowIndex: 0, cellIndex: 4}, name: '將'}
-      ])).to.be.true
-      expect(isGameOver([
-        {position: {rowIndex: 9, cellIndex: 4}, name: '帥'}
-      ])).to.be.true
-    })
-
-    it('Game with no JIANG chessman is over', () => {
-      expect(isGameOver([
+    it('cannot play with no JIANG chessman', () => {
+      expect(canPlay([
         {position: {rowIndex: 0, cellIndex: 1}, name: '車'}
-      ])).to.be.true
-      expect(isGameOver([
+      ])).to.be.false
+      expect(canPlay([
         {position: {rowIndex: 0, cellIndex: 1}, name: '車'},
         {position: {rowIndex: 0, cellIndex: 2}, name: '馬'},
         {position: {rowIndex: 0, cellIndex: 3}, name: '砲'}
-      ])).to.be.true
+      ])).to.be.false
     })
   })
 

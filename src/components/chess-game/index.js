@@ -3,7 +3,7 @@ import ChessBoard from 'components/chess-board'
 import ChessGrid from 'components/chess-grid'
 import {isValid, isSameColor} from 'components/chess-man/util'
 import {findChessMan} from 'components/chess-grid/util'
-import {canGo} from './util'
+import {canGo, isGameOver} from './util'
 import chessmans from './chessmans'
 import './style.less'
 
@@ -39,7 +39,9 @@ class ChessGame extends React.Component {
 
 	_onClick = (target) => {
 		const {chessmans, activeChessman} = this.state
-		if (!activeChessman && isValid(target.name)
+		if (isGameOver(chessmans)) {
+			return
+		} else if (!activeChessman && isValid(target.name)
 			|| isSameColor(activeChessman.name, target.name)) {
 			this.setState({
 				activeChessman: target
