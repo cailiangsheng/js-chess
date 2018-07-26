@@ -167,7 +167,7 @@ const canGoZu = ({from, to, differ, chessmans}) => {
   const stepForward = -stepBackward
 
   const isForward = (differ.stepRow === stepForward)
-  const isAfterRiver = (differToCenter.stepRow === differToJiang.stepRow)
+  const isAfterRiver = (differToCenter.stepRow === stepBackward)
   const isHorizontal = differ.deltaCell > 0
 
   return isStraightByOneStep(differ) && (
