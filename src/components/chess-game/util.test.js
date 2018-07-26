@@ -362,6 +362,23 @@ describe('chess-game.util', () => {
         )).to.be.true
       })
 
+      it('cannot go straight backward vertically by one step', () => {
+        expect(canGo(
+          {position: {rowIndex: 6, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 7, cellIndex: 6}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
+        )).to.be.false
+        expect(canGo(
+          {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
+          {position: {rowIndex: 5, cellIndex: 6}},
+          [
+            {position: {rowIndex: 9, cellIndex: 4}, name: '將'}
+          ]
+        )).to.be.false
+      })
+
       it('cannot go in slant direction', () => {
         expect(canGo(
           {position: {rowIndex: 4, cellIndex: 6}, name: '卒'},
