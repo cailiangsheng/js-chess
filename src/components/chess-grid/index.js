@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import ChessTattoo from 'components/chess-tattoo'
+import ChessStep from 'components/chess-step'
 import ChessMan from 'components/chess-man'
 import CONSTS from './consts'
-import {needsTattoo, findChessMan} from './util'
+import {needsTattoo, findChessMan, findPosition} from './util'
 import './style.less'
 
 const numColumns = CONSTS.NUM_CELLS
@@ -20,9 +21,11 @@ const renderCells = (props, rowIndex) => {
       const chessman = findChessMan(props.chessmans, position)
       const chessmanName = chessman && chessman.name
       const isActive = activeChessman && _.isEqual(position, activeChessman.position)
+      const isStepped = findPosition(steppedPositions, position)
       const target = {name: chessmanName, position}
       return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
         { !chessman && needsTattoo(position) && <ChessTattoo /> }
+        { isStepped && <ChessStep /> }
         { chessman && <ChessMan name={chessmanName} isActive={isActive} /> }
       </td>
     })
@@ -59,11 +62,19 @@ ChessGrid.propTypes = {
       cellIndex: PropTypes.number.isRequired
     }).isRequired
   }),
+  steppedPositions: PropTypes.arrayOf(
+    PropTypes.shape({
+      rowIndex: PropTypes.number.isRequired,
+      cellIndex: PropTypes.number.isRequired
+    })
+  ),
   onClick: PropTypes.func
 }
 
 ChessGrid.defaultProps = {
-  chessmans: []
+  chessmans: [],
+  activeChessman: null,
+  steppedPositions: []
 }
 
 export default ChessGrid

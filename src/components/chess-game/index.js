@@ -13,7 +13,8 @@ class ChessGame extends React.Component {
 		this.state = {
 			chessmans,
 			activeChessman: null,
-			playedChessman: null
+			playedChessman: null,
+			steppedPositions: []
 		}
 	}
 
@@ -26,16 +27,17 @@ class ChessGame extends React.Component {
 		)
 		chessmans = _.without(chessmans, chessmanKilled)
 
-		const chessmanGoing = findChessMan(
-			chessmans,
-			this.state.activeChessman.position
-		)
-		chessmanGoing.position = target.position
+		const fromPosition = this.state.activeChessman.position
+		const toPosition = target.position
+		const steppedPositions = [fromPosition, toPosition]
+		const chessmanGoing = findChessMan(chessmans, fromPosition)
+		chessmanGoing.position = toPosition
 
 		this.setState({
 			chessmans,
 			activeChessman: null,
-			playedChessman: chessmanGoing
+			playedChessman: chessmanGoing,
+			steppedPositions
 		})
 	}
 
@@ -62,10 +64,10 @@ class ChessGame extends React.Component {
 	}
 
 	render () {
-		const {chessmans, activeChessman} = this.state
+		const {chessmans, activeChessman, steppedPositions} = this.state
 		return <div className='chess-game'>
 	      <ChessBoard />
-	      <ChessGrid chessmans={chessmans} activeChessman={activeChessman} onClick={this._onClick} />
+	      <ChessGrid chessmans={chessmans} activeChessman={activeChessman} steppedPositions={steppedPositions} onClick={this._onClick} />
 		</div>
 	}
 }

@@ -42,9 +42,14 @@ const findChessMan = (chessmans, position) => {
   return chessmans.find(chessman => isSamePosition(chessman.position, position))
 }
 
+const findPosition = (positions, position) => {
+  return positions.find(pos => isSamePosition(pos, position))
+}
+
 export {
   needsTattoo,
   findChessMan,
+  findPosition,
   isSamePosition,
   isValidPosition,
   isJiangPosition,
