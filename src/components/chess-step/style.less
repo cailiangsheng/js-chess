@@ -1,0 +1,55 @@
+.chess-step {
+	width: 100%;
+	height: 100%;
+  
+	.corner {
+	  width: 50%;
+	  height: 50%;
+	  position: relative;
+  
+	  &:before {
+		content: "";
+		display: block;
+		width: 30%;
+		height: 30%;
+		position: absolute;
+	  }
+  
+	  .cell:first-child &.left {
+		visibility: hidden;
+	  }
+  
+	  .cell:last-child &.right {
+		visibility: hidden;
+	  }
+	}
+  
+	.left {
+	  float: left;
+	}
+  
+	.right {
+	  float: right;
+	}
+  
+	.left:before {
+	  border-left: solid 2px black;
+	  left: 0;
+	}
+  
+	.right:before {
+	  border-right: solid 2px black;
+	  right: 0;
+	}
+  
+	.top:before {
+	  border-top: solid 2px black;
+	  top: 0;
+	}
+  
+	.bottom::before {
+	  border-bottom: solid 2px black;
+	  bottom: 0;
+	}
+  }
+  
