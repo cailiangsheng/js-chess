@@ -30,6 +30,7 @@
     position: relative;
 
     &:before {
+      line-height: @board-cell-size;
       font-size: 22px;
       color: gray;
     }
@@ -37,13 +38,11 @@
     &:nth-child(2):before {
       content: "楚";
       float: right;
-      margin-top: -1px;
     }
 
     &:nth-child(3):before {
       content: "河";
       float: left;
-      margin-top: -1px;
     }
 
     &:nth-child(7):before {
