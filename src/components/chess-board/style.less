@@ -27,6 +27,36 @@
 
   .row:nth-child(5) .cell {
     border-right: none;
+    position: relative;
+
+    &:before {
+      font-size: 22px;
+      color: gray;
+    }
+
+    &:nth-child(2):before {
+      content: "楚";
+      float: right;
+      margin-top: -1px;
+    }
+
+    &:nth-child(3):before {
+      content: "河";
+      float: left;
+      margin-top: -1px;
+    }
+
+    &:nth-child(7):before {
+      content: "汉";
+      float: left;
+      transform: rotateZ(180deg);
+    }
+
+    &:nth-child(6):before {
+      content: "界";
+      float: right;
+      transform: rotateZ(180deg);
+    }
   }
 
   .row:nth-child(1) .cell:nth-child(4),
