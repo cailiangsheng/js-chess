@@ -51,7 +51,7 @@ class ChessGame extends React.Component {
 	}
 
 	_onClick = (target) => {
-		const {chessmans, activeChessman, playedChessman} = this.state
+		const {chessmans, activeChessman} = this.state
 		if (isGameOver(chessmans)) {
 			return
 		} else if (this._canActivate(target)) {

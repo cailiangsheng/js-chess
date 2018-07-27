@@ -13,7 +13,7 @@ const numColumns = CONSTS.NUM_CELLS
 const numRows = CONSTS.NUM_ROWS
 
 const renderCells = (props, rowIndex) => {
-  const {onClick, activeChessman} = props
+  const {onClick, activeChessman, steppedPositions} = props
   return Array
     .from({length: numColumns})
     .map((v, cellIndex) => {
