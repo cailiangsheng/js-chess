@@ -25,8 +25,19 @@ const isGameOver = (chessmans = []) => {
 }
 
 const canPlay = (chessmans = []) => {
-  const jiangChessmans = _.filter(chessmans, (chessman) => getType(chessman.name) === CHESS_MAN.TYPE.JIANG)
+  const jiangChessmans = getJiangChessmans(chessmans)
   return jiangChessmans.length === 2 && !isSameColor(jiangChessmans[0].name, jiangChessmans[1].name)
+}
+
+const getJiangChessmans = (chessmans = []) => {
+  return _.filter(chessmans, (chessman) => getType(chessman.name) === CHESS_MAN.TYPE.JIANG)
+}
+
+const getWinnerColor = (chessmans = []) => {
+  const jiangChessmans = getJiangChessmans(chessmans)
+  if (jiangChessmans.length === 1) return getColor(jiangChessmans[0].name)
+  else if (jiangChessmans.length === 2) return ''
+  else return CHESS_MAN.COLOR.INVALID
 }
 
 const canGo = (from, to, chessmans = []) => {
@@ -189,5 +200,6 @@ const canGoZu = ({from, to, differ, chessmans}) => {
 export {
   isGameOver,
   canPlay,
-  canGo
+  canGo,
+  getWinnerColor
 }
