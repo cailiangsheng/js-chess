@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import ChessTattoo from 'components/chess-tattoo'
-import ChessStep from 'components/chess-step'
+import ChessStepped from 'components/chess-stepped'
+import ChessStepping from 'components/chess-stepping'
 import ChessMan from 'components/chess-man'
 import CONSTS from './consts'
 import {needsTattoo, findChessMan, findPosition} from './util'
@@ -13,7 +14,7 @@ const numColumns = CONSTS.NUM_CELLS
 const numRows = CONSTS.NUM_ROWS
 
 const renderCells = (props, rowIndex) => {
-  const {onClick, activeChessman, steppedPositions} = props
+  const {onClick, activeChessman, steppedPositions, steppingPositions} = props
   return Array
     .from({length: numColumns})
     .map((v, cellIndex) => {
@@ -22,11 +23,13 @@ const renderCells = (props, rowIndex) => {
       const chessmanName = chessman && chessman.name
       const isActive = activeChessman && _.isEqual(position, activeChessman.position)
       const isStepped = findPosition(steppedPositions, position)
+      const isStepping = findPosition(steppingPositions, position)
       const target = {name: chessmanName, position}
       return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
         { !chessman && needsTattoo(position) && <ChessTattoo /> }
-        { isStepped && <ChessStep /> }
+        { isStepped && <ChessStepped /> }
         { chessman && <ChessMan name={chessmanName} isActive={isActive} /> }
+        { isStepping && <ChessStepping /> }
       </td>
     })
 }
@@ -68,13 +71,20 @@ ChessGrid.propTypes = {
       cellIndex: PropTypes.number.isRequired
     })
   ),
+  steppingPositions: PropTypes.arrayOf(
+    PropTypes.shape({
+      rowIndex: PropTypes.number.isRequired,
+      cellIndex: PropTypes.number.isRequired
+    })
+  ),
   onClick: PropTypes.func
 }
 
 ChessGrid.defaultProps = {
   chessmans: [],
   activeChessman: null,
-  steppedPositions: []
+  steppedPositions: [],
+  steppingPositions: []
 }
 
 export default ChessGrid

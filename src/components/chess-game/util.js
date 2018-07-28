@@ -20,6 +20,17 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid/consts'
 
+const getSteppingPositions = (from, chessmans) => {
+  const positions = []
+  for (let i = 0; i < CHESS_GRID.NUM_ROWS; i++) {
+    for (let j = 0; j < CHESS_GRID.NUM_CELLS; j++) {
+      const to = { position: { rowIndex: i, cellIndex:j } }
+      if (canGo(from, to, chessmans)) positions.push(to.position)
+    }
+  }
+  return positions
+}
+
 const isGameOver = (chessmans = []) => {
   return !canPlay(chessmans)
 }
@@ -201,5 +212,6 @@ export {
   isGameOver,
   canPlay,
   canGo,
-  getWinnerColor
+  getWinnerColor,
+  getSteppingPositions
 }

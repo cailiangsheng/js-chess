@@ -4,7 +4,7 @@ import ChessGrid from 'components/chess-grid'
 import ChessWinner from 'components/chess-winner'
 import {isValid, isSameColor} from 'components/chess-man/util'
 import {findChessMan} from 'components/chess-grid/util'
-import {canGo, isGameOver, getWinnerColor} from './util'
+import {canGo, isGameOver, getWinnerColor, getSteppingPositions} from './util'
 import chessmans from './chessmans'
 import './style.less'
 
@@ -16,6 +16,7 @@ class ChessGame extends React.Component {
 			activeChessman: null,
 			playedChessman: null,
 			steppedPositions: [],
+			steppingPositions: [],
 			winnerColor: ''
 		}
 	}
@@ -39,6 +40,7 @@ class ChessGame extends React.Component {
 			chessmans,
 			activeChessman: null,
 			playedChessman: chessmanGoing,
+			steppingPositions: [],
 			steppedPositions,
 			winnerColor: getWinnerColor(chessmans)
 		})
@@ -59,7 +61,8 @@ class ChessGame extends React.Component {
 			return
 		} else if (this._canActivate(target)) {
 			this.setState({
-				activeChessman: target
+				activeChessman: target,
+				steppingPositions: getSteppingPositions(target, chessmans)
 			})
 		} else if(canGo(activeChessman, target, chessmans)) {
 			this._goTo(target)
@@ -67,12 +70,14 @@ class ChessGame extends React.Component {
 	}
 
 	render () {
-		const {chessmans, activeChessman, steppedPositions, winnerColor} = this.state
+		const {chessmans, activeChessman, steppingPositions, steppedPositions, winnerColor} = this.state
 		return <div className='chess-game'>
 		  <ChessWinner winnerColor={winnerColor} />
 		  <div className='chess-body'>
 			<ChessBoard />
-			<ChessGrid chessmans={chessmans} activeChessman={activeChessman} steppedPositions={steppedPositions} onClick={this._onClick} />
+			<ChessGrid chessmans={chessmans} activeChessman={activeChessman}
+			  steppingPositions={steppingPositions} steppedPositions={steppedPositions}
+			  onClick={this._onClick} />
 		  </div>
 		</div>
 	}
