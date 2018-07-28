@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import {validNames, getColor} from 'lib/utils/chess-man'
+import {validNames, getColor} from './util'
 import './style.less'
 
 const ChessMan = ({name, isActive}) => {

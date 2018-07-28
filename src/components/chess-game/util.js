@@ -5,7 +5,7 @@ import {
   getType,
   getColor,
   getName
-} from './chess-man'
+} from 'components/chess-man/util'
 
 import {
   isValidPosition,
@@ -14,11 +14,11 @@ import {
   isShiPosition,
   isXiangPosition,
   findChessMan
-} from './chess-position'
+} from 'components/chess-grid/util'
 
-import CHESS_MAN from 'lib/consts/chess-man'
+import CHESS_MAN from 'components/chess-man/consts'
 
-import CHESS_GRID from 'lib/consts/chess-grid'
+import CHESS_GRID from 'components/chess-grid/consts'
 
 const getSteppingPositions = (from, chessmans) => {
   const positions = []
