@@ -2,6 +2,7 @@ const path = require('path')
 
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
@@ -48,6 +49,12 @@ module.exports = {
 
 function getPlugins () {
 	const plugins = [
+		new CopyWebpackPlugin([
+			{
+				from: 'assets',
+				to: outputDir
+			}
+		]),
 		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',
