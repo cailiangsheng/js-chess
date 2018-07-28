@@ -1,9 +1,9 @@
 import {
   canPlay,
   canGo
-} from './util'
+} from './chess-game'
 
-describe('chess-game.util', () => {
+describe('utils.chess-game', () => {
   describe('canPlay', () => {
     it('cannot play with empty chessmans', () => {
       expect(canPlay(null)).to.be.false

@@ -1,11 +1,11 @@
 import _ from 'lodash'
-import CONSTS from './consts'
+import CHESS_GRID from 'lib/consts/chess-grid'
 
 const isValidPosition = (position) => {
   if (!position) return false
   const {rowIndex, cellIndex} = position
-  return rowIndex >= 0 && rowIndex < CONSTS.NUM_ROWS
-    && cellIndex >=0 && cellIndex < CONSTS.NUM_CELLS
+  return rowIndex >= 0 && rowIndex < CHESS_GRID.NUM_ROWS
+    && cellIndex >=0 && cellIndex < CHESS_GRID.NUM_CELLS
 }
 
 const isJiangPosition = ({rowIndex, cellIndex}) => {

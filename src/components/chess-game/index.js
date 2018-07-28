@@ -2,17 +2,25 @@ import React from 'react'
 import ChessBoard from 'components/chess-board'
 import ChessGrid from 'components/chess-grid'
 import ChessWinner from 'components/chess-winner'
-import {isValid, isSameColor} from 'components/chess-man/util'
-import {findChessMan} from 'components/chess-grid/util'
-import {canGo, isGameOver, getWinnerColor, getSteppingPositions} from './util'
-import chessmans from './chessmans'
+
+import {isValid, isSameColor} from 'lib/utils/chess-man'
+import {findChessMan} from 'lib/utils/chess-position'
+import {
+	canGo,
+	isGameOver,
+	getWinnerColor,
+	getSteppingPositions
+} from 'lib/utils/chess-game'
+
+import CHESS_MANS from 'lib/consts/chess-mans.json'
+
 import './style.less'
 
 class ChessGame extends React.Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-			chessmans,
+			chessmans: CHESS_MANS,
 			activeChessman: null,
 			playedChessman: null,
 			steppedPositions: [],

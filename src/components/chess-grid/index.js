@@ -2,16 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
+
 import ChessTattoo from 'components/chess-tattoo'
 import ChessStepped from 'components/chess-stepped'
 import ChessStepping from 'components/chess-stepping'
 import ChessMan from 'components/chess-man'
-import CONSTS from './consts'
-import {needsTattoo, findChessMan, findPosition} from './util'
+
+import CHES_GRID from 'lib/consts/chess-grid'
+import {
+  needsTattoo,
+  findChessMan,
+  findPosition
+} from 'lib/utils/chess-position'
+
 import './style.less'
 
-const numColumns = CONSTS.NUM_CELLS
-const numRows = CONSTS.NUM_ROWS
+const numColumns = CHES_GRID.NUM_CELLS
+const numRows = CHES_GRID.NUM_ROWS
 
 const renderCells = (props, rowIndex) => {
   const {onClick, activeChessman, steppedPositions, steppingPositions} = props
