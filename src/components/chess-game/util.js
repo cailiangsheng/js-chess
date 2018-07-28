@@ -24,8 +24,13 @@ const getSteppingPositions = (from, chessmans) => {
   const positions = []
   for (let i = 0; i < CHESS_GRID.NUM_ROWS; i++) {
     for (let j = 0; j < CHESS_GRID.NUM_CELLS; j++) {
-      const to = { position: { rowIndex: i, cellIndex:j } }
-      if (canGo(from, to, chessmans)) positions.push(to.position)
+      const position = { rowIndex: i, cellIndex: j }
+      const chessman = findChessMan(chessmans, position)
+      const name = chessman && chessman.name
+      const to = { position, name }
+      if (canGo(from, to, chessmans)) {
+        positions.push(to.position)
+      }
     }
   }
   return positions
