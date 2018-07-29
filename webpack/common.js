@@ -19,7 +19,7 @@ const entry = useDLL ? {} : { libs: require('./libs') }
 
 module.exports = {
 	entry: Object.assign(entry, {
-		app: useVue ? 'src/vue.js' : 'src/react.js'
+		app: 'src/index.' + (useVue ? 'vue.js' : 'react.js')
 	}),
 	output: {
 		filename: '[name].[hash].js',
@@ -28,10 +28,10 @@ module.exports = {
 	},
 	module: {
 		rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
+			{
+				test: /\.vue$/,
+				loader: 'vue-loader'
+			},
 			{
 				test: /\.js$/,
 				loader: ['cache-loader', 'babel-loader'],
