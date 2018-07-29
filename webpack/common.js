@@ -57,7 +57,6 @@ module.exports = {
 
 function getPlugins () {
 	const plugins = [
-	  new VueLoaderPlugin(),
 		new CopyWebpackPlugin([
 			{
 				from: 'assets'
@@ -82,6 +81,10 @@ function getPlugins () {
 			[path.basename(outputDir)],
 			{root: path.dirname(path.resolve(__dirname, outputDir))}
 		))
+	}
+
+	if (useVue) {
+		plugins.unshift(new VueLoaderPlugin())
 	}
 
 	if (useDLL) {
