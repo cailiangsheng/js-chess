@@ -1,8 +1,10 @@
 import Vue from 'vue/dist/vue.common'
-import ChessBoard from 'components/chess-board/.vue'
+import ChessGame from 'components/chess-game/.vue'
+import './style.less'
 
 const root = document.querySelector('#root')
 
 new Vue({
-  render: (h) => h(ChessBoard)
-}).$mount(root)
+  render: (h) => h(ChessGame)
+})
+.$mount(root)
