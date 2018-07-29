@@ -6,6 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 const exec = require('child_process').exec
 
 const outputDir = '../dist'
@@ -15,7 +17,7 @@ const entry = useDLL ? {} : { libs: require('./libs') }
 
 module.exports = {
 	entry: Object.assign(entry, {
-		app: 'src/index.js'
+		app: 'src/vue.js'
 	}),
 	output: {
 		filename: '[name].[hash].js',
@@ -24,6 +26,10 @@ module.exports = {
 	},
 	module: {
 		rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
 			{
 				test: /\.js$/,
 				loader: ['cache-loader', 'babel-loader'],
@@ -49,6 +55,7 @@ module.exports = {
 
 function getPlugins () {
 	const plugins = [
+	  new VueLoaderPlugin(),
 		new CopyWebpackPlugin([
 			{
 				from: 'assets',
