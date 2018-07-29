@@ -4,6 +4,7 @@
       <tr class="row" v-for="(v, i) in 10" :key="i">
       	<td class="cell" v-for="(v, j) in 9" :key="j">
       		<ChessTattoo v-if="needsTattoo(i, j)"/>
+      		<ChessMan v-if="hasChessMan(i, j)"/>
 	      </td>
       </tr>
     </tbody>
@@ -14,11 +15,8 @@
 
 <script>
 	import ChessTattoo from 'components/chess-tattoo/.vue'
+	import ChessMan from 'components/chess-man/.vue'
 	import {needsTattoo, findChessMan, findPosition} from './util'
-	import CONSTS from './consts'
-
-	const rowRange = Array.from({length: CONSTS.NUM_ROWS}, (v, i) => i)
-	const cellRange = Array.from({length: CONSTS.NUM_CELLS}, (v, j) => j)
 
 	export default {
 		props: {
@@ -44,12 +42,15 @@
 			},
 		},
 	  components: {
-	    ChessTattoo
+	    ChessTattoo,
+	    ChessMan
 	  },
 		methods: {
 			needsTattoo(rowIndex, cellIndex) {
-      	const position = {rowIndex, cellIndex}
-				return needsTattoo(position)
+				return needsTattoo({rowIndex, cellIndex})
+			},
+			hasChessMan(rowIndex, cellIndex) {
+				return findChessMan(this.chessmans, {rowIndex, cellIndex})
 			},
 			onClick () {
 				// TODO
