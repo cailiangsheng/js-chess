@@ -3,8 +3,8 @@
     <tbody>
       <tr class="row" v-for="(v, i) in 10" :key="i">
       	<td class="cell" v-for="(v, j) in 9" :key="j">
-      		<ChessTattoo v-if="needsTattoo(i, j)"/>
-      		<ChessMan v-if="hasChessMan(i, j)"/>
+      		<ChessTattoo v-if="needsTattoo(i, j)" />
+      		<ChessMan v-if="hasChessMan(i, j)" :name="getChessManName(i, j)" />
 	      </td>
       </tr>
     </tbody>
@@ -50,6 +50,13 @@
 				return needsTattoo({rowIndex, cellIndex})
 			},
 			hasChessMan(rowIndex, cellIndex) {
+				return !!this.getChessMan(rowIndex, cellIndex)
+			},
+			getChessManName(rowIndex, cellIndex) {
+				const chessman = this.getChessMan(rowIndex, cellIndex)
+				return chessman && chessman.name
+			},
+			getChessMan(rowIndex, cellIndex) {
 				return findChessMan(this.chessmans, {rowIndex, cellIndex})
 			},
 			onClick () {

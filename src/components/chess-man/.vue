@@ -1,5 +1,5 @@
 <template>
-	<div class="chess-man color">
+	<div class="chess-man" v-bind:class="classNames">
 	  <span>{{name}}</span>
 	</div>
 </template>
@@ -21,8 +21,12 @@
 			}
 		},
 		computed: {
-			color() {
-				return getColor(this.name)
+			classNames() {
+				const color = getColor(this.name)
+				return {
+					[color]: true,
+					'active': this.isActive
+				}
 			}
 		},
 		methods: {
