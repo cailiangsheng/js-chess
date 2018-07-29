@@ -10,14 +10,16 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const exec = require('child_process').exec
 
-const outputDir = '../dist'
 const useDevServer = process.env.DEV_SERVER !== undefined
+const useVue = process.env.VUE !== undefined
 const useDLL = process.env.DLL !== undefined
+
+const outputDir = '../dist' + (useVue ? '/vue' : '/react')
 const entry = useDLL ? {} : { libs: require('./libs') }
 
 module.exports = {
 	entry: Object.assign(entry, {
-		app: 'src/vue.js'
+		app: useVue ? 'src/vue.js' : 'src/react.js'
 	}),
 	output: {
 		filename: '[name].[hash].js',
@@ -58,8 +60,7 @@ function getPlugins () {
 	  new VueLoaderPlugin(),
 		new CopyWebpackPlugin([
 			{
-				from: 'assets',
-				to: outputDir
+				from: 'assets'
 			}
 		]),
 		new webpack.ProvidePlugin({
