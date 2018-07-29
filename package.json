@@ -11,7 +11,7 @@
     "react:server:dll-dev": "npm run react:dll && cross-env DLL=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
     "react:server:dev": "cross-env DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
     "vue:build": "npm run vue:dll && npm run vue:dll-prod",
-    "vue:server:dist": "http-server dist/vue -o -p 6666",
+    "vue:server:dist": "http-server dist/vue -o -p 9999",
     "vue:server:dll-dev": "npm run vue:dll && cross-env VUE=1 DLL=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
     "vue:server:dev": "cross-env VUE=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
     "test:all": "npm run test ./src/**/*.test.js",
