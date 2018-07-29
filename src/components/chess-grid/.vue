@@ -4,7 +4,9 @@
       <tr class="row" v-for="(v, i) in 10" :key="i">
       	<td class="cell" v-for="(v, j) in 9" :key="j" @click="onClick(i, j)">
       		<ChessTattoo v-if="needsTattoo(i, j)" />
+        	<ChessStepped v-if="isStepped(i, j)" />
       		<ChessMan v-if="hasChessMan(i, j)" :name="getChessManName(i, j)" />
+        	<ChessStepping v-if="isStepping(i, j)" />
 	      </td>
       </tr>
     </tbody>
@@ -15,6 +17,8 @@
 
 <script>
 	import ChessTattoo from 'components/chess-tattoo/.vue'
+	import ChessStepped from 'components/chess-stepped/.vue'
+	import ChessStepping from 'components/chess-stepping/.vue'
 	import ChessMan from 'components/chess-man/.vue'
 	import {needsTattoo, findChessMan, findPosition} from './util'
 
@@ -43,12 +47,23 @@
 		},
 	  components: {
 	    ChessTattoo,
+	    ChessStepped,
+	    ChessStepping,
 	    ChessMan
 	  },
 		methods: {
 			needsTattoo(rowIndex, cellIndex) {
-				return needsTattoo({rowIndex, cellIndex})
+      	const position = {rowIndex, cellIndex}
+				return needsTattoo(position)
 			},
+	  	isStepped(rowIndex, cellIndex) {
+      	const position = {rowIndex, cellIndex}
+	  		return findPosition(this.steppedPositions, position)
+	  	},
+	  	isStepping(rowIndex, cellIndex) {
+      	const position = {rowIndex, cellIndex}
+	  		return findPosition(this.steppingPositions, position)
+	  	},
 			hasChessMan(rowIndex, cellIndex) {
 				return !!this.getChessMan(rowIndex, cellIndex)
 			},
