@@ -6,8 +6,8 @@ import ChessTattoo from 'components/chess-tattoo'
 import ChessStepped from 'components/chess-stepped'
 import ChessStepping from 'components/chess-stepping'
 import ChessMan from 'components/chess-man'
-import CONSTS from './consts'
 import {needsTattoo, findChessMan, findPosition} from './util'
+import CONSTS from './consts'
 import './style.less'
 
 const numColumns = CONSTS.NUM_CELLS
