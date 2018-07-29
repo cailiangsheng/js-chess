@@ -2,7 +2,7 @@
 	<table class="chess-grid">
     <tbody>
       <tr class="row" v-for="(v, i) in 10" :key="i">
-      	<td class="cell" v-for="(v, j) in 9" :key="j">
+      	<td class="cell" v-for="(v, j) in 9" :key="j" @click="onClick(i, j)">
       		<ChessTattoo v-if="needsTattoo(i, j)" />
       		<ChessMan v-if="hasChessMan(i, j)" :name="getChessManName(i, j)" />
 	      </td>
@@ -57,10 +57,14 @@
 				return chessman && chessman.name
 			},
 			getChessMan(rowIndex, cellIndex) {
-				return findChessMan(this.chessmans, {rowIndex, cellIndex})
+      	const position = {rowIndex, cellIndex}
+				return findChessMan(this.chessmans, position)
 			},
-			onClick () {
-				// TODO
+			onClick (rowIndex, cellIndex) {
+      	const position = {rowIndex, cellIndex}
+      	const name = this.getChessManName(rowIndex, cellIndex)
+    		const target = {name, position}
+    		this.$emit('click', target)
 			}
 		}
 	}
