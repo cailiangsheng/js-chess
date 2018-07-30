@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { clickChessGrid } from './action'
+import { clickChessGrid } from './actions'
 import ChessGame from '../index'
 
 const mapStateToProps = (state, ownProps) => state.chessGame
