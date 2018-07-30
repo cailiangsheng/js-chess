@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {CLICK_CHESS_GRID} from './actions'
+import {CLICK_CHESS_GRID} from './action'
 import {findChessMan} from 'components/chess-grid/util'
 import {isValid, isSameColor} from 'components/chess-man/util'
 import {canGo, isGameOver, getWinnerColor, getSteppingPositions} from '../util'
