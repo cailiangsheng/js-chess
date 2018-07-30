@@ -50,7 +50,8 @@ module.exports = {
 			path.resolve('./node_modules')
 		],
 		alias: {
-			HOCS: path.resolve(__dirname, 'components/hocs')
+			HOCS: path.resolve(__dirname, 'components/hocs'),
+			vue: path.resolve(__dirname, '../node_modules/vue/dist/vue.common')
 		}
 	}
 }

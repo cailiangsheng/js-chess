@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 import ChessGame from 'components/chess-game/.vue'
 import store from 'components/chess-game/vuex/store'
 import './style.less'

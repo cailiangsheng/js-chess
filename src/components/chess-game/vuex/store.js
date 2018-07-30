@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.common'
+import Vue from 'vue'
 import Vuex from 'vuex'
 import actions from './actions'
 import { mutations, initialState } from './mutations'
