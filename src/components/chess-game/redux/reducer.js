@@ -31,6 +31,8 @@ const clickTarget = (state, target) => {
     return activateTarget(state, target)
   } else if(canGo(activeChessman, target, chessmans)) {
     return goToTarget(state, target)
+  } else {
+    return state
   }
 }
 
