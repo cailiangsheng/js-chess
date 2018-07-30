@@ -78,3 +78,8 @@ const clickChessGrid = (state = initialState, action) => {
 }
 
 export default clickChessGrid
+
+export {
+  clickTarget,
+  initialState
+}
