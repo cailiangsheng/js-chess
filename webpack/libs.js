@@ -11,7 +11,8 @@ const reactLibs = [
 
 const vueLibs = [
 	'lodash',
-	'vue/dist/vue.common'
+	'vue/dist/vue.common',
+	'vuex'
 ]
 
 const useVue = process.env.VUE !== undefined
