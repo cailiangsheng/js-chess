@@ -1,26 +1,12 @@
 import React from 'react'
-import ChessBoard from 'components/chess-board'
-import ChessGrid from 'components/chess-grid'
-import ChessWinner from 'components/chess-winner'
-import './style.less'
+import { Provider } from 'react-redux'
+import ChessGame from './redux/container'
+import store from './redux/store'
 
-const ChessGame = ({
-	chessmans,
-	activeChessman,
-	steppingPositions,
-	steppedPositions,
-	winnerColor,
-	onClick
-}) => {
-	return <div className='chess-game'>
-	  <ChessWinner winnerColor={winnerColor} />
-	  <div className='chess-body'>
-		<ChessBoard />
-		<ChessGrid chessmans={chessmans} activeChessman={activeChessman}
-		  steppingPositions={steppingPositions} steppedPositions={steppedPositions}
-		  onClick={onClick} />
-	  </div>
-	</div>
-}
+const ChessGameApp = () => (
+    <Provider store={store}>
+      <ChessGame />
+    </Provider>
+)
 
-export default ChessGame
+export default ChessGameApp

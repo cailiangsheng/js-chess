@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import ChessGameApp from 'components/chess-game/app.vue'
+import ChessGame from 'components/chess-game/vue'
 import './style.less'
 
 new Vue(
-  ChessGameApp
+  ChessGame
 )
 .$mount(
   document.querySelector('#root')

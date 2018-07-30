@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ChessGameApp from 'components/chess-game/app.react'
+import ChessGame from 'components/chess-game'
 import './style.less'
 
 ReactDOM.render(
-  <ChessGameApp />,
+  <ChessGame />,
   document.querySelector("#root")
 )
