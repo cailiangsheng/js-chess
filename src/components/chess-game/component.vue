@@ -19,37 +19,24 @@
 	import ChessWinner from 'components/chess-winner/.vue'
 	import ChessBoard from 'components/chess-board/.vue'
 	import ChessGrid from 'components/chess-grid/.vue'
+	import {mapState, mapActions} from 'vuex'
 
 	export default {
-		computed: {
-			chessmans() {
-				return this.$store.state.chessmans
-			},
-			activeChessman() {
-				return this.$store.state.activeChessman
-			},
-			playedChessman() {
-				return this.$store.state.playedChessman
-			},
-			steppedPositions() {
-				return this.$store.state.steppedPositions
-			},
-			steppingPositions() {
-				return this.$store.state.steppingPositions
-			},
-			winnerColor() {
-				return this.$store.state.winnerColor
-			}
-		},
 		components: {
 			ChessWinner,
 			ChessBoard,
 			ChessGrid
 		},
-		methods: {
-			onClick (target) {
-				this.$store.dispatch('clickChessGrid', target)
-			}
-		}
+		computed: mapState([
+			'chessmans',
+			'activeChessman',
+			'playedChessman',
+			'steppedPositions',
+			'steppingPositions',
+			'winnerColor'
+		]),
+		methods: mapActions({
+			onClick: 'clickChessGrid'
+		})
 	}
 </script>
