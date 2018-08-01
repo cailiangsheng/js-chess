@@ -17,7 +17,7 @@ const renderRows = () => {
 }
 
 const ChessBoard = () => {
-	return <div className='chess-board full'>
+	return <div className='chess-board normal'>
     <table>
       <tbody>
         {renderRows()}

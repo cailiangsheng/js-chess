@@ -1,10 +1,11 @@
 import React from 'react'
-import ChessBoard from 'components/chess-board'
-import ChessGrid from 'components/chess-grid'
+import ChessBoardFlip from 'components/chess-board-flip'
+import ChessGridFlip from 'components/chess-grid-flip'
 import ChessWinner from 'components/chess-winner'
+import CHESSMANS from './chessmans.json'
 import './style.less'
 
-const ChessGame = ({
+const ChessGameFlip = ({
 	chessmans,
 	activeChessman,
 	steppingPositions,
@@ -12,15 +13,19 @@ const ChessGame = ({
 	winnerColor,
 	onClick
 }) => {
-	return <div className='chess-game normal'>
+	return <div className='chess-game flip'>
 	  <ChessWinner winnerColor={winnerColor} />
 	  <div className='chess-body'>
-		<ChessBoard />
-		<ChessGrid chessmans={chessmans} activeChessman={activeChessman}
+		<ChessBoardFlip />
+		<ChessGridFlip chessmans={chessmans} activeChessman={activeChessman}
 		  steppingPositions={steppingPositions} steppedPositions={steppedPositions}
 		  onClick={onClick} />
 	  </div>
 	</div>
 }
 
-export default ChessGame
+ChessGameFlip.defaultProps = {
+	chessmans: CHESSMANS
+}
+
+export default ChessGameFlip

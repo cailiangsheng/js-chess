@@ -16,8 +16,8 @@ const renderRows = () => {
     .map((v, i) => <tr key={i} className='row'>{renderCells()}</tr>)
 }
 
-const ChessBoardHalf = () => {
-	return <div className='chess-board half'>
+const ChessBoardFlip = () => {
+	return <div className='chess-board flip'>
     <table>
       <tbody>
         {renderRows()}
@@ -26,4 +26,4 @@ const ChessBoardHalf = () => {
   </div>
 }
 
-export default ChessBoardHalf
+export default ChessBoardFlip

@@ -10,13 +10,10 @@ import {needsTattoo, findChessMan, findPosition} from './util'
 import CONSTS from './consts'
 import './style.less'
 
-const numColumns = CONSTS.NUM_CELLS
-const numRows = CONSTS.NUM_ROWS
-
 const renderCells = (props, rowIndex) => {
   const {onClick, activeChessman, steppedPositions, steppingPositions} = props
   return Array
-    .from({length: numColumns})
+    .from({length: props.numCells})
     .map((v, cellIndex) => {
       const position = {rowIndex, cellIndex}
       const chessman = findChessMan(props.chessmans, position)
@@ -36,7 +33,7 @@ const renderCells = (props, rowIndex) => {
 
 const renderRows = (props) => {
   return Array
-    .from({length: numRows})
+    .from({length: props.numRows})
     .map((v, i) => <tr key={i} className='row'>{renderCells(props, i)}</tr>)
 }
 
@@ -49,6 +46,8 @@ const ChessGrid = (props) => {
 }
 
 ChessGrid.propTypes = {
+  numCells: PropTypes.number.isRequired,
+  numRows: PropTypes.number.isRequired,
   chessmans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -81,6 +80,8 @@ ChessGrid.propTypes = {
 }
 
 ChessGrid.defaultProps = {
+  numRows: CONSTS.NUM_ROWS,
+  numCells: CONSTS.NUM_CELLS,
   chessmans: [],
   activeChessman: null,
   steppedPositions: [],
