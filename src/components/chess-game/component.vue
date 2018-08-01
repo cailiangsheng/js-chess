@@ -1,5 +1,5 @@
 <template>
-	<div class="chess-game">
+	<div class="chess-game normal">
 		  <ChessWinner :winnerColor="winnerColor" />
 		  <div class="chess-body">
 				<ChessBoard />
