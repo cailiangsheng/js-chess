@@ -36,7 +36,7 @@ const getSteppingPositions = (from, chessmans) => {
 }
 
 const getWinnerColor = (chessmans = []) => {
-  return CHESS_MAN.COLOR.INVALID
+  return ''
 }
 
 // TODO: can move part of the code into common util
@@ -61,17 +61,43 @@ const canGo = (from, to, chessmans = []) => {
 
   switch (getType(from.name)) {
     case CHESS_MAN.TYPE.JU:
-	case CHESS_MAN.TYPE.MA:
+
+
+    case CHESS_MAN.TYPE.MA:
     case CHESS_MAN.TYPE.XIANG:
     case CHESS_MAN.TYPE.SHI:
     case CHESS_MAN.TYPE.JIANG:
-	case CHESS_MAN.TYPE.ZU:
-		return isStraightByOneStep(params.differ)
+	  case CHESS_MAN.TYPE.ZU:
+		  return isStraightByOneStep(params.differ)
     case CHESS_MAN.TYPE.PAO:
       return canGoPao(params)
     default:
       return false
   }
+}
+
+const canJuEat = (toType) => {
+  return [
+    CHESS_MAN.TYPE.JU,
+    CHESS_MAN.TYPE.MA,
+    CHESS_MAN.TYPE.PAO,
+    CHESS_MAN.TYPE.ZU
+  ].includes(toType)
+}
+
+const canMaEat = (toType) => {
+  return [
+    CHESS_MAN.TYPE.MA,
+    CHESS_MAN.TYPE.PAO,
+    CHESS_MAN.TYPE.ZU
+  ].includes(toType)
+}
+
+const canZuEat = (toType) => {
+  return [
+    CHESS_MAN.TYPE.JIANG,
+    CHESS_MAN.TYPE.ZU
+  ].includes(toType)
 }
 
 const differPositions = ({from, to}) => ({
