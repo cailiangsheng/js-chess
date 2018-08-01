@@ -20,6 +20,7 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid/consts'
 
+// TODO: move to common util
 const getSteppingPositions = (from, chessmans) => {
   const positions = []
   for (let i = 0; i < CHESS_GRID.NUM_ROWS; i++) {
@@ -57,13 +58,22 @@ const getWinnerColor = (chessmans = []) => {
 }
 
 const canGo = (from, to, chessmans = []) => {
-  if (!from || !to) return false
+  if (!from || !to) {
+    return false
+  }
 
-  if (isSameColor(from.name, to.name)) return false
+  if (isSameColor(from.name, to.name)) {
+    return false
+  }
 
-  if (!isValidPosition(from.position) || !isValidPosition(to.position)) return false
+  if (!isValidPosition(from.position, CHESS_GRID)
+    || !isValidPosition(to.position, CHESS_GRID)) {
+    return false
+  }
 
-  if (isSamePosition(from.position, to.position)) return false
+  if (isSamePosition(from.position, to.position)) {
+    return false
+  }
 
   const differ = differPositions({from, to})
   const params = {from, to, differ, chessmans}
