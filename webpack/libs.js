@@ -6,7 +6,8 @@ const reactLibs = [
 	'react-dom',
 	'prop-types',
 	'classnames',
-	'lodash'
+	'lodash',
+	'react-router-dom'
 ]
 
 const vueLibs = [
