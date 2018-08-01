@@ -2,7 +2,6 @@ import React from 'react'
 import ChessBoardFlip from 'components/chess-board-flip'
 import ChessGridFlip from 'components/chess-grid-flip'
 import ChessWinner from 'components/chess-winner'
-import CHESSMANS from './chessmans.json'
 import './style.less'
 
 const ChessGameFlip = ({
@@ -23,9 +22,4 @@ const ChessGameFlip = ({
 	  </div>
 	</div>
 }
-
-ChessGameFlip.defaultProps = {
-	chessmans: CHESSMANS
-}
-
 export default ChessGameFlip

@@ -18,6 +18,27 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid-flip/consts'
 
+// TODO: move to common util
+const getSteppingPositions = (from, chessmans) => {
+  const positions = []
+  for (let i = 0; i < CHESS_GRID.NUM_ROWS; i++) {
+    for (let j = 0; j < CHESS_GRID.NUM_CELLS; j++) {
+      const position = { rowIndex: i, cellIndex: j }
+      const chessman = findChessMan(chessmans, position)
+      const name = chessman && chessman.name
+      const to = { position, name }
+      if (canGo(from, to, chessmans)) {
+        positions.push(to.position)
+      }
+    }
+  }
+  return positions
+}
+
+const getWinnerColor = (chessmans = []) => {
+  return CHESS_MAN.COLOR.INVALID
+}
+
 // TODO: can move part of the code into common util
 const canGo = (from, to, chessmans = []) => {
   if (!from || !to) {
@@ -95,5 +116,7 @@ const canGoPao = (params) => {
 }
 
 export {
-  canGo
+  canGo,
+  getWinnerColor,
+  getSteppingPositions
 }

@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux'
-import reducer from 'components/chess-game/redux/reducer'
+import reducer from './reducer'
 
 const rootReducer = combineReducers({
     chessGame: reducer
