@@ -1,12 +1,12 @@
 import React from 'react'
 import './style.less'
 
-const numColumns = 8
-const numRows = 9
+const numRows = 8
+const numCells = 4
 
 const renderCells = () => {
   return Array
-    .from({length: numColumns})
+    .from({length: numCells})
     .map((v, i) => <td key={i} className='cell' />)
 }
 
@@ -16,8 +16,8 @@ const renderRows = () => {
     .map((v, i) => <tr key={i} className='row'>{renderCells()}</tr>)
 }
 
-const ChessBoard = () => {
-	return <div className='chess-board full'>
+const ChessBoardHalf = () => {
+	return <div className='chess-board half'>
     <table>
       <tbody>
         {renderRows()}
@@ -26,4 +26,4 @@ const ChessBoard = () => {
   </div>
 }
 
-export default ChessBoard
+export default ChessBoardHalf

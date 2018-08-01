@@ -1,0 +1,19 @@
+@board-cell-size: 30px;
+
+.chess-board {
+  border: solid 2px black;
+  padding: 2px;
+
+  table {
+    border: solid 1px black;
+    border-spacing: 0;
+  }
+
+  .cell {
+    width: @board-cell-size;
+    height: @board-cell-size;
+    border-right: solid 1px black;
+    border-bottom: solid 1px black;
+    padding: 0;
+  }
+}
