@@ -58,22 +58,61 @@ const canGo = (from, to, chessmans = []) => {
 
   const differ = differPositions({from, to})
   const params = {from, to, differ, chessmans}
+  const toType = getType(to.name)
+  let canEat = false
 
   switch (getType(from.name)) {
     case CHESS_MAN.TYPE.JU:
-
-
+      canEat = canJuEat(toType)
+      break
     case CHESS_MAN.TYPE.MA:
+      canEat = canMaEat(toType)
+      break
     case CHESS_MAN.TYPE.XIANG:
+      canEat = canXiangEat(toType)
+      break
     case CHESS_MAN.TYPE.SHI:
+      canEat = canShiEat(toType)
+      break
     case CHESS_MAN.TYPE.JIANG:
+      canEat = canJiangEat(toType)
+      break
 	  case CHESS_MAN.TYPE.ZU:
-		  return isStraightByOneStep(params.differ)
+      canEat = canZuEat(toType)
+      break
     case CHESS_MAN.TYPE.PAO:
       return canGoPao(params)
     default:
       return false
   }
+  return canEat && isStraightByOneStep(params.differ)
+}
+
+const canJiangEat = (toType) => {
+  return toType !== CHESS_MAN.TYPE.ZU
+}
+
+const canShiEat = (toType) => {
+  return [
+    CHESS_MAN.TYPE.SHI,
+    CHESS_MAN.TYPE.XIANG,
+    CHESS_MAN.TYPE.JU,
+    CHESS_MAN.TYPE.MA,
+    CHESS_MAN.TYPE.PAO,
+    CHESS_MAN.TYPE.ZU,
+    CHESS_MAN.TYPE.INVALID
+  ].includes(toType)
+}
+
+const canXiangEat = (toType) => {
+  return [
+    CHESS_MAN.TYPE.XIANG,
+    CHESS_MAN.TYPE.JU,
+    CHESS_MAN.TYPE.MA,
+    CHESS_MAN.TYPE.PAO,
+    CHESS_MAN.TYPE.ZU,
+    CHESS_MAN.TYPE.INVALID
+  ].includes(toType)
 }
 
 const canJuEat = (toType) => {
@@ -81,7 +120,8 @@ const canJuEat = (toType) => {
     CHESS_MAN.TYPE.JU,
     CHESS_MAN.TYPE.MA,
     CHESS_MAN.TYPE.PAO,
-    CHESS_MAN.TYPE.ZU
+    CHESS_MAN.TYPE.ZU,
+    CHESS_MAN.TYPE.INVALID
   ].includes(toType)
 }
 
@@ -89,14 +129,16 @@ const canMaEat = (toType) => {
   return [
     CHESS_MAN.TYPE.MA,
     CHESS_MAN.TYPE.PAO,
-    CHESS_MAN.TYPE.ZU
+    CHESS_MAN.TYPE.ZU,
+    CHESS_MAN.TYPE.INVALID
   ].includes(toType)
 }
 
 const canZuEat = (toType) => {
   return [
     CHESS_MAN.TYPE.JIANG,
-    CHESS_MAN.TYPE.ZU
+    CHESS_MAN.TYPE.ZU,
+    CHESS_MAN.TYPE.INVALID
   ].includes(toType)
 }
 
