@@ -18,6 +18,7 @@ const renderCells = (props, rowIndex) => {
       const position = {rowIndex, cellIndex}
       const chessman = findChessMan(props.chessmans, position)
       const chessmanName = chessman && chessman.name
+      const isHidden = chessman && chessman.isHidden
       const isActive = activeChessman && _.isEqual(position, activeChessman.position)
       const isStepped = findPosition(steppedPositions, position)
       const isStepping = findPosition(steppingPositions, position)
@@ -25,7 +26,7 @@ const renderCells = (props, rowIndex) => {
       return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
         { showTattoo && !chessman && needsTattoo(position) && <ChessTattoo /> }
         { isStepped && <ChessStepped /> }
-        { chessman && <ChessMan name={chessmanName} isActive={isActive} /> }
+        { chessman && <ChessMan name={chessmanName} isActive={isActive} isHidden={isHidden} /> }
         { isStepping && <ChessStepping /> }
       </td>
     })

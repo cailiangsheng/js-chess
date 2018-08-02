@@ -18,6 +18,18 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid-flip/consts'
 
+const hideChessmans = (chessmans) => {
+  return _.map(chessmans, hideChessman)
+}
+
+const hideChessman = (chessman) => Object.assign(chessman, {
+  isHidden: true
+})
+
+const showChessman = (chessman) => Object.assign(chessman, {
+  isHidden: false
+})
+
 const shuffleChessmans = (chessmans) => {
   const positions = _.map(chessmans, 'position')
   const shuffledPositions = _.shuffle(positions)
@@ -34,8 +46,7 @@ const getSteppingPositions = (from, chessmans) => {
     for (let j = 0; j < CHESS_GRID.NUM_CELLS; j++) {
       const position = { rowIndex: i, cellIndex: j }
       const chessman = findChessMan(chessmans, position)
-      const name = chessman && chessman.name
-      const to = { position, name }
+      const to = chessman ? chessman : { position }
       if (canGo(from, to, chessmans)) {
         positions.push(to.position)
       }
@@ -60,19 +71,19 @@ const getWinnerColor = (chessmans = []) => {
 
 // TODO: can move part of the code into common util
 const canGo = (from, to, chessmans = []) => {
-  if (!from || !to) {
-	return false
-  }
+  if (!from || !to) return false
+
+  if (to.isHidden) return false
 
   if (isSameColor(from.name, to.name)) return false
 
   if (!isValidPosition(from.position, CHESS_GRID)
   	|| !isValidPosition(to.position, CHESS_GRID)) {
-	return false
+	 return false
   }
 
   if (isSamePosition(from.position, to.position)) {
-	return false
+	 return false
   }
 
   const differ = differPositions({from, to})
@@ -206,5 +217,7 @@ export {
   canGo,
   getWinnerColor,
   getSteppingPositions,
-  shuffleChessmans
+  shuffleChessmans,
+  hideChessmans,
+  showChessman
 }
