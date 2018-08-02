@@ -36,8 +36,8 @@ const getSteppingPositions = (from, chessmans) => {
 }
 
 const getWinnerColor = (chessmans = []) => {
-  const numRedChessmans = _.filter(chessmans, (chessman) => getColor(chessman.name) === CHESS_MAN.COLOR.RED)
-  const numBlackChessmans = _.filter(chessmans, (chessman) => getColor(chessman.name) === CHESS_MAN.COLOR.BLACK)
+  const numRedChessmans = _.filter(chessmans, (chessman) => getColor(chessman.name) === CHESS_MAN.COLOR.RED).length
+  const numBlackChessmans = _.filter(chessmans, (chessman) => getColor(chessman.name) === CHESS_MAN.COLOR.BLACK).length
   if (numRedChessmans > 0 && numBlackChessmans === 0) {
     return CHESS_MAN.COLOR.RED
   } else if (numRedChessmans === 0 && numBlackChessmans > 0) {
