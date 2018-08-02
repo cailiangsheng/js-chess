@@ -23,18 +23,14 @@ const initialState = {
   winnerColor: ''
 }
 
-const isSameColorEx = (target1, target2) => {
-  if (target1.isHidden || target2.isHidden) return false
-  else return isSameColor(target1.name, target2.name)
-}
-
 const canActivate = (state, target) => {
   if (!isValid(target.name)) return false
 
   const {activeChessman, playedChessman} = state
+  const isHiddenTarget = target.isHidden
   return !activeChessman && !playedChessman
-    || !activeChessman && !isSameColorEx(playedChessman, target)
-    || activeChessman && isSameColorEx(activeChessman, target)
+    || !activeChessman && (!isSameColorEx(playedChessman, target) || isHiddenTarget)
+    || activeChessman && (isSameColorEx(activeChessman, target) || isHiddenTarget)
 }
 
 const clickTarget = (state, target) => {

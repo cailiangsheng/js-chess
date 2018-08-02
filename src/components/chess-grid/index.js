@@ -22,7 +22,7 @@ const renderCells = (props, rowIndex) => {
       const isActive = activeChessman && _.isEqual(position, activeChessman.position)
       const isStepped = findPosition(steppedPositions, position)
       const isStepping = findPosition(steppingPositions, position)
-      const target = {name: chessmanName, position}
+      const target = {name: chessmanName, position, isHidden}
       return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
         { showTattoo && !chessman && needsTattoo(position) && <ChessTattoo /> }
         { isStepped && <ChessStepped /> }
