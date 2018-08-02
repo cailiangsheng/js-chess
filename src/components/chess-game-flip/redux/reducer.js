@@ -25,18 +25,20 @@ const initialState = {
 
 const canActivate = (state, target) => {
   if (!isValid(target.name)) return false
+  if (target.isHidden) return false
 
   const {activeChessman, playedChessman} = state
-  const isHiddenTarget = target.isHidden
   return !activeChessman && !playedChessman
-    || !activeChessman && (!isSameColorEx(playedChessman, target) || isHiddenTarget)
-    || activeChessman && (isSameColorEx(activeChessman, target) || isHiddenTarget)
+    || !activeChessman && !isSameColor(playedChessman.name, target.name)
+    || activeChessman && isSameColor(activeChessman.name, target.name)
 }
 
 const clickTarget = (state, target) => {
   const {chessmans, activeChessman, winnerColor} = state
   if (winnerColor) {
     return state
+  } else if (target.isHidden) {
+    return showTarget(state, target)
   } else if (canActivate(state, target)) {
     return activateTarget(state, target)
   } else if(canGo(activeChessman, target, chessmans)) {
@@ -46,13 +48,22 @@ const clickTarget = (state, target) => {
   }
 }
 
-const activateTarget = (state, target) => {
+const showTarget = (state, target) => {
   const chessman = findChessMan(state.chessmans, target.position)
   showChessman(chessman)
   showChessman(target)
   return Object.assign({}, state, {
+    activeChessman: null,
+    steppingPositions: [],
+    steppedPositions: [target.position]
+  })
+}
+
+const activateTarget = (state, target) => {
+  return Object.assign({}, state, {
     activeChessman: target,
-    steppingPositions: getSteppingPositions(target, state.chessmans)
+    steppingPositions: getSteppingPositions(target, state.chessmans),
+    steppedPositions: []
   })
 }
 
