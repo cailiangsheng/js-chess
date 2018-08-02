@@ -178,7 +178,7 @@ const countStraightBlockers = ({from, to, differ, chessmans}) => {
 const canGoPao = (params) => {
   const isEmptyTarget = !params.to.name
   return isStraight(params.differ) && (
-    isEmptyTarget && countStraightBlockers(params) === 0 ||
+    isEmptyTarget && isStraightByOneStep(params.differ) ||
     !isEmptyTarget && countStraightBlockers(params) === 1
   )
 }
