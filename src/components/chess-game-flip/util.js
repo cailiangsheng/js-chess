@@ -18,6 +18,15 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid-flip/consts'
 
+const shuffleChessmans = (chessmans) => {
+  const positions = _.map(chessmans, 'position')
+  const shuffledPositions = _.shuffle(positions)
+  return _.map(chessmans, (chessman, index) => ({
+    name: chessman.name,
+    position: shuffledPositions[index]
+  }))
+}
+
 // TODO: move to common util
 const getSteppingPositions = (from, chessmans) => {
   const positions = []
@@ -196,5 +205,6 @@ const canGoPao = (params) => {
 export {
   canGo,
   getWinnerColor,
-  getSteppingPositions
+  getSteppingPositions,
+  shuffleChessmans
 }

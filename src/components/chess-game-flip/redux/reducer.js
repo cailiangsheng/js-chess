@@ -2,11 +2,11 @@ import _ from 'lodash'
 import {CLICK_CHESS_GRID} from 'components/chess-game/redux/actions'
 import {findChessMan} from 'components/chess-grid/util'
 import {isValid, isSameColor} from 'components/chess-man/util'
-import {canGo, getWinnerColor, getSteppingPositions} from '../util'
+import {canGo, getWinnerColor, getSteppingPositions, shuffleChessmans} from '../util'
 import CHESSMANS from '../chessmans'
 
 const initialState = {
-  chessmans: CHESSMANS,
+  chessmans: shuffleChessmans(CHESSMANS),
   activeChessman: null,
   playedChessman: null,
   steppedPositions: [],
