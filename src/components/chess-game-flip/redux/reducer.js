@@ -54,6 +54,7 @@ const showTarget = (state, target) => {
   showChessman(target)
   return Object.assign({}, state, {
     activeChessman: null,
+    playedChessman: target,
     steppingPositions: [],
     steppedPositions: [target.position]
   })
