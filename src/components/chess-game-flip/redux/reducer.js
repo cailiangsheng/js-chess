@@ -27,8 +27,8 @@ const initialState = {
   playerColor: ''
 }
 
-const newPlayerColor = (chessman) => {
-  return getDifferentColor(getColor(chessman.name))
+const newPlayerColor = (state, chessman) => {
+  return getDifferentColor(state.playerColor || getColor(chessman.name))
 }
 
 const canActivate = (state, target) => {
@@ -61,7 +61,7 @@ const showTarget = (state, target) => {
   showChessman(target)
   return Object.assign({}, state, {
     activeChessman: null,
-    playerColor: newPlayerColor(target),
+    playerColor: newPlayerColor(state, target),
     steppingPositions: [],
     steppedPositions: [target.position]
   })
@@ -93,7 +93,7 @@ const goToTarget = (state, target) => {
   return {
     chessmans,
     activeChessman: null,
-    playerColor: newPlayerColor(chessmanGoing),
+    playerColor: newPlayerColor(state, chessmanGoing),
     steppingPositions: [],
     steppedPositions,
     winnerColor: getWinnerColor(chessmans)

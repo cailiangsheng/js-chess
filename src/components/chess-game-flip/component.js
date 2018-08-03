@@ -10,10 +10,11 @@ const ChessGameFlip = ({
 	steppingPositions,
 	steppedPositions,
 	winnerColor,
+	playerColor,
 	onClick
 }) => {
 	return <div className='chess-game flip'>
-	  <ChessWinner winnerColor={winnerColor} />
+	  <ChessWinner winnerColor={winnerColor} playerColor={playerColor} />
 	  <div className='chess-body'>
 		<ChessBoardFlip />
 		<ChessGridFlip chessmans={chessmans} activeChessman={activeChessman}
