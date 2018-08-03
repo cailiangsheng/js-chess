@@ -1,7 +1,7 @@
 import React from 'react'
 import ChessBoardFlip from 'components/chess-board-flip'
 import ChessGridFlip from 'components/chess-grid-flip'
-import ChessWinner from 'components/chess-winner'
+import ChessStatus from 'components/chess-status'
 import './style.less'
 
 const ChessGameFlip = ({
@@ -14,7 +14,7 @@ const ChessGameFlip = ({
 	onClick
 }) => {
 	return <div className='chess-game flip'>
-	  <ChessWinner winnerColor={winnerColor} playerColor={playerColor} />
+	  <ChessStatus winnerColor={winnerColor} playerColor={playerColor} />
 	  <div className='chess-body'>
 		<ChessBoardFlip />
 		<ChessGridFlip chessmans={chessmans} activeChessman={activeChessman}

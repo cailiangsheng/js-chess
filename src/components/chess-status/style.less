@@ -1,0 +1,37 @@
+.chess-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+  margin-top: -50px;
+
+  .winner {
+    &:before {
+      content: '中国象棋';
+      font-size: 22px;
+    }
+  
+    &.black:before {
+      content: '黑方胜';
+    }
+  
+    &.red:before {
+      content: '红方胜';
+    }
+  }
+
+  .player {
+    &:before {
+      content: '中国象棋';
+      font-size: 22px;
+    }
+  
+    &.black:before {
+      content: '黑方走';
+    }
+  
+    &.red:before {
+      content: '红方走';
+    }
+  }
+}

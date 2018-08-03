@@ -1,6 +1,7 @@
 <template>
 	<div class="chess-game normal">
-		  <ChessWinner :winnerColor="winnerColor" />
+		  <ChessStatus :winnerColor="winnerColor"
+		  	:playerColor="playerColor" />
 		  <div class="chess-body">
 				<ChessBoard />
 				<ChessGrid :chessmans="chessmans"
@@ -15,28 +16,28 @@
 <style lang="less" src="./style.less"></style>
 
 <script>
-	import _ from 'lodash'
-	import ChessWinner from 'components/chess-winner/.vue'
-	import ChessBoard from 'components/chess-board/.vue'
-	import ChessGrid from 'components/chess-grid/.vue'
-	import {mapState, mapActions} from 'vuex'
+import _ from "lodash";
+import ChessStatus from "components/chess-status/.vue";
+import ChessBoard from "components/chess-board/.vue";
+import ChessGrid from "components/chess-grid/.vue";
+import { mapState, mapActions } from "vuex";
 
-	export default {
-		components: {
-			ChessWinner,
-			ChessBoard,
-			ChessGrid
-		},
-		computed: mapState([
-			'chessmans',
-			'activeChessman',
-			'playedChessman',
-			'steppedPositions',
-			'steppingPositions',
-			'winnerColor'
-		]),
-		methods: mapActions({
-			onClick: 'clickChessGrid'
-		})
-	}
+export default {
+  components: {
+    ChessStatus,
+    ChessBoard,
+    ChessGrid
+  },
+  computed: mapState([
+    "chessmans",
+    "activeChessman",
+    "playedChessman",
+    "steppedPositions",
+    "steppingPositions",
+    "winnerColor"
+  ]),
+  methods: mapActions({
+    onClick: "clickChessGrid"
+  })
+};
 </script>
