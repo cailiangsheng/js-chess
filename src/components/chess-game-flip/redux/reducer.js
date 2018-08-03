@@ -1,7 +1,11 @@
 import _ from 'lodash'
 import {CLICK_CHESS_GRID} from 'components/chess-game/redux/actions'
 import {findChessMan} from 'components/chess-grid/util'
-import {isValid, isSameColor} from 'components/chess-man/util'
+import {
+  isValid,
+  getColor,
+  getDifferentColor
+} from 'components/chess-man/util'
 
 import {
   canGo,
@@ -17,20 +21,23 @@ import CHESSMANS from '../chessmans'
 const initialState = {
   chessmans: hideChessmans(shuffleChessmans(CHESSMANS)),
   activeChessman: null,
-  playedChessman: null,
   steppedPositions: [],
   steppingPositions: [],
-  winnerColor: ''
+  winnerColor: '',
+  playerColor: ''
+}
+
+const newPlayerColor = (chessman) => {
+  return getDifferentColor(getColor(chessman.name))
 }
 
 const canActivate = (state, target) => {
   if (!isValid(target.name)) return false
   if (target.isHidden) return false
 
-  const {activeChessman, playedChessman} = state
-  return !activeChessman && !playedChessman
-    || !activeChessman && !isSameColor(playedChessman.name, target.name)
-    || activeChessman && isSameColor(activeChessman.name, target.name)
+  const {playerColor} = state
+  const targetColor = getColor(target.name)
+  return !playerColor || playerColor === targetColor
 }
 
 const clickTarget = (state, target) => {
@@ -54,7 +61,7 @@ const showTarget = (state, target) => {
   showChessman(target)
   return Object.assign({}, state, {
     activeChessman: null,
-    playedChessman: target,
+    playerColor: newPlayerColor(target),
     steppingPositions: [],
     steppedPositions: [target.position]
   })
@@ -86,7 +93,7 @@ const goToTarget = (state, target) => {
   return {
     chessmans,
     activeChessman: null,
-    playedChessman: chessmanGoing,
+    playerColor: newPlayerColor(chessmanGoing),
     steppingPositions: [],
     steppedPositions,
     winnerColor: getWinnerColor(chessmans)
