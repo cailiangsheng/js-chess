@@ -31,7 +31,7 @@ export default {
   computed: mapState([
     "chessmans",
     "activeChessman",
-    "playedChessman",
+    "playerColor",
     "steppedPositions",
     "steppingPositions",
     "winnerColor"
