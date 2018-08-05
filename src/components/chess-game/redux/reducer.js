@@ -1,26 +1,40 @@
 import _ from 'lodash'
 import {CLICK_CHESS_GRID} from './actions'
 import {findChessMan} from 'components/chess-grid/util'
-import {isValid, isSameColor} from 'components/chess-man/util'
-import {canGo, getWinnerColor, getSteppingPositions} from '../util'
+
+import {
+  isValid,
+  getColor,
+  getDifferentColor
+} from 'components/chess-man/util'
+
+import {
+  canGo,
+  getWinnerColor,
+  getSteppingPositions
+} from '../util'
+
 import CHESSMANS from '../chessmans'
 
 const initialState = {
   chessmans: CHESSMANS,
   activeChessman: null,
-  playedChessman: null,
   steppedPositions: [],
   steppingPositions: [],
-  winnerColor: ''
+  winnerColor: '',
+  playerColor: ''
+}
+
+const newPlayerColor = (state, chessman) => {
+  return getDifferentColor(state.playerColor || getColor(chessman.name))
 }
 
 const canActivate = (state, target) => {
   if (!isValid(target.name)) return false
 
-  const {activeChessman, playedChessman} = state
-  return !activeChessman && !playedChessman
-    || !activeChessman && !isSameColor(playedChessman.name, target.name)
-    || activeChessman && isSameColor(activeChessman.name, target.name)
+  const {playerColor} = state
+  const targetColor = getColor(target.name)
+  return !playerColor || playerColor === targetColor
 }
 
 const clickTarget = (state, target) => {
@@ -39,6 +53,7 @@ const clickTarget = (state, target) => {
 const activateTarget = (state, target) => {
   return Object.assign({}, state, {
     activeChessman: target,
+    playerColor: getColor(target.name),
     steppingPositions: getSteppingPositions(target, state.chessmans)
   })
 }
@@ -61,7 +76,7 @@ const goToTarget = (state, target) => {
   return {
     chessmans,
     activeChessman: null,
-    playedChessman: chessmanGoing,
+    playerColor: newPlayerColor(state, chessmanGoing),
     steppingPositions: [],
     steppedPositions,
     winnerColor: getWinnerColor(chessmans)
