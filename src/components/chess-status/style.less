@@ -21,6 +21,30 @@
   }
 
   .player {
-    // TODO
+    &::before {
+      content: "";
+      display: block;
+      width: 34px;
+      height: 34px;
+      position: absolute;
+      margin-top: -2px;
+      margin-left: -2px;
+      border: solid 2px yellow;
+      border-radius: 100%;
+      border-bottom-color: transparent;
+      animation: hrhand 2s linear infinite;
+    }
+
+    .chess-man {
+      width: 30px;
+      height: 30px;
+      font-size: 24px;
+      line-height: 28px;
+    }
   }
+}
+
+@keyframes hrhand {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
 }
