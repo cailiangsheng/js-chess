@@ -8,7 +8,7 @@ import './style.less'
 
 const ChessStatus = ({winnerColor, playerColor}) => {
   const isInitial = !winnerColor && !playerColor
-  const playerName = playerColor && getName({type: CHESS_MAN.TYPE.JIANG, color: playerColor})
+  const playerName = !winnerColor && playerColor && getName({type: CHESS_MAN.TYPE.JIANG, color: playerColor})
   return <div className={classNames('chess-status', {'initial': isInitial})}>
     {winnerColor && <div className={classNames('winner', winnerColor)} />}
     {playerName && <div className='player'><ChessMan name={playerName} /></div>}
