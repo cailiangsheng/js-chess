@@ -3,9 +3,12 @@ import ChessBoardFlip from 'components/chess-board-flip'
 import ChessGridFlip from 'components/chess-grid-flip'
 import ChessManList from 'components/chess-man-list'
 import ChessStatus from 'components/chess-status'
+import {isRed, isBlack} from 'components/chess-man/util'
+import _ from 'lodash'
 import './style.less'
 
 const ChessGameFlip = ({
+	killedNames,
 	chessmans,
 	activeChessman,
 	steppingPositions,
@@ -14,8 +17,8 @@ const ChessGameFlip = ({
 	playerColor,
 	onClick
 }) => {
-	const redNames = ["俥", "傌", "炮", "相", "仕", "帥", "兵"]
-	const blackNames = ["車", "馬", "砲", "象", "士", "將", "卒"]
+	const redNames = _.filter(killedNames, isRed)
+	const blackNames = _.filter(killedNames, isBlack)
 	return <div className='chess-game flip'>
 	  <ChessStatus winnerColor={winnerColor} playerColor={playerColor} />
 		<div className='chess-frames'>
@@ -34,4 +37,5 @@ const ChessGameFlip = ({
 		</div>
 	</div>
 }
+
 export default ChessGameFlip

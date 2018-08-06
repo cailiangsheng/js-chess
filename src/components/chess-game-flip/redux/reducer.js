@@ -19,6 +19,7 @@ import {
 import CHESSMANS from '../chessmans'
 
 const initialState = {
+  killedNames: [],
   chessmans: hideChessmans(shuffleChessmans(CHESSMANS)),
   activeChessman: null,
   steppedPositions: [],
@@ -83,6 +84,9 @@ const goToTarget = (state, target) => {
     target.position
   )
   chessmans = _.without(chessmans, chessmanKilled)
+  const killedNames = chessmanKilled
+    ? state.killedNames.concat([chessmanKilled.name])
+    : state.killedNames
 
   const fromPosition = state.activeChessman.position
   const toPosition = target.position
@@ -91,6 +95,7 @@ const goToTarget = (state, target) => {
   chessmanGoing.position = toPosition
 
   return {
+    killedNames,
     chessmans,
     activeChessman: null,
     playerColor: newPlayerColor(state, chessmanGoing),
