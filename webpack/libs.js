@@ -13,7 +13,8 @@ const reactLibs = [
 const vueLibs = [
 	'lodash',
 	'vue/dist/vue.common',
-	'vuex'
+	'vuex',
+	'vue-router'
 ]
 
 const useVue = process.env.VUE !== undefined
