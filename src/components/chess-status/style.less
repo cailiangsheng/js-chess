@@ -37,7 +37,7 @@
       border: solid 2px yellow;
       border-radius: 100%;
       border-bottom-color: transparent;
-      animation: hrhand 2s linear infinite;
+      animation: ball-clip-rotate 2s linear infinite;
     }
 
     .chess-man {
@@ -49,7 +49,11 @@
   }
 }
 
-@keyframes hrhand {
-  0% {transform: rotate(0deg)}
-  100% {transform: rotate(360deg)}
+@keyframes ball-clip-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
