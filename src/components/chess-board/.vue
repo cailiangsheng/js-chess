@@ -1,5 +1,5 @@
 <template>
-	<div class="chess-board">
+	<div class="chess-board normal">
     <table>
       <tbody>
         <tr class="row" v-for="i in 9" :key="i">
