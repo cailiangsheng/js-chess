@@ -9,6 +9,12 @@ const sortNames = (names) => {
   names.sort((name1, name2) => getType(name1) - getType(name2))
 }
 
+const renderCount = (count) => {
+  return count > 1
+    ? <div className='chess-man-count'>{count}</div>
+    : null
+}
+
 const ChessManList = ({names}) => {
   const countNames = _.countBy(names, name => name)
   const uniqNames = _.uniq(names)
@@ -18,9 +24,7 @@ const ChessManList = ({names}) => {
       uniqNames.map((name, index) => (
         <div className='chess-man-list-item'>
           <ChessMan name={name} key={index} />
-          <div className='chess-man-count'>
-            {countNames[name]}
-          </div>
+          {renderCount(countNames[name])}
         </div>
       ))
     }
