@@ -1,4 +1,5 @@
 @board-cell-size: 28px;
+@chess-man-count-size: 12px;
 
 .chess-man-list {
 	.chess-man {
@@ -6,5 +7,22 @@
 		height: @board-cell-size;
 		line-height: 26px;
 		font-size: 22px;
+	}
+}
+
+.chess-man-list-item {
+	position: relative;
+
+	.chess-man-count {
+		background-color: green;
+		color: white;
+		width: @chess-man-count-size;
+		font-size: @chess-man-count-size;
+		line-height: @chess-man-count-size;
+		border-radius: 20%;
+		text-align: center;
+		position: absolute;
+		top: 0;
+		right: -@chess-man-count-size / 2;
 	}
 }
