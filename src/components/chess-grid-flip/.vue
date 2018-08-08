@@ -4,7 +4,6 @@
 		:numCells="numCells"
 		:chessmans="chessmans"
 		:activeChessman="activeChessman"
-		:playedChessman="playedChessman"
 		:steppedPositions="steppedPositions"
 		:steppingPositions="steppingPositions" />
 </template>
@@ -16,29 +15,31 @@ import ChessGrid from "components/chess-grid/.vue";
 import CONSTS from "./consts";
 
 export default {
-  chessmans: {
-    type: Array,
-    default: []
-  },
-  activeChessman: {
-    type: Object,
-    default: null
-  },
-  playedChessman: {
-    type: Object,
-    default: null
-  },
-  steppedPositions: {
-    type: Array,
-    default: []
-  },
-  steppingPositions: {
-    type: Array,
-    default: []
+  props: {
+    chessmans: {
+      type: Array,
+      default: []
+    },
+    activeChessman: {
+      type: Object,
+      default: null
+    },
+    steppedPositions: {
+      type: Array,
+      default: []
+    },
+    steppingPositions: {
+      type: Array,
+      default: []
+    }
   },
   computed: {
-    numRows: CONSTS.NUM_ROWS,
-    numCells: CONSTS.NUM_CELLS
+    numRows() {
+      return CONSTS.NUM_ROWS
+    },
+    numCells() {
+      return CONSTS.NUM_CELLS
+    }
   },
   components: {
     ChessGrid

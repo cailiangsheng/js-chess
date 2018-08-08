@@ -5,7 +5,10 @@
       	<td class="cell" v-for="(v, j) in numCells" :key="j" @click="onClick(i, j)">
       		<ChessTattoo v-if="showTattoo && needsTattoo(i, j)" />
         	<ChessStepped v-if="isStepped(i, j)" />
-      		<ChessMan v-if="hasChessMan(i, j)" :name="getChessManName(i, j)" />
+      		<ChessMan v-if="hasChessMan(i, j)"
+            :name="getChessManName(i, j)"
+            :isActive="isActiveChessman(i, j)"
+            :isHidden="isHiddenChessman(i, j)" />
         	<ChessStepping v-if="isStepping(i, j)" />
 	      </td>
       </tr>
@@ -44,10 +47,6 @@ export default {
       type: Object,
       default: null
     },
-    playedChessman: {
-      type: Object,
-      default: null
-    },
     steppedPositions: {
       type: Array,
       default: []
@@ -78,6 +77,14 @@ export default {
     },
     hasChessMan(rowIndex, cellIndex) {
       return !!this.getChessMan(rowIndex, cellIndex);
+    },
+    isActiveChessman(rowIndex, cellIndex) {
+      const position = { rowIndex, cellIndex };
+      return this.activeChessman && _.isEqual(position, this.activeChessman.position)
+    },
+    isHiddenChessman (rowIndex, cellIndex) {
+      const chessman = this.getChessMan(rowIndex, cellIndex);
+      return chessman && chessman.isHidden;
     },
     getChessManName(rowIndex, cellIndex) {
       const chessman = this.getChessMan(rowIndex, cellIndex);

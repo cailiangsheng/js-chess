@@ -18,6 +18,10 @@
 			isActive: {
 				type: Boolean,
 				default: false
+			},
+			isHidden: {
+				type: Boolean,
+				default: false
 			}
 		},
 		computed: {
@@ -25,7 +29,8 @@
 				const color = getColor(this.name)
 				return {
 					[color]: true,
-					'active': this.isActive
+					'active': this.isActive,
+					'hidden': this.isHidden
 				}
 			}
 		},
