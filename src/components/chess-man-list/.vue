@@ -2,7 +2,7 @@
   <div class="chess-man-list">
 	<div class="chess-man-list-item" v-for="(name, index) in uniqNames">
 		<ChessMan :name="name" :key="index" />
-		<div class="chess-man-count">
+		<div class="chess-man-count" v-if="countNames[name] > 1">
 			{{countNames[name]}}
 		</div>
 	</div>
@@ -12,6 +12,7 @@
 <style lang="less" src="./style.less"></style>
 
 <script>
+import ChessMan from 'components/chess-man/.vue';
 import { getType } from "components/chess-man/util";
 import _ from "lodash";
 
@@ -21,6 +22,9 @@ export default {
       type: Array,
       default: []
     }
+  },
+  components: {
+    ChessMan
   },
   computed: {
     countNames() {
