@@ -5,7 +5,8 @@
 		:chessmans="chessmans"
 		:activeChessman="activeChessman"
 		:steppedPositions="steppedPositions"
-		:steppingPositions="steppingPositions" />
+		:steppingPositions="steppingPositions"
+    @click="onClick" />
 </template>
 
 <style lang="less" src="../chess-grid/style.less"></style>
@@ -43,6 +44,11 @@ export default {
   },
   components: {
     ChessGrid
+  },
+  methods: {
+    onClick(target) {
+      this.$emit("click", target);
+    }
   }
 };
 </script>

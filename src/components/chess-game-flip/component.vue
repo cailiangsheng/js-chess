@@ -12,7 +12,7 @@
           :activeChessman="activeChessman"
 					:steppingPositions="steppingPositions"
           :steppedPositions="steppedPositions"
-					@onClick="onClick" />
+					@click="onClick" />
 			</div>
 			<div class="right">
 				<ChessManList :names="blackNames" />

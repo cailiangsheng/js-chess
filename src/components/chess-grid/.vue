@@ -97,7 +97,8 @@ export default {
     onClick(rowIndex, cellIndex) {
       const position = { rowIndex, cellIndex };
       const name = this.getChessManName(rowIndex, cellIndex);
-      const target = { name, position };
+      const isHidden = this.isHiddenChessman(rowIndex, cellIndex);
+      const target = { name, position, isHidden };
       this.$emit("click", target);
     }
   }
