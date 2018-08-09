@@ -56,7 +56,8 @@ module.exports = {
 		],
 		alias: {
 			HOCS: path.resolve(__dirname, 'components/hocs')
-		}
+		},
+		extensions: ['.js', '.ts']
 	}
 }
 
