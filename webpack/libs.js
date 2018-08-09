@@ -14,8 +14,15 @@ const vueLibs = [
 	'vue/dist/vue.common'
 ]
 
+const angularLibs = [
+	'@angular/core',
+	'@angular/platform-browser',
+	'@angular/platform-browser-dynamic',
+	'zone.js'
+]
+
 const useVue = process.env.VUE !== undefined
 
-const dependencies = useVue ? vueLibs : reactLibs
+const dependencies = angularLibs // useVue ? vueLibs : reactLibs
 
 module.exports = dependencies.concat(['babel-polyfill'])

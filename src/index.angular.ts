@@ -4,4 +4,6 @@ import {
 
 import { Module } from './components/chess-game/module'
 
+import 'zone.js'
+
 platformBrowserDynamic().bootstrapModule(Module)
