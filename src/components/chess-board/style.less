@@ -1,24 +1,8 @@
-@board-cell-size: 30px;
+@import './base.less';
 
-.chess-board {
-  border: solid 2px black;
-  padding: 2px;
-
-  table {
-    border: solid 1px black;
-    border-spacing: 0;
-  }
-
-  .cell {
-    width: @board-cell-size;
-    height: @board-cell-size;
-    border-right: solid 1px black;
-    border-bottom: solid 1px black;
-    padding: 0;
-
-    &:last-child {
-      border-right: none;
-    }
+.chess-board.normal {
+  .cell:last-child {
+    border-right: none;
   }
 
   .row:last-child .cell {
@@ -32,7 +16,7 @@
     &:before {
       line-height: @board-cell-size;
       font-size: 22px;
-      color: gray;
+      color: black;
     }
 
     &:nth-child(2):before {

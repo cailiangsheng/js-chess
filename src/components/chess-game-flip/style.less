@@ -1,0 +1,32 @@
+.chess-game.flip {
+	.chess-body {
+		width: 170px;
+		height: 294px;
+		border: solid 2px black;
+		background-color: white;
+	
+		.chess-board {
+			position: absolute;
+			margin: 18px;
+		}
+	
+		.chess-grid {
+			position: absolute;
+			margin: 21px;
+		}
+	}
+
+	.chess-frames {
+		display: flex;
+
+		> .left {
+			padding-right: 20px;
+			width: 30px;
+		}
+
+		> .right {
+			padding-left: 20px;
+			width: 30px;
+		}
+	}
+}

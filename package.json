@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run coverage:report:all && npm run build",
-    "build": "npm run react:build && npm run vue:build",
+    "build": "npm run react:build && npm run vue:build && npm run angular:build",
     "react:build": "npm run react:dll && npm run react:dll-prod",
     "react:server:dist": "http-server dist/react -o -p 8888",
     "react:server:dll-dev": "npm run react:dll && cross-env DLL=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
@@ -14,6 +14,10 @@
     "vue:server:dist": "http-server dist/vue -o -p 9999",
     "vue:server:dll-dev": "npm run vue:dll && cross-env VUE=1 DLL=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
     "vue:server:dev": "cross-env VUE=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
+    "angular:build": "npm run angular:dll && npm run angular:dll-prod",
+    "angular:server:dist": "http-server dist/angular -o -p 9999",
+    "angular:server:dll-dev": "npm run angular:dll && cross-env ANGULAR=1 DLL=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
+    "angular:server:dev": "cross-env ANGULAR=1 DEV_SERVER=1 webpack-dev-server --config webpack/dev.js",
     "test:all": "npm run test ./src/**/*.test.js",
     "coverage:all": "npm run coverage ./src/**/*.test.js",
     "coverage:report:all": "npm run coverage:report ./src/**/*.test.js",
@@ -29,7 +33,11 @@
     "vue:dll-dev": "cross-env VUE=1 DLL=1 webpack --config webpack/dev.js",
     "vue:dll-prod": "cross-env VUE=1 DLL=1 webpack --config webpack/prod.js",
     "vue:dev": "cross-env VUE=1 webpack --config webpack/dev.js",
-    "vue:prod": "cross-env VUE=1 webpack --config webpack/prod.js"
+    "vue:prod": "cross-env VUE=1 webpack --config webpack/prod.js",
+    "angular:dll-dev": "cross-env ANGULAR=1 DLL=1 webpack --config webpack/dev.js",
+    "angular:dll-prod": "cross-env ANGULAR=1 DLL=1 webpack --config webpack/prod.js",
+    "angular:dev": "cross-env ANGULAR=1 webpack --config webpack/dev.js",
+    "angular:prod": "cross-env ANGULAR=1 webpack --config webpack/prod.js"
   },
   "repository": {
     "type": "git",
@@ -82,6 +90,9 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^3.3.2",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
     "websocket": "^1.0.26",
     "whatwg-fetch": "^2.0.4",
     "zone.js": "^0.8.26"
@@ -145,7 +156,6 @@
     "typescript": "^2.9.2",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
-    "vue": "^2.5.16",
     "vue-loader": "^15.2.6",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^3.12.0",

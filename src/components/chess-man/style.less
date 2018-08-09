@@ -24,4 +24,14 @@
   &.active {
     background-color: yellow;
   }
+
+  &.hidden {
+    &.black, &.red, &.active {
+      background-color: gray;
+      border-color: gray;
+    }
+    > span {
+      display: none;
+    }
+  }
 }

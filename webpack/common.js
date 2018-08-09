@@ -12,14 +12,15 @@ const exec = require('child_process').exec
 
 const useDevServer = process.env.DEV_SERVER !== undefined
 const useVue = process.env.VUE !== undefined
+const useAngular = process.env.ANGULAR !== undefined
 const useDLL = process.env.DLL !== undefined
 
-const outputDir = '../dist' + (useVue ? '/vue' : '/react')
+const outputDir = '../dist' + (useVue ? '/vue' : (useAngular ? '/angular' : '/react'))
 const entry = useDLL ? {} : { libs: require('./libs') }
 
 module.exports = {
 	entry: Object.assign(entry, {
-		app: 'src/index.' + 'angular.ts' // (useVue ? 'vue.js' : 'react.js')
+		app: 'src/index.' + (useVue ? 'vue.js' : (useAngular ? 'angular.ts' : 'react.js'))
 	}),
 	output: {
 		filename: '[name].[hash].js',
@@ -55,9 +56,10 @@ module.exports = {
 			path.resolve('./node_modules')
 		],
 		alias: {
-			HOCS: path.resolve(__dirname, 'components/hocs')
+			HOCS: path.resolve(__dirname, 'components/hocs'),
+			vue: path.resolve(__dirname, '../node_modules/vue/dist/vue.common')
 		},
-		extensions: ['.js', '.ts']
+		extensions: ['.js', '.ts', '.json']
 	}
 }
 

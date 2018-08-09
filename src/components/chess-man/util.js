@@ -13,6 +13,12 @@ const isSameColor = (name1, name2) => {
 		|| isBlack(name1) && isBlack(name2)
 }
 
+const getDifferentColor = (color) => {
+	if (color === CONSTS.COLOR.RED) return CONSTS.COLOR.BLACK
+	else if (color === CONSTS.COLOR.BLACK) return CONSTS.COLOR.RED
+	return CONSTS.COLOR.INVALID
+}
+
 const getColor = (name) => {
 	if (isRed(name)) return CONSTS.COLOR.RED
 	if (isBlack(name)) return CONSTS.COLOR.BLACK
@@ -47,6 +53,7 @@ export {
   isRed,
   isBlack,
   isSameColor,
+  getDifferentColor,
   getColor,
   getType,
   getName

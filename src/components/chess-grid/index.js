@@ -10,25 +10,23 @@ import {needsTattoo, findChessMan, findPosition} from './util'
 import CONSTS from './consts'
 import './style.less'
 
-const numColumns = CONSTS.NUM_CELLS
-const numRows = CONSTS.NUM_ROWS
-
 const renderCells = (props, rowIndex) => {
-  const {onClick, activeChessman, steppedPositions, steppingPositions} = props
+  const {showTattoo, onClick, activeChessman, steppedPositions, steppingPositions} = props
   return Array
-    .from({length: numColumns})
+    .from({length: props.numCells})
     .map((v, cellIndex) => {
       const position = {rowIndex, cellIndex}
       const chessman = findChessMan(props.chessmans, position)
       const chessmanName = chessman && chessman.name
+      const isHidden = chessman && chessman.isHidden
       const isActive = activeChessman && _.isEqual(position, activeChessman.position)
       const isStepped = findPosition(steppedPositions, position)
       const isStepping = findPosition(steppingPositions, position)
-      const target = {name: chessmanName, position}
+      const target = {name: chessmanName, position, isHidden}
       return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
-        { !chessman && needsTattoo(position) && <ChessTattoo /> }
+        { showTattoo && !chessman && needsTattoo(position) && <ChessTattoo /> }
         { isStepped && <ChessStepped /> }
-        { chessman && <ChessMan name={chessmanName} isActive={isActive} /> }
+        { chessman && <ChessMan name={chessmanName} isActive={isActive} isHidden={isHidden} /> }
         { isStepping && <ChessStepping /> }
       </td>
     })
@@ -36,7 +34,7 @@ const renderCells = (props, rowIndex) => {
 
 const renderRows = (props) => {
   return Array
-    .from({length: numRows})
+    .from({length: props.numRows})
     .map((v, i) => <tr key={i} className='row'>{renderCells(props, i)}</tr>)
 }
 
@@ -49,6 +47,9 @@ const ChessGrid = (props) => {
 }
 
 ChessGrid.propTypes = {
+  numCells: PropTypes.number.isRequired,
+  numRows: PropTypes.number.isRequired,
+  showTattoo: PropTypes.bool.isRequired,
   chessmans: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -81,6 +82,9 @@ ChessGrid.propTypes = {
 }
 
 ChessGrid.defaultProps = {
+  numRows: CONSTS.NUM_ROWS,
+  numCells: CONSTS.NUM_CELLS,
+  showTattoo: true,
   chessmans: [],
   activeChessman: null,
   steppedPositions: [],

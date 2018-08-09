@@ -11,7 +11,8 @@ module.exports = merge(common, {
 		contentBase: '../dist',
 		hot: true,
 		open: true,
-		port: 8080
+		port: 8080,
+		historyApiFallback: true
 	},
 	module: {
 		rules: [

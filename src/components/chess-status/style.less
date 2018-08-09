@@ -1,0 +1,59 @@
+.chess-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+  margin-top: -50px;
+
+  &.initial:before {
+    content: "中国象棋";
+    font-size: 22px;
+  }
+
+  .winner {
+    &:before {
+      content: '';
+      font-size: 22px;
+    }
+  
+    &.black:before {
+      content: '黑方胜';
+    }
+  
+    &.red:before {
+      content: '红方胜';
+    }
+  }
+
+  .player {
+    &::before {
+      content: "";
+      display: block;
+      width: 34px;
+      height: 34px;
+      position: absolute;
+      margin-top: -2px;
+      margin-left: -2px;
+      border: solid 2px yellow;
+      border-radius: 100%;
+      border-bottom-color: transparent;
+      animation: ball-clip-rotate 2s linear infinite;
+    }
+
+    .chess-man {
+      width: 30px;
+      height: 30px;
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+}
+
+@keyframes ball-clip-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,9 +1,9 @@
 <template>
-	<div class="chess-board normal">
+	<div class="chess-board flip">
     <table>
       <tbody>
-        <tr class="row" v-for="i in 9" :key="i">
-        	<td class="cell" v-for="j in 8" :key="j" />
+        <tr class="row" v-for="i in 8" :key="i">
+        	<td class="cell" v-for="j in 4" :key="j" />
         </tr>
       </tbody>
   	</table>

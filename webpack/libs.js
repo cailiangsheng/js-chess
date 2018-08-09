@@ -6,12 +6,15 @@ const reactLibs = [
 	'react-dom',
 	'prop-types',
 	'classnames',
-	'lodash'
+	'lodash',
+	'react-router-dom'
 ]
 
 const vueLibs = [
 	'lodash',
-	'vue/dist/vue.common'
+	'vue/dist/vue.common',
+	'vuex',
+	'vue-router'
 ]
 
 const angularLibs = [
@@ -22,7 +25,7 @@ const angularLibs = [
 ]
 
 const useVue = process.env.VUE !== undefined
-
-const dependencies = angularLibs // useVue ? vueLibs : reactLibs
+const useAngular = process.env.ANGULAR !== undefined
+const dependencies = useVue ? vueLibs : (useAngular ? angularLibs : reactLibs)
 
 module.exports = dependencies.concat(['babel-polyfill'])
