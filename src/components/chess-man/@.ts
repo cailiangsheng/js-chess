@@ -5,7 +5,7 @@ import './style.less'
 @Component({
 	selector: 'chess-man',
 	template: `
-		<div [class]="classNames()">
+		<div [ngClass]="classNames()">
 			<span>{{name}}</span>
 		</div>`
 })
@@ -17,8 +17,8 @@ export class ChessMan {
 	classNames() {
 		const color = getColor(this.name)
 		return {
-			'chess-man': true,
 			[color]: true,
+			'chess-man': true,
 			'hidden': this.isHidden,
 			'active': this.isActive
 		}
