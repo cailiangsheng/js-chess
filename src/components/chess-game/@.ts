@@ -2,6 +2,8 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: '#root',
-  template: `<chess-man name="相"></chess-man>`
+  template: `
+	  <chess-status winnerColor="" playerColor="red">
+	  </chess-status>`
 })
 export class ChessGame { }
