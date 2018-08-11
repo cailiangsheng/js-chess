@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { ChessGame } from './@'
+import { ChessGrid } from '../chess-grid/@'
 import { ChessBoard } from '../chess-board/@'
 import { ChessMan } from '../chess-man/@'
 import { ChessStatus } from '../chess-status/@'
@@ -13,7 +14,8 @@ import { ChessTattoo } from '../chess-tattoo/@'
   	BrowserModule
   ],
   declarations: [
-  	ChessGame,
+    ChessGame,
+    ChessGrid,
   	ChessBoard,
   	ChessMan,
     ChessStatus,
