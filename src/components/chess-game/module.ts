@@ -4,6 +4,9 @@ import { ChessGame } from './@'
 import { ChessBoard } from '../chess-board/@'
 import { ChessMan } from '../chess-man/@'
 import { ChessStatus } from '../chess-status/@'
+import { ChessStepped } from '../chess-stepped/@'
+import { ChessStepping } from '../chess-stepping/@'
+import { ChessTattoo } from '../chess-tattoo/@'
 
 @NgModule({
   imports: [
@@ -13,7 +16,10 @@ import { ChessStatus } from '../chess-status/@'
   	ChessGame,
   	ChessBoard,
   	ChessMan,
-    ChessStatus
+    ChessStatus,
+    ChessStepped,
+    ChessStepping,
+    ChessTattoo
   ],
   bootstrap: [
   	ChessGame
