@@ -1,13 +1,12 @@
 import { Component, Input } from '@angular/core'
-// import CHESSMANS from './chessmans.json'
 import './style.less'
 
 @Component({
   selector: '#root',
   template: `
   	<div class="chess-game normal">
-		<chess-status winnerColor="winnerColor"
-			playerColor="playerColor"></chess-status>
+		<chess-status [winnerColor]="winnerColor"
+			[playerColor]="playerColor"></chess-status>
 		<div class="chess-body">
 			<chess-board></chess-board>
 			<chess-grid [chessmans]="chessmans"
@@ -21,7 +20,7 @@ import './style.less'
 export class ChessGame {
 	winnerColor:string = ''
 	playerColor:string = ''
-	chessmans: Array<Object> = [] // CHESSMANS
+	chessmans: Array<Object> = require('./chessmans.json')
     activeChessman: Object = null
 	steppedPositions: Array<Object> = []
 	steppingPositions: Array<Object> = []
