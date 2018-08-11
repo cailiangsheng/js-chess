@@ -10,33 +10,14 @@ import './style.less'
 		</div>`
 })
 export class ChessMan {
-	private _name: string = '象'
-	private _isActive: boolean = false
-	private _isHidden: boolean = false
+	@Input()
+	name: string = '象'
 
 	@Input()
-	set name(value: string) {
-		this._name = value
-	}
-	get name(): string {
-		return this._name
-	}
+	isActive: boolean = false
 
 	@Input()
-	set isActive(value: boolean) {
-		this._isActive = value
-	}
-	get isActive(): boolean {
-		return this._isActive
-	}
-
-	@Input()
-	set isHidden(value: boolean) {
-		this._isHidden = value
-	}
-	get isHidden(): boolean {
-		return this._isHidden
-	}
+	isHidden: boolean = false
 
 	classNames() {
 		const color = getColor(this.name)
