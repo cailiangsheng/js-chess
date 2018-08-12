@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import './style.less'
 
 @Component({
-  selector: '#root',
+  selector: 'chess-game',
   template: `
   	<div class="chess-game normal">
 		<chess-status [winnerColor]="winnerColor"

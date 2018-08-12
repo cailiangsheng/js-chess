@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { ChessGame } from './@'
+import { RouterModule, Routes } from '@angular/router'
+import { APP_BASE_HREF } from '@angular/common'
+import { ChessApp } from './@'
+import { ChessGame } from '../chess-game/@'
 import { ChessGrid } from '../chess-grid/@'
 import { ChessBoard } from '../chess-board/@'
 import { ChessMan } from '../chess-man/@'
@@ -9,11 +12,22 @@ import { ChessStepped } from '../chess-stepped/@'
 import { ChessStepping } from '../chess-stepping/@'
 import { ChessTattoo } from '../chess-tattoo/@'
 
+const appRoutes: Routes = [
+  { path: '', component: ChessGame },
+  { path: 'board', component: ChessBoard },
+];
+
 @NgModule({
   imports: [
-  	BrowserModule
+  	BrowserModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: false } // <-- debugging purposes only
+    )
   ],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   declarations: [
+    ChessApp,
     ChessGame,
     ChessGrid,
   	ChessBoard,
@@ -24,7 +38,7 @@ import { ChessTattoo } from '../chess-tattoo/@'
     ChessTattoo
   ],
   bootstrap: [
-  	ChessGame
+  	ChessApp
   ]
 })
-export class Module { }
+export class AppModule { }

@@ -19,6 +19,8 @@ const vueLibs = [
 
 const angularLibs = [
 	'@angular/core',
+	'@angular/common',
+	'@angular/router',
 	'@angular/platform-browser',
 	'@angular/platform-browser-dynamic',
 	'zone.js'
