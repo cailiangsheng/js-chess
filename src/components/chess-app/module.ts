@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, Routes } from '@angular/router'
-import { APP_BASE_HREF } from '@angular/common'
+import {
+  APP_BASE_HREF,
+  HashLocationStrategy,
+  LocationStrategy
+} from '@angular/common'
+
 import { ChessApp } from './@'
 import { ChessGame } from '../chess-game/@'
 import { ChessGrid } from '../chess-grid/@'
@@ -29,7 +34,10 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   declarations: [
     ChessApp,
     ChessGame,
