@@ -11,10 +11,14 @@ import { ChessStatus } from '../chess-status/@'
 import { ChessStepped } from '../chess-stepped/@'
 import { ChessStepping } from '../chess-stepping/@'
 import { ChessTattoo } from '../chess-tattoo/@'
+import { ChessGameFlip } from '../chess-game-flip/@'
+import { ChessBoardFlip } from '../chess-board-flip/@'
 
 const appRoutes: Routes = [
   { path: '', component: ChessGame },
   { path: 'board', component: ChessBoard },
+  { path: 'board-flip', component: ChessBoardFlip },
+  { path: 'flip', component: ChessGameFlip }
 ];
 
 @NgModule({
@@ -35,7 +39,9 @@ const appRoutes: Routes = [
     ChessStatus,
     ChessStepped,
     ChessStepping,
-    ChessTattoo
+    ChessTattoo,
+    ChessGameFlip,
+    ChessBoardFlip
   ],
   bootstrap: [
   	ChessApp
