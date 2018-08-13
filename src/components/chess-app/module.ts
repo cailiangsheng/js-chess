@@ -8,19 +8,16 @@ import {
 } from '@angular/common'
 
 import { ChessApp } from './@'
-import { ChessGame } from '../chess-game/@'
-import { ChessGrid } from '../chess-grid/@'
+import { ChessGameModule } from '../chess-game/@'
 import { ChessBoard } from '../chess-board/@'
-import { ChessMan } from '../chess-man/@'
-import { ChessStatus } from '../chess-status/@'
-import { ChessStepped } from '../chess-stepped/@'
-import { ChessStepping } from '../chess-stepping/@'
-import { ChessTattoo } from '../chess-tattoo/@'
-import { ChessGameFlip } from '../chess-game-flip/@'
 import { ChessBoardFlip } from '../chess-board-flip/@'
+import { ChessGameFlip } from '../chess-game-flip/@'
 
 const appRoutes: Routes = [
-  { path: '', component: ChessGame },
+  {
+    path: '',
+    loadChildren: '../chess-game/@#ChessGameModule'
+  },
   { path: 'board', component: ChessBoard },
   { path: 'board-flip', component: ChessBoardFlip },
   { path: 'flip', component: ChessGameFlip }
@@ -40,14 +37,6 @@ const appRoutes: Routes = [
   ],
   declarations: [
     ChessApp,
-    ChessGame,
-    ChessGrid,
-  	ChessBoard,
-  	ChessMan,
-    ChessStatus,
-    ChessStepped,
-    ChessStepping,
-    ChessTattoo,
     ChessGameFlip,
     ChessBoardFlip
   ],

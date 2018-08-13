@@ -1,32 +1,33 @@
-import { Component, Input } from '@angular/core'
-import './style.less'
+import { NgModule } from '@angular/core'
+import { StoreModule } from '@ngrx/store'
+import store from './ngrx/store'
 
-@Component({
-	selector: 'chess-game',
-	template: `
-  	<div class="chess-game normal">
-		<chess-status [winnerColor]="winnerColor"
-			[playerColor]="playerColor"></chess-status>
-		<div class="chess-body">
-			<chess-board></chess-board>
-			<chess-grid [chessmans]="chessmans"
-				[activeChessman]="activeChessman"
-				[steppingPositions]="steppingPositions"
-				[steppedPositions]="steppedPositions"
-				(click)="log($event)">
-			</chess-grid>
-		</div>
-	</div>`
+import { ChessGameContainer } from './ngrx/container'
+import { ChessGameComponent } from './component'
+import { ChessGrid } from '../chess-grid/@'
+import { ChessBoard } from '../chess-board/@'
+import { ChessMan } from '../chess-man/@'
+import { ChessStatus } from '../chess-status/@'
+import { ChessStepped } from '../chess-stepped/@'
+import { ChessStepping } from '../chess-stepping/@'
+import { ChessTattoo } from '../chess-tattoo/@'
+
+@NgModule({
+  imports: [
+    store
+  ],
+  declarations: [
+    ChessGameContainer,
+    ChessGameComponent,
+    ChessGrid,
+    ChessBoard,
+    ChessMan,
+    ChessStatus,
+    ChessStepped,
+    ChessStepping,
+    ChessTattoo
+  ],
+  providers: [
+  ],
 })
-export class ChessGame {
-	winnerColor: string = ''
-	playerColor: string = ''
-	chessmans: Array<Object> = require('./chessmans.json')
-	activeChessman: Object = null
-	steppedPositions: Array<Object> = []
-	steppingPositions: Array<Object> = []
-
-	log($event) {
-		console.log($event)
-	}
-}
+export class ChessGameModule {}
