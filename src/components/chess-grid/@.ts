@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 import * as util from './util'
 import _ from 'lodash'
 import './style.less'
 
 @Component({
-	selector: 'chess-grid',
-	template: `
+    selector: 'chess-grid',
+    template: `
         <table class="chess-grid">
         <tbody>
         <tr class="row" *ngFor="let r of rows(); index as i">
-            <td class="cell" *ngFor="let c of cells(); index as j">
+            <td class="cell" *ngFor="let c of cells(); index as j" (click)="onClick(i, j)">
                 <chess-tattoo *ngIf="showTattoo && needsTattoo(i, j)"></chess-tattoo>
                 <chess-stepped *ngIf="isStepped(i, j)"></chess-stepped>
                 <chess-man *ngIf="hasChessMan(i, j)"
@@ -30,27 +30,39 @@ export class ChessGrid {
     @Input()
     numCells: number = 9
 
-	@Input()
-	showTattoo: boolean = true
+    @Input()
+    showTattoo: boolean = true
 
-	@Input()
-	chessmans: Array<Object> = []
+    @Input()
+    chessmans: Array<Object> = []
 
-	@Input()
+    @Input()
     activeChessman: any = null
 
-	@Input()
-	steppedPositions: Array<Object> = []
+    @Input()
+    steppedPositions: Array<Object> = []
 
-	@Input()
-	steppingPositions: Array<Object> = []
-    
-	rows() {
-        return Array.from({length: this.numRows})
+    @Input()
+    steppingPositions: Array<Object> = []
+
+    @Output()
+    click = new EventEmitter<Object>()
+
+    onClick(rowIndex, cellIndex) {
+        const target = {
+            name: this.getChessManName(rowIndex, cellIndex),
+            position: { rowIndex, cellIndex },
+            isHidden: this.isHiddenChessman(rowIndex, cellIndex)
+        }
+        this.click.emit(target)
+    }
+
+    rows() {
+        return Array.from({ length: this.numRows })
     }
 
     cells() {
-        return Array.from({length: this.numCells})
+        return Array.from({ length: this.numCells })
     }
 
     needsTattoo(rowIndex, cellIndex) {
@@ -77,7 +89,7 @@ export class ChessGrid {
         return this.activeChessman && _.isEqual(position, this.activeChessman.position)
     }
 
-    isHiddenChessman (rowIndex, cellIndex) {
+    isHiddenChessman(rowIndex, cellIndex) {
         const chessman = this.getChessMan(rowIndex, cellIndex)
         return chessman && chessman.isHidden
     }
