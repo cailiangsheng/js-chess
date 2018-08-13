@@ -23,7 +23,8 @@ const angularLibs = [
 	'@angular/router',
 	'@angular/platform-browser',
 	'@angular/platform-browser-dynamic',
-	'zone.js'
+	'zone.js',
+	'@ngrx/store'
 ]
 
 const useVue = process.env.VUE !== undefined

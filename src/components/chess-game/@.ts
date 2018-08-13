@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core'
-import { StoreModule } from '@ngrx/store'
 import store from './ngrx/store'
 
 import { ChessGameContainer } from './ngrx/container'
-import { ChessGameComponent } from './component'
+import { ChessGameComponent } from './component.ts'
 import { ChessGrid } from '../chess-grid/@'
 import { ChessBoard } from '../chess-board/@'
 import { ChessMan } from '../chess-man/@'
@@ -26,8 +25,6 @@ import { ChessTattoo } from '../chess-tattoo/@'
     ChessStepped,
     ChessStepping,
     ChessTattoo
-  ],
-  providers: [
-  ],
+  ]
 })
 export class ChessGameModule {}

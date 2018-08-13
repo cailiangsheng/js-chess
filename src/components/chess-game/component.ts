@@ -19,5 +19,5 @@ import './style.less'
 	</div>`
 })
 export class ChessGameComponent {
-	@Input() props: Object;
+	@Input() props: Object = {}
 }

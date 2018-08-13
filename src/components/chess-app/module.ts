@@ -9,23 +9,24 @@ import {
 
 import { ChessApp } from './@'
 import { ChessGameModule } from '../chess-game/@'
-import { ChessBoard } from '../chess-board/@'
+// import { ChessBoard } from '../chess-board/@'
 import { ChessBoardFlip } from '../chess-board-flip/@'
 import { ChessGameFlip } from '../chess-game-flip/@'
 
 const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: '../chess-game/@#ChessGameModule'
+    loadChildren: 'components/chess-game/module#ChessGameModule'
   },
-  { path: 'board', component: ChessBoard },
+  // { path: 'board', component: ChessBoard },
   { path: 'board-flip', component: ChessBoardFlip },
   { path: 'flip', component: ChessGameFlip }
-];
+]
 
 @NgModule({
   imports: [
-  	BrowserModule,
+    BrowserModule,
+    ChessGameModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
