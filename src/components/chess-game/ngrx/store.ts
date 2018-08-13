@@ -6,6 +6,6 @@ const rootReducer = combineReducers({
 	chessGame: reducer
 })
 
-const store = StoreModule.provideStore(reducer)
+const store = StoreModule.forRoot(rootReducer)
 
 export default store
