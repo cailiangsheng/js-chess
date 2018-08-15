@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { RouterModule, Routes } from '@angular/router'
 import store from './ngrx/store'
 
 import { ChessGameContainer } from './ngrx/container'
@@ -11,20 +13,32 @@ import { ChessStepped } from '../chess-stepped/@'
 import { ChessStepping } from '../chess-stepping/@'
 import { ChessTattoo } from '../chess-tattoo/@'
 
+const routes: Routes = [
+  {
+    path: '',
+    component: ChessGameContainer
+  }
+]
+
+const COMPONENTS = [
+  ChessGameContainer,
+  ChessGameComponent,
+  ChessGrid,
+  ChessBoard,
+  ChessMan,
+  ChessStatus,
+  ChessStepped,
+  ChessStepping,
+  ChessTattoo
+]
+
 @NgModule({
   imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
     store
   ],
-  declarations: [
-    ChessGameContainer,
-    ChessGameComponent,
-    ChessGrid,
-    ChessBoard,
-    ChessMan,
-    ChessStatus,
-    ChessStepped,
-    ChessStepping,
-    ChessTattoo
-  ]
+  declarations: COMPONENTS,
+  exports: COMPONENTS
 })
-export class ChessGameModule {}
+export class ChessGameModule { }
