@@ -18,6 +18,7 @@ const vueLibs = [
 ]
 
 const angularLibs = [
+	'lodash',
 	'@angular/core',
 	'@angular/common',
 	'@angular/router',

@@ -8,6 +8,14 @@ const isValid = (name) => validNames.includes(name)
 const isRed = (name) => redNames.includes(name)
 const isBlack = (name) => blackNames.includes(name)
 
+const filterRedNames = (names) => {
+  return _.filter(names, isRed)
+}
+
+const filterBlackNames = (names) => {
+  return _.filter(names, isBlack)
+}
+
 const isSameColor = (name1, name2) => {
 	return isRed(name1) && isRed(name2)
 		|| isBlack(name1) && isBlack(name2)
@@ -48,13 +56,15 @@ const getName = ({color, type}) => {
 }
 
 export {
-  validNames,
-  isValid,
-  isRed,
-  isBlack,
-  isSameColor,
-  getDifferentColor,
-  getColor,
-  getType,
-  getName
+	filterRedNames,
+	filterBlackNames,
+	validNames,
+	isValid,
+	isRed,
+	isBlack,
+	isSameColor,
+	getDifferentColor,
+	getColor,
+	getType,
+	getName
 }
