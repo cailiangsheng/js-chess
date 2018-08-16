@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 
 import { ChessGameFlipComponent } from './component.ts'
-// import { ChessGridFlip } from '../chess-grid-flip/@'
-import { ChessBoardFlip } from '../chess-board-flip/@'
 import { ChessComponentsModule } from '../@'
+import { ChessBoardFlip } from '../chess-board-flip/@'
 
 const routes: Routes = [
 	{
@@ -19,9 +18,7 @@ const routes: Routes = [
 ]
 
 const COMPONENTS = [
-	ChessGameFlipComponent,
-	// ChessGridFlip,
-	ChessBoardFlip
+	ChessGameFlipComponent
 ]
 
 @NgModule({

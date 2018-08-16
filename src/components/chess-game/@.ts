@@ -5,29 +5,30 @@ import store from './ngrx/store'
 
 import { ChessGameContainer } from './ngrx/container'
 import { ChessGameComponent } from './component.ts'
-import { ChessGrid } from '../chess-grid/@'
-import { ChessBoard } from '../chess-board/@'
 import { ChessComponentsModule } from '../@'
+import { ChessBoard } from '../chess-board/@'
 
 const routes: Routes = [
   {
     path: '',
     component: ChessGameContainer
+  },
+  {
+    path: 'board',
+    component: ChessBoard
   }
 ]
 
 const COMPONENTS = [
   ChessGameContainer,
-  ChessGameComponent,
-  ChessGrid,
-  ChessBoard,
+  ChessGameComponent
 ]
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     ChessComponentsModule,
+    RouterModule.forChild(routes),
     store
   ],
   declarations: COMPONENTS,
