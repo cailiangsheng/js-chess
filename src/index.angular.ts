@@ -2,7 +2,7 @@ import {
     platformBrowserDynamic
 } from '@angular/platform-browser-dynamic'
 
-import { AppModule } from './components/chess-app/module'
+import { AppModule } from './components/chess-app/@'
 
 import 'zone.js'
 import 'core-js/es6/reflect'
