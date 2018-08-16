@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { filterRedNames, filterBlackNames } from '../chess-man/util'
-import _ from 'lodash'
+import './style.less'
 
 @Component({
 	selector: 'chess-game-flip-component',
