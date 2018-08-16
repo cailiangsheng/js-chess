@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { State } from './reducer'
@@ -13,10 +13,12 @@ import { ClickGridAction } from './actions'
   `
 })
 export class ChessGameContainer {
-  state$: Observable<State>
-
   constructor(private store: Store<State>) {
-    this.state$ = store.select(state => state)
+    this.store.subscribe(data => {
+      console.log(data)
+      debugger
+    })
+    debugger
   }
 
   onClick($event) {

@@ -1,11 +1,14 @@
-import { StoreModule } from '@ngrx/store'
-import { combineReducers } from '@ngrx/store'
-import { reducer } from './reducer'
+import { StoreModule, ActionReducerMap } from '@ngrx/store'
+import { reducer, State } from './reducer'
 
-const rootReducer = combineReducers({
+export interface ChessGameState {
+	chessGame: State
+}
+
+export const reducers: ActionReducerMap<ChessGameState> = {
 	chessGame: reducer
-})
+}
 
-const store = StoreModule.forRoot(rootReducer)
+const store = StoreModule.forRoot(reducers)
 
 export default store
