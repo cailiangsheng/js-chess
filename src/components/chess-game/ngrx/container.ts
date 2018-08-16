@@ -15,9 +15,9 @@ import { ClickGridAction } from './actions'
 export class ChessGameContainer {
   state$: Observable<State>
 
-  // constructor(private store: Store<State>) {
-  //   this.state$ = store.select(state => state)
-  // }
+  constructor(private store: Store<State>) {
+    this.state$ = store.select(state => state)
+  }
 
   onClick($event) {
     // this.store.dispatch(new ClickGridAction($event))
