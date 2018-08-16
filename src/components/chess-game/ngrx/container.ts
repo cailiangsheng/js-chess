@@ -1,12 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
-import { select, Store } from '@ngrx/store'
-import { Observable } from 'rxjs'
+import { Component } from '@angular/core'
+import { Store } from '@ngrx/store'
 import { State } from './reducer'
 import { ClickGridAction } from './actions'
 
 @Component({
   selector: 'chess-game-container',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <chess-game-component [props]="props">
     </chess-game-component>
@@ -17,11 +15,14 @@ export class ChessGameContainer {
 
   constructor(private store: Store<State>) {
     this.store.select('chessGame').subscribe(state => {
-      this.props = state
+      this.props = {
+        ...state,
+        onClick: ($event) => this.onClick($event)
+      }
     })
   }
 
   onClick($event) {
-    // this.store.dispatch(new ClickGridAction($event))
+    this.store.dispatch(new ClickGridAction($event))
   }
 }

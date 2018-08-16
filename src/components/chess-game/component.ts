@@ -13,7 +13,7 @@ import './style.less'
 				[activeChessman]="props.activeChessman"
 				[steppingPositions]="props.steppingPositions"
 				[steppedPositions]="props.steppedPositions"
-				(click)="props.onClick">
+				(click)="props.onClick($event)">
 			</chess-grid>
 		</div>
 	</div>`
