@@ -10,16 +10,17 @@ import {
 
 import { ChessApp } from './@'
 import { ChessGameModule } from '../chess-game/@'
-import { ChessBoardFlip } from '../chess-board-flip/@'
-import { ChessGameFlip } from '../chess-game-flip/@'
+import { ChessGameFlipModule } from '../chess-game-flip/@'
 
 const appRoutes: Routes = [
   {
     path: '',
     loadChildren: () => ChessGameModule
   },
-  { path: 'board-flip', component: ChessBoardFlip },
-  { path: 'flip', component: ChessGameFlip }
+  {
+    path: 'flip',
+    loadChildren: () => ChessGameFlipModule
+  },
 ]
 
 @NgModule({
@@ -36,9 +37,7 @@ const appRoutes: Routes = [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   declarations: [
-    ChessApp,
-    ChessGameFlip,
-    ChessBoardFlip
+    ChessApp
   ],
   bootstrap: [
     ChessApp

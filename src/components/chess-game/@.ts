@@ -7,11 +7,7 @@ import { ChessGameContainer } from './ngrx/container'
 import { ChessGameComponent } from './component.ts'
 import { ChessGrid } from '../chess-grid/@'
 import { ChessBoard } from '../chess-board/@'
-import { ChessMan } from '../chess-man/@'
-import { ChessStatus } from '../chess-status/@'
-import { ChessStepped } from '../chess-stepped/@'
-import { ChessStepping } from '../chess-stepping/@'
-import { ChessTattoo } from '../chess-tattoo/@'
+import { ChessComponentsModule } from '../@'
 
 const routes: Routes = [
   {
@@ -25,17 +21,13 @@ const COMPONENTS = [
   ChessGameComponent,
   ChessGrid,
   ChessBoard,
-  ChessMan,
-  ChessStatus,
-  ChessStepped,
-  ChessStepping,
-  ChessTattoo
 ]
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ChessComponentsModule,
     store
   ],
   declarations: COMPONENTS,
