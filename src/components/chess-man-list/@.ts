@@ -6,28 +6,22 @@ import './style.less'
 	selector: 'chess-man-list',
 	template: `
         <div class="chess-man-list">
-            <div class="chess-man-list-item" *ngFor="let name of uniqNames">
+            <div class="chess-man-list-item" *ngFor="let name of uniqNames()">
                 <chess-man [name]="name"></chess-man>
-                <div class="chess-man-count" *ngIf="countNames[name] > 1">
-                    {{countNames[name]}}
+                <div class="chess-man-count" *ngIf="countNames(name) > 1">
+                    {{countNames(name)}}
                 </div>
             </div>
         </div>`
 })
 export class ChessManList {
-    countNames: Object
-    uniqNqmes: string[]
+    @Input() names: string[] = []
 
-    _names: string[] = []
-
-    @Input()
-    get names():string[] {
-        return this._names
+    countNames(name: string): number {
+        return util.countNames(this.names)[name]
     }
-    set names(value:string[]) {
-        this._names = value
-        this.countNames = util.countNames(value)
-        this.uniqNqmes = util.uniqNames(value)
-        debugger
+
+    uniqNames(): string[] {
+        return util.uniqNames(this.names)
     }
 }
