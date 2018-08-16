@@ -5,7 +5,7 @@ import '../chess-grid/style.less'
 @Component({
 	selector: 'chess-grid-flip',
 	template: `
-        <chess-grid showTattoo="false"
+        <chess-grid [showTattoo]="false"
             [numRows]="numRows"
             [numCells]="numCells"
             [chessmans]="props.chessmans"

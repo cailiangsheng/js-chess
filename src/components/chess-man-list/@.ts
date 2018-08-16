@@ -26,7 +26,8 @@ export class ChessManList {
     }
     set names(value:string[]) {
         this._names = value
-        this.countNames = util.countNames()
-        this.uniqNqmes = util.uniqNames()
+        this.countNames = util.countNames(value)
+        this.uniqNqmes = util.uniqNames(value)
+        debugger
     }
 }
