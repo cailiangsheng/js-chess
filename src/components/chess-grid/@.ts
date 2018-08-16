@@ -86,7 +86,7 @@ export class ChessGrid {
 
     isActiveChessman(rowIndex, cellIndex) {
         const position = { rowIndex, cellIndex }
-        return this.activeChessman && _.isEqual(position, this.activeChessman.position)
+        return this.activeChessman && util.isSamePosition(position, this.activeChessman.position)
     }
 
     isHiddenChessman(rowIndex, cellIndex) {
