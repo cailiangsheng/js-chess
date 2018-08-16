@@ -12,7 +12,7 @@ import '../chess-grid/style.less'
             [activeChessman]="props.activeChessman"
             [steppedPositions]="props.steppedPositions"
             [steppingPositions]="props.steppingPositions"
-            (click)="props.onClick">
+            (click)="props.onClick($event)">
         </chess-grid>`
 })
 export class ChessGridFlip {
