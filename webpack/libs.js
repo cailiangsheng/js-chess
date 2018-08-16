@@ -24,6 +24,8 @@ const angularLibs = [
 	'@angular/platform-browser',
 	'@angular/platform-browser-dynamic',
 	'zone.js',
+	'core-js/es6/reflect', // polyfill for DI
+	'core-js/es7/reflect', // polyfill for DI
 	'@ngrx/store'
 ]
 
