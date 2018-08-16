@@ -8,17 +8,17 @@ import { ClickGridAction } from './actions'
   selector: 'chess-game-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <chess-game-component>
+    <chess-game-component [props]="props">
     </chess-game-component>
   `
 })
 export class ChessGameContainer {
+  props: Object
+
   constructor(private store: Store<State>) {
-    this.store.subscribe(data => {
-      console.log(data)
-      debugger
+    this.store.select('chessGame').subscribe(state => {
+      this.props = state
     })
-    debugger
   }
 
   onClick($event) {
