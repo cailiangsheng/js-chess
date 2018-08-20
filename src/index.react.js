@@ -8,3 +8,10 @@ ReactDOM.render(
   <ChessApp />,
   document.querySelector("#root")
 )
+
+socket.on('connect', () => {
+  console.log('conneted')
+  socket.emit('hello', {
+    name: 'world'
+  })
+})
