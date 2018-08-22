@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import ChessApp from 'components/chess-app/.vue'
+import ChessApp from 'views/chess-app/.vue'
 import './style.less'
 
 new Vue(

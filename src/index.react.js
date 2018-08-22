@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ChessApp from 'components/chess-app'
+import ChessApp from 'views/chess-app'
 import socket from 'lib/socket'
 import './style.less'
 

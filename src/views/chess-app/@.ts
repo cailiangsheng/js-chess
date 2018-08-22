@@ -8,8 +8,8 @@ import {
   LocationStrategy
 } from '@angular/common'
 
-import { ChessGameModule } from '../chess-game/@'
-import { ChessGameFlipModule } from '../chess-game-flip/@'
+import { ChessGameModule } from 'components/chess-game/@'
+import { ChessGameFlipModule } from 'components/chess-game-flip/@'
 
 @Component({
   selector: '#root',

@@ -53,6 +53,7 @@ module.exports = {
 	resolve: {
 		modules: [
 			path.resolve('./'),
+			path.resolve('./src'),
 			path.resolve('./node_modules')
 		],
 		alias: {
