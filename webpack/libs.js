@@ -7,7 +7,8 @@ const reactLibs = [
 	'prop-types',
 	'classnames',
 	'lodash',
-	'react-router-dom'
+	'react-router-dom',
+	'socket.io-client'
 ]
 
 const vueLibs = [
