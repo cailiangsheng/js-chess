@@ -20,7 +20,7 @@ const entry = useDLL ? {} : { libs: require('./libs') }
 
 module.exports = {
 	entry: Object.assign(entry, {
-		app: 'src/index.' + (useVue ? 'vue.js' : (useAngular ? 'angular.ts' : 'react.js'))
+		app: 'index.' + (useVue ? 'vue.js' : (useAngular ? 'angular.ts' : 'react.js'))
 	}),
 	output: {
 		filename: '[name].[hash].js',
@@ -57,7 +57,6 @@ module.exports = {
 			path.resolve('./node_modules')
 		],
 		alias: {
-			HOCS: path.resolve(__dirname, 'components/hocs'),
 			vue: path.resolve(__dirname, '../node_modules/vue/dist/vue.common')
 		},
 		extensions: ['.js', '.ts', '.json']

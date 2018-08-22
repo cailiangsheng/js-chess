@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
-import {getName} from '../chess-man/util'
-import CHESS_MAN from '../chess-man/consts'
+import { getName } from 'components/chess-man/util'
+import CHESS_MAN from 'components/chess-man/consts'
 import './style.less'
 
 @Component({
@@ -27,8 +27,8 @@ export class ChessStatus {
 		}
 	}
 
-  playerName() {
-    return !this.winnerColor && this.playerColor
-      && getName({type: CHESS_MAN.TYPE.JIANG, color: this.playerColor})
-  }
+	playerName() {
+		return !this.winnerColor && this.playerColor
+			&& getName({ type: CHESS_MAN.TYPE.JIANG, color: this.playerColor })
+	}
 }

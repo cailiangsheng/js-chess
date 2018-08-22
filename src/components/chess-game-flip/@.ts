@@ -5,8 +5,8 @@ import store from './ngrx/store'
 
 import { ChessGameFlipContainer } from './ngrx/container'
 import { ChessGameFlipComponent } from './component.ts'
-import { ChessComponentsModule } from '../@'
-import { ChessBoardFlip } from '../chess-board-flip/@'
+import { ChessComponentsModule } from 'components/@'
+import { ChessBoardFlip } from 'components/chess-board-flip/@'
 
 const routes: Routes = [
   {
@@ -20,8 +20,8 @@ const routes: Routes = [
 ]
 
 const COMPONENTS = [
-	ChessGameFlipContainer,
-	ChessGameFlipComponent
+  ChessGameFlipContainer,
+  ChessGameFlipComponent
 ]
 
 @NgModule({

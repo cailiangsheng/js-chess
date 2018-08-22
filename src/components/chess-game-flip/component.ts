@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { filterRedNames, filterBlackNames } from '../chess-man/util'
+import { filterRedNames, filterBlackNames } from 'components/chess-man/util'
 import './style.less'
 
 @Component({

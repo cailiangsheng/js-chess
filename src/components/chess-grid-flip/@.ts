@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core'
 import CONSTS from "./consts"
-import '../chess-grid/style.less'
+import 'components/chess-grid/style.less'
 
 @Component({
-	selector: 'chess-grid-flip',
-	template: `
+    selector: 'chess-grid-flip',
+    template: `
         <chess-grid [showTattoo]="false"
             [numRows]="numRows"
             [numCells]="numCells"

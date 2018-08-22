@@ -1,4 +1,4 @@
-import { getType } from '../chess-man/util'
+import { getType } from 'components/chess-man/util'
 import _ from 'lodash'
 
 const countNames = (names) => {

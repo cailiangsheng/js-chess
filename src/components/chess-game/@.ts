@@ -5,8 +5,8 @@ import store from './ngrx/store'
 
 import { ChessGameContainer } from './ngrx/container'
 import { ChessGameComponent } from './component.ts'
-import { ChessComponentsModule } from '../@'
-import { ChessBoard } from '../chess-board/@'
+import { ChessComponentsModule } from 'components/@'
+import { ChessBoard } from 'components/chess-board/@'
 
 const routes: Routes = [
   {

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -12,5 +13,11 @@
     ],
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true
-  }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
