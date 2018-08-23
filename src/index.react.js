@@ -1,17 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ChessApp from 'views/chess-app'
-import socket from 'lib/socket'
 import './style.less'
 
 ReactDOM.render(
   <ChessApp />,
   document.querySelector("#root")
 )
-
-socket.on('connect', () => {
-  console.log('conneted')
-  socket.emit('hello', {
-    name: 'world'
-  })
-})
