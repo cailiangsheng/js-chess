@@ -23,6 +23,10 @@ class ChessGameOnline extends React.Component {
     socket.on('enterRoom', (data) => {
       console.log(`Socket[${data.socketId}] entered room[${data.roomId}]`)
     })
+
+    socket.on('leaveRoom', (data) => {
+      console.log(`Socket[${data.socketId}] left room[${data.roomId}]`)
+    })
   }
 
   render () {
