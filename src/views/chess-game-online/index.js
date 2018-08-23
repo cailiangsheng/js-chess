@@ -11,10 +11,17 @@ class ChessGameOnline extends React.Component {
   _initSocket = () => {
     const {playerColor, roomId, roomToken} = this.props.match.params
     socket.on('connect', () => {
-      console.log('conneted')
-      socket.emit('hello', {
-        name: 'world'
+      console.log('Connected to server')
+
+      socket.emit('enterRoom', {
+        playerColor,
+        roomId,
+        roomToken
       })
+    })
+
+    socket.on('enterRoom', (data) => {
+      console.log(`Socket[${data.socketId}] entered room[${data.roomId}]`)
     })
   }
 
