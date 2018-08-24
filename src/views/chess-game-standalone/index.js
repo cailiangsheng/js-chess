@@ -1,11 +1,11 @@
 import React from 'react'
 
 const ChessGameStandalone = ({match}) => {
-  const {playerColor} = match.params
+  const {viewColor} = match.params
   return <div>
     <span>Standalone Game</span>
     <ul>
-      <li>playerColor: {playerColor}</li>
+      <li>viewColor: {viewColor}</li>
     </ul>
   </div>
 }

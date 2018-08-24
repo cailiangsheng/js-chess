@@ -10,8 +10,8 @@ import ChessGameStandalone from 'views/chess-game-standalone'
 const ChessApp = () => (
     <Router>
         <div>
-            <Route path='/online/:playerColor(red|black)?/:roomId?/:roomToken?' component={ChessGameOnline} />
-            <Route path='/standalone/:playerColor(red|black)?' component={ChessGameStandalone} />
+            <Route path='/online/:viewColor(red|black)?/:roomId?/:roomToken?' component={ChessGameOnline} />
+            <Route path='/standalone/:viewColor(red|black)?' component={ChessGameStandalone} />
             <Route exact path='/' component={ChessGame} />
             <Route path='/flip' component={ChessGameFlip} />
             <Route path='/board' component={ChessBoard} />

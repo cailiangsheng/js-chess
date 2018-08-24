@@ -9,12 +9,12 @@ class ChessGameOnline extends React.Component {
   }
 
   _initSocket = () => {
-    const {playerColor, roomId, roomToken} = this.props.match.params
+    const {viewColor, roomId, roomToken} = this.props.match.params
     socket.on('connect', () => {
       console.log('Connected to server')
 
       socket.emit('enterRoom', {
-        playerColor,
+        viewColor,
         roomId,
         roomToken
       })
@@ -30,11 +30,11 @@ class ChessGameOnline extends React.Component {
   }
 
   render () {
-    const {playerColor, roomId, roomToken} = this.props.match.params
+    const {viewColor, roomId, roomToken} = this.props.match.params
     return <div>
       <span>Online Game</span>
       <ul>
-        <li>playerColor: {playerColor}</li>
+        <li>viewColor: {viewColor}</li>
         <li>roomId: {roomId}</li>
         <li>roomToken: {roomToken}</li>
       </ul>
