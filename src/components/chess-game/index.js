@@ -10,3 +10,7 @@ const ChessGameApp = () => (
 )
 
 export default ChessGameApp
+
+export {
+  store
+}
