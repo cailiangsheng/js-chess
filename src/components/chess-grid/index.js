@@ -7,8 +7,22 @@ import ChessStepped from 'components/chess-stepped'
 import ChessStepping from 'components/chess-stepping'
 import ChessMan from 'components/chess-man'
 import {needsTattoo, findChessMan, findPosition} from './util'
+import {getColor} from 'components/chess-man/util'
 import CONSTS from './consts'
 import './style.less'
+
+const allowAction = ({
+  actionColor,
+  activeColor,
+  chessmanColor
+}) => {
+  if (!actionColor) return true
+  if (activeColor) {
+    return activeColor === actionColor
+  } else {
+    return chessmanColor === actionColor
+  }
+}
 
 const renderCells = (props, rowIndex) => {
   const {
@@ -16,6 +30,7 @@ const renderCells = (props, rowIndex) => {
     numCells,
     showTattoo,
     viewColor,
+    actionColor,
     onClick,
     activeChessman,
     steppedPositions,
@@ -37,7 +52,11 @@ const renderCells = (props, rowIndex) => {
       const isStepped = findPosition(steppedPositions, position)
       const isStepping = findPosition(steppingPositions, position)
       const target = {name: chessmanName, position, isHidden}
-      return <td key={cellIndex} className='cell' onClick={() => onClick && onClick(target)}>
+      const chessmanColor = chessman && getColor(chessman.name)
+      const activeColor = activeChessman && getColor(activeChessman.name)
+      const isClickable = allowAction({actionColor, activeColor, chessmanColor}) && onClick
+      const clickHandler = isClickable ? () => onClick(target) : undefined
+      return <td key={cellIndex} className='cell' onClick={clickHandler}>
         { showTattoo && !chessman && needsTattoo(position) && <ChessTattoo /> }
         { isStepped && <ChessStepped /> }
         { chessman && <ChessMan name={chessmanName} isActive={isActive} isHidden={isHidden} /> }
@@ -93,6 +112,7 @@ ChessGrid.propTypes = {
     })
   ),
   viewColor: PropTypes.string,
+  actionColor: PropTypes.string,
   onClick: PropTypes.func
 }
 
@@ -104,7 +124,8 @@ ChessGrid.defaultProps = {
   activeChessman: null,
   steppedPositions: [],
   steppingPositions: [],
-  viewColor: 'black'
+  viewColor: 'black',
+  actionColor: null
 }
 
 export default ChessGrid

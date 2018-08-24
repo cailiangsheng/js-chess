@@ -60,7 +60,7 @@ class ChessGameOnline extends React.Component {
 
   render () {
     const {viewColor} = this.props.match.params
-    return <ChessGame viewColor={viewColor} />
+    return <ChessGame viewColor={viewColor} actionColor={viewColor} />
   }
 }
 
