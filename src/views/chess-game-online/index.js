@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ChessGame, { store } from 'components/chess-game'
+import ChessGame, { store, updateChessState } from 'components/chess-game'
 import socket from 'lib/socket'
 
 class ChessGameOnline extends React.Component {
@@ -33,6 +33,7 @@ class ChessGameOnline extends React.Component {
 
     socket.on('updateState', (data) => {
       console.log(`Socket[${data.socketId}] updated state`, data.state)
+      this._updateState(data.state)
     })
   }
 
@@ -41,12 +42,20 @@ class ChessGameOnline extends React.Component {
   }
 
   _sendState = () => {
+    if (this.isUpdatingState) return
+
     const {roomId} = this.props.match.params
-    const state = store.getState()
+    const state = store.getState().chessGame
     socket.emit('updateState', {
       roomId,
       state
     })
+  }
+
+  _updateState = (state) => {
+    this.isUpdatingState = true
+    store.dispatch(updateChessState(state))
+    this.isUpdatingState = false
   }
 
   render () {

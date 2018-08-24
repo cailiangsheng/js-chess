@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {CLICK_CHESS_GRID} from './actions'
+import {CLICK_CHESS_GRID, UPDATE_CHESS_STATE} from './actions'
 import {findChessMan} from 'components/chess-grid/util'
 
 import {
@@ -87,6 +87,8 @@ const clickChessGrid = (state = initialState, action) => {
   switch (action.type) {
     case CLICK_CHESS_GRID:
       return clickTarget(state, action.target)
+    case UPDATE_CHESS_STATE:
+      return action.state
     default:
       return state
   }
