@@ -11,11 +11,25 @@ import CONSTS from './consts'
 import './style.less'
 
 const renderCells = (props, rowIndex) => {
-  const {showTattoo, onClick, activeChessman, steppedPositions, steppingPositions} = props
+  const {
+    numRows,
+    numCells,
+    showTattoo,
+    viewColor,
+    onClick,
+    activeChessman,
+    steppedPositions,
+    steppingPositions
+  } = props
+
   return Array
-    .from({length: props.numCells})
+    .from({length: numCells})
     .map((v, cellIndex) => {
-      const position = {rowIndex, cellIndex}
+      const shouldReverse = viewColor !== ChessGrid.defaultProps.viewColor
+      const position = {
+        rowIndex: shouldReverse ? numRows - rowIndex - 1 : rowIndex,
+        cellIndex: shouldReverse ? numCells - cellIndex - 1 : cellIndex
+      }
       const chessman = findChessMan(props.chessmans, position)
       const chessmanName = chessman && chessman.name
       const isHidden = chessman && chessman.isHidden
@@ -78,6 +92,7 @@ ChessGrid.propTypes = {
       cellIndex: PropTypes.number.isRequired
     })
   ),
+  viewColor: PropTypes.string,
   onClick: PropTypes.func
 }
 
@@ -88,7 +103,8 @@ ChessGrid.defaultProps = {
   chessmans: [],
   activeChessman: null,
   steppedPositions: [],
-  steppingPositions: []
+  steppingPositions: [],
+  viewColor: 'black'
 }
 
 export default ChessGrid
