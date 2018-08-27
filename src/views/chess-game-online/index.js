@@ -6,24 +6,30 @@ import getSocket from 'lib/socket'
 class ChessGameOnline extends React.Component {
   constructor (props) {
     super(props)
+    this.state = this._init(this.props)
+  }
 
-    const {viewColor, roomId, roomToken} = this.props.match.params
+  componentWillReceiveProps (nextProps) {
+    this.setState(this._init(nextProps))
+  }
+
+  _init = (props) => {
+    const {viewColor, roomId, roomToken} = props.match.params
+    let mode
     if (!viewColor || !roomId) {
-      this.state = {
-        mode: 'select'
-      }
+      mode = 'entry'
     } else {
-      this.state = {
-        mode: roomToken ? 'play' : 'watch'
-      }
+      mode = roomToken ? 'play' : 'watch'
       this._initSocket()
       this._initStore()
     }
+    return {mode}
   }
 
   _initSocket = () => {
     const {viewColor, roomId, roomToken} = this.props.match.params
     const socket = getSocket()
+
     socket.on('connect', () => {
       console.log('Connected to server')
 
@@ -59,6 +65,7 @@ class ChessGameOnline extends React.Component {
     const {roomId} = this.props.match.params
     const state = store.getState().chessGame
     const socket = getSocket()
+
     socket.emit('updateState', {
       roomId,
       state
@@ -71,9 +78,31 @@ class ChessGameOnline extends React.Component {
     this.isUpdatingState = false
   }
 
+  _renderEntry = () => {
+    return <span>TODO Entry</span>
+  }
+
+  _renderGame = ({viewColor, actionColor}) => {
+    return <ChessGame viewColor={viewColor} actionColor={actionColor} />
+  }
+
   render () {
     const {viewColor} = this.props.match.params
-    return <ChessGame viewColor={viewColor} actionColor={viewColor} />
+    const {mode} = this.state
+    switch (mode) {
+      case 'entry':
+        return this._renderEntry()
+      case 'watch':
+        return this._renderGame({
+          viewColor,
+          actionColor: 'none'
+        })
+      case 'play':
+        return this._renderGame({
+          viewColor,
+          actionColor: viewColor
+        })
+    }
   }
 }
 
