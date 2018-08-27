@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
-import getSocket from 'lib/socket'
+import createSocket from 'lib/socket'
 
 class ChessGameOnline extends React.Component {
   constructor (props) {
@@ -18,9 +18,14 @@ class ChessGameOnline extends React.Component {
     let mode
     if (!viewColor || !roomId) {
       mode = 'entry'
+      this.socket && this.socket.close()
     } else {
       mode = roomToken ? 'play' : 'watch'
-      this._initSocket()
+      if (this.socket) {
+        this.socket.open()
+      } else {
+        this.socket = this._initSocket()
+      }
       this._initStore()
     }
     return {mode}
@@ -28,7 +33,7 @@ class ChessGameOnline extends React.Component {
 
   _initSocket = () => {
     const {viewColor, roomId, roomToken} = this.props.match.params
-    const socket = getSocket()
+    const socket = createSocket()
 
     socket.on('connect', () => {
       console.log('Connected to server')
@@ -53,6 +58,8 @@ class ChessGameOnline extends React.Component {
       console.log(`Socket[${data.socketId}] updated state`, data.state)
       this._updateState(data.state)
     })
+
+    return socket
   }
 
   _initStore = () => {
@@ -64,7 +71,7 @@ class ChessGameOnline extends React.Component {
 
     const {roomId} = this.props.match.params
     const state = store.getState().chessGame
-    const socket = getSocket()
+    const socket = this.socket
 
     socket.emit('updateState', {
       roomId,

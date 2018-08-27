@@ -3,12 +3,7 @@ import io from 'socket.io-client'
 const hostname = location.hostname
 const port = 5555
 const url = `http://${hostname}:${port}`
-let socket
 
-const getSocket = () => {
-    socket = socket || io(url)
-    return socket
-}
+const createSocket = () => io(url)
 
-
-export default getSocket
+export default createSocket
