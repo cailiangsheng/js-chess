@@ -4,9 +4,9 @@ import ChessGame from './redux/container'
 import store from './redux/store'
 import { updateChessState } from './redux/actions'
 
-const ChessGameApp = () => (
+const ChessGameApp = (props) => (
     <Provider store={store}>
-      <ChessGame />
+      <ChessGame {...props} />
     </Provider>
 )
 

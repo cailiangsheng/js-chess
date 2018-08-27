@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
-import socket from 'lib/socket'
+import getSocket from 'lib/socket'
 
 class ChessGameOnline extends React.Component {
   constructor (props) {
@@ -23,6 +23,7 @@ class ChessGameOnline extends React.Component {
 
   _initSocket = () => {
     const {viewColor, roomId, roomToken} = this.props.match.params
+    const socket = getSocket()
     socket.on('connect', () => {
       console.log('Connected to server')
 
@@ -57,6 +58,7 @@ class ChessGameOnline extends React.Component {
 
     const {roomId} = this.props.match.params
     const state = store.getState().chessGame
+    const socket = getSocket()
     socket.emit('updateState', {
       roomId,
       state
@@ -70,8 +72,8 @@ class ChessGameOnline extends React.Component {
   }
 
   render () {
-    const {viewColor, roomId, roomToken} = this.props.match.params
-    return <ChessGame />
+    const {viewColor} = this.props.match.params
+    return <ChessGame viewColor={viewColor} actionColor={viewColor} />
   }
 }
 
