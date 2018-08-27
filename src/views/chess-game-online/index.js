@@ -6,8 +6,19 @@ import socket from 'lib/socket'
 class ChessGameOnline extends React.Component {
   constructor (props) {
     super(props)
-    this._initSocket()
-    this._initStore()
+
+    const {viewColor, roomId, roomToken} = this.props.match.params
+    if (!viewColor || !roomId) {
+      this.state = {
+        mode: 'select'
+      }
+    } else {
+      this.state = {
+        mode: roomToken ? 'play' : 'watch'
+      }
+      this._initSocket()
+      this._initStore()
+    }
   }
 
   _initSocket = () => {
