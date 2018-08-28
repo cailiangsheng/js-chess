@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
 import createSocket from 'lib/socket'
+import ChessGameEntry from './entry'
 
 class ChessGameOnline extends React.Component {
   constructor (props) {
@@ -86,7 +87,7 @@ class ChessGameOnline extends React.Component {
   }
 
   _renderEntry = () => {
-    return <span>TODO Entry</span>
+    return <ChessGameEntry />
   }
 
   _renderGame = ({viewColor, actionColor}) => {
