@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
 import createSocket from 'lib/socket'
-import ChessGameEntry from './entry'
+import ChessGameEntry from './entry/index'
 
 class ChessGameOnline extends React.Component {
   constructor (props) {
