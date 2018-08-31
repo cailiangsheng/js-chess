@@ -24,17 +24,22 @@ class ToggleButton extends React.Component {
 		})
 	}
 
-	value () {
+	option () {
 		const {optionIndex} = this.state
 		const {options} = this.props
-		const value = _.get(options, `[${optionIndex}].value`)
-		return value
+		return _.get(options, `[${optionIndex}]`)
+	}
+
+	value () {
+		return _.get(this.option(), 'value')
+	}
+
+	label () {
+		return _.get(this.option(), 'label', '')
 	}
 
 	render () {
-		const {optionIndex} = this.state
-		const {options} = this.props
-		const label = _.get(options, `[${optionIndex}].label`, '')
+		const label = this.label()
 		return <BasicButton className='toggle' label={label} onClick={this._onClick} />
 	}
 }
