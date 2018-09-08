@@ -22,7 +22,7 @@ const roomOptions = [
 class ChessGameEntry extends React.Component {
 	constructor (props) {
 		super(props)
-		this.input = React.createRef()
+		this.input = null
 		this.state = {
 			roomMode: 'random'
 		}
@@ -34,8 +34,13 @@ class ChessGameEntry extends React.Component {
 		})
 	}
 
+	_setInput = (input) => {
+		this.input = input
+		input && input.focus()
+	}
+
 	_onConfirm = () => {
-		const roomId = _.get(this.input, 'current.value')
+		const roomId = _.get(this.input, 'value')
 		console.log(roomId)
 	}
 
@@ -48,7 +53,7 @@ class ChessGameEntry extends React.Component {
 			<li>房间: <ToggleButton options={roomOptions} onChange={this._onRoomModeChange} /></li>
 			{
 				needsRoomId && <li>
-					房号: <input type='text' ref={this.input} />
+					房号: <input type='text' ref={this._setInput} />
 				</li>
 			}
 			<li><BasicButton label='确定' onClick={this._onConfirm} /></li>
