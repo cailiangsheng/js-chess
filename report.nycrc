@@ -9,5 +9,9 @@
     ],
     "sourceMap": false,
     "instrument": false,
-    "all": false
+    "all": false,
+    "reporter": [
+        "lcov"
+    ],
+    "report-dir": "./coverage"
 }
