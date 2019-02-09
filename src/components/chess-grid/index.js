@@ -6,8 +6,8 @@ import ChessTattoo from 'components/chess-tattoo'
 import ChessStepped from 'components/chess-stepped'
 import ChessStepping from 'components/chess-stepping'
 import ChessMan from 'components/chess-man'
-import {needsTattoo, findChessMan, findPosition} from './util'
-import {getColor} from 'components/chess-man/util'
+import { needsTattoo, findChessMan, findPosition } from './util'
+import { getColor } from 'components/chess-man/util'
 import CONSTS from './consts'
 import './style.less'
 
@@ -38,7 +38,7 @@ const renderCells = (props, rowIndex) => {
   } = props
 
   return Array
-    .from({length: numCells})
+    .from({ length: numCells })
     .map((v, cellIndex) => {
       const shouldReverse = viewColor !== ChessGrid.defaultProps.viewColor
       const position = {
@@ -51,32 +51,32 @@ const renderCells = (props, rowIndex) => {
       const isActive = activeChessman && _.isEqual(position, activeChessman.position)
       const isStepped = findPosition(steppedPositions, position)
       const isStepping = findPosition(steppingPositions, position)
-      const target = {name: chessmanName, position, isHidden}
+      const target = { name: chessmanName, position, isHidden }
       const chessmanColor = chessman && getColor(chessman.name)
       const activeColor = activeChessman && getColor(activeChessman.name)
-      const isClickable = allowAction({actionColor, activeColor, chessmanColor}) && onClick
+      const isClickable = allowAction({ actionColor, activeColor, chessmanColor }) && onClick
       const clickHandler = isClickable ? () => onClick(target) : undefined
       return <td key={cellIndex} className='cell' onClick={clickHandler}>
-        { showTattoo && !chessman && needsTattoo(position) && <ChessTattoo /> }
-        { isStepped && <ChessStepped /> }
-        { chessman && <ChessMan name={chessmanName} isActive={isActive} isHidden={isHidden} /> }
-        { isStepping && <ChessStepping /> }
+        {showTattoo && !chessman && needsTattoo(position) && <ChessTattoo />}
+        {isStepped && <ChessStepped />}
+        {chessman && <ChessMan name={chessmanName} isActive={isActive} isHidden={isHidden} />}
+        {isStepping && <ChessStepping />}
       </td>
     })
 }
 
 const renderRows = (props) => {
   return Array
-    .from({length: props.numRows})
+    .from({ length: props.numRows })
     .map((v, i) => <tr key={i} className='row'>{renderCells(props, i)}</tr>)
 }
 
 const ChessGrid = (props) => {
-	return <table className='chess-grid'>
+  return <table className='chess-grid'>
     <tbody>
       {renderRows(props)}
     </tbody>
-	</table>
+  </table>
 }
 
 ChessGrid.propTypes = {
@@ -124,7 +124,7 @@ ChessGrid.defaultProps = {
   activeChessman: null,
   steppedPositions: [],
   steppingPositions: [],
-  viewColor: 'black',
+  viewColor: 'red',
   actionColor: null
 }
 
