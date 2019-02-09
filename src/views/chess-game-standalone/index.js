@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
 import { ChessAI, move2Iccs } from '../../../../js-chess-ai/dist/ai'
 import { fromFen, toFen, fromIccs } from '../../../../js-chess-ai/test/chessmans'
+import { getWinnerColor } from '../../../../js-chess-ai/test/result'
 
 class ChessGameStandalone extends React.Component {
   constructor(props) {
@@ -11,10 +12,6 @@ class ChessGameStandalone extends React.Component {
   }
 
   _init = (props) => {
-    this._initStore()
-  }
-
-  _initStore = () => {
     store.subscribe(this._onStateChange)
   }
 
@@ -41,10 +38,15 @@ class ChessGameStandalone extends React.Component {
           activeChessman: null,
           steppingPositions: [],
           steppedPositions: fromIccs(iccs),
-          winnerColor: ''
+          winnerColor: getWinnerColor(ai)
         }))
       }
-      ai.response()
+      const winnerColor = getWinnerColor(ai)
+      if (winnerColor) {
+        store.dispatch(updateChessState({ winnerColor }))
+      } else {
+        ai.response()
+      }
     }
   }
 
