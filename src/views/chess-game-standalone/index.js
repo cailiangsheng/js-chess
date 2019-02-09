@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
-import { ChessAI, move2Iccs } from '../../../../js-chess-ai/dist/ai'
-import { fromFen, toFen, fromIccs } from '../../../../js-chess-ai/test/chessmans'
+import { ChessAI, move2Iccs, MOVE } from '../../../../js-chess-ai/dist/ai'
+import { fromFen, toFen, fromIccs, toIccs } from '../../../../js-chess-ai/test/chessmans'
 import { getWinnerColor } from '../../../../js-chess-ai/test/result'
+import { iccs2sqs } from '../../../../js-chess-ai/test/iccs'
 
 class ChessGameStandalone extends React.Component {
   constructor(props) {
@@ -16,18 +17,32 @@ class ChessGameStandalone extends React.Component {
   }
 
   _getAI = () => {
-    var ai = new ChessAI();
-    ai.setSearch(16);
-    ai.setLevel(2); // ai.millis = 10;
-    ai.computer = 1;
-    return ai
+    if (!this.ai) {
+      var ai = new ChessAI();
+      ai.setSearch(16);
+      ai.setLevel(2); // ai.millis = 10;
+      ai.computer = 1;
+      this.ai = ai;
+    }
+    return this.ai;
   }
 
   _onStateChange = () => {
     const state = store.getState().chessGame
     if (state.playerColor === 'black') {
-      const fen = toFen(state.chessmans)
+      const iccs = toIccs(state.steppedPositions)
+      const sqs = iccs2sqs(iccs)
+      const mv = MOVE(sqs[0], sqs[1])
       const ai = this._getAI()
+      if (!ai.pos.legalMove(mv) || !ai.pos.makeMove(mv)) {
+        store.dispatch(updateChessState({
+          ...state,
+          playerColor: '',
+          winnerColor: 'black'
+        }))
+        return
+      }
+      const fen = toFen(state.chessmans)
       ai.pos.fromFen(fen + ' b')
       ai.onAddMove = function () {
         const fen = ai.pos.toFen()
@@ -43,7 +58,11 @@ class ChessGameStandalone extends React.Component {
       }
       const winnerColor = getWinnerColor(ai)
       if (winnerColor) {
-        store.dispatch(updateChessState({ winnerColor }))
+        store.dispatch(updateChessState({
+          ...state,
+          playerColor: '',
+          winnerColor
+        }))
       } else {
         ai.response()
       }
