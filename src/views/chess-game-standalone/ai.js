@@ -15,6 +15,10 @@ import {
 } from '../../../../js-chess-ai/util'
 
 class AI {
+  constructor(updateState) {
+    this.updateState = updateState
+  }
+
   _getAI = () => {
     if (!this.ai) {
       var ai = new ChessAI();
@@ -26,45 +30,59 @@ class AI {
     return this.ai;
   }
 
-  handleStateChange(state, updateState) {
+  _refreshState = () => {
+    const ai = this._getAI()
+    const fen = ai.pos.toFen()
+    const iccs = move2Iccs(ai.mvLast)
+    this.updateState({
+      chessmans: fromFen(fen),
+      playerColor: 'red',
+      activeChessman: null,
+      steppingPositions: [],
+      steppedPositions: fromIccs(iccs),
+      winnerColor: getWinnerColor(ai)
+    })
+  }
+
+  _finalState = (state, winnerColor) => {
+    this.updateState({
+      ...state,
+      playerColor: '',
+      winnerColor
+    })
+  }
+
+  _isBadMove = (iccs) => {
+    const ai = this._getAI()
+    const sqs = iccs2sqs(iccs)
+    const mv = MOVE(sqs[0], sqs[1])
+    return !ai.pos.legalMove(mv) || !ai.pos.makeMove(mv)
+  }
+
+  handleStateChange(state) {
     if (state.playerColor === 'black') {
-      const iccs = toIccs(state.steppedPositions)
-      const sqs = iccs2sqs(iccs)
-      const mv = MOVE(sqs[0], sqs[1])
       const ai = this._getAI()
-      if (!ai.pos.legalMove(mv) || !ai.pos.makeMove(mv)) {
-        updateState({
-          ...state,
-          playerColor: '',
-          winnerColor: 'black'
-        })
+      const iccs = toIccs(state.steppedPositions)
+      if (this._isBadMove(iccs)) {
+        this._finalState(state, 'black')
         return
       }
-      const fen = toFen(state.chessmans)
-      ai.pos.fromFen(fen + ' b')
-      ai.onAddMove = function () {
-        const fen = ai.pos.toFen()
-        const iccs = move2Iccs(ai.mvLast)
-        updateState({
-          chessmans: fromFen(fen),
-          playerColor: 'red',
-          activeChessman: null,
-          steppingPositions: [],
-          steppedPositions: fromIccs(iccs),
-          winnerColor: getWinnerColor(ai)
-        })
-      }
+      ai.onAddMove = (function () {
+        this._refreshState()
+      }).bind(this)
       const winnerColor = getWinnerColor(ai)
       if (winnerColor) {
-        updateState({
-          ...state,
-          playerColor: '',
-          winnerColor
-        })
+        this._finalState(state, winnerColor)
       } else {
         ai.response()
       }
+      iccs2sqs(iccs).forEach((sq) => ai.clickSquare(sq))
     }
+  }
+
+  retract() {
+    this.ai.retract()
+    this._refreshState()
   }
 }
 

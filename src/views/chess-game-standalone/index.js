@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import BasicButton from 'components/button/basic'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
 import AI from './ai'
 
@@ -15,19 +16,26 @@ class ChessGameStandalone extends React.Component {
 
   _onStateChange = () => {
     const state = store.getState().chessGame
-    this.ai = this.ai || new AI()
-    this.ai.handleStateChange(state, this._updateState)
+    this.ai = this.ai || new AI(this._updateState)
+    this.ai.handleStateChange(state)
   }
 
   _updateState = (state) => {
     store.dispatch(updateChessState(state))
   }
 
+  _onRetract = () => {
+    this.ai && this.ai.retract()
+  }
+
   render() {
     // const { viewColor } = match.params
     const viewColor = 'red'
     const actionColor = viewColor
-    return <ChessGame viewColor={viewColor} actionColor={actionColor} />
+    return <div>
+      <ChessGame viewColor={viewColor} actionColor={actionColor} />
+      <BasicButton label='悔棋' onClick={this._onRetract} />
+    </div>
   }
 }
 
