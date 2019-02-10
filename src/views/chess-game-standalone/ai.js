@@ -1,8 +1,18 @@
 
-import { ChessAI, move2Iccs, MOVE } from '../../../../js-chess-ai/dist/ai'
-import { fromFen, toFen, fromIccs, toIccs } from '../../../../js-chess-ai/test/chessmans'
-import { getWinnerColor } from '../../../../js-chess-ai/test/result'
-import { iccs2sqs } from '../../../../js-chess-ai/test/iccs'
+import {
+  ChessAI,
+  move2Iccs,
+  MOVE
+} from '../../../../js-chess-ai/dist/ai'
+
+import {
+  fromFen,
+  toFen,
+  fromIccs,
+  toIccs,
+  getWinnerColor,
+  iccs2sqs
+} from '../../../../js-chess-ai/util'
 
 class AI {
   _getAI = () => {
