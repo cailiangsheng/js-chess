@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import BasicButton from 'components/button/basic'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
 import AI from './ai'
+import './style.less'
 
 class ChessGameStandalone extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class ChessGameStandalone extends React.Component {
     // const { viewColor } = match.params
     const viewColor = 'red'
     const actionColor = viewColor
-    return <div>
+    return <div className='chess-game-standalone'>
       <ChessGame viewColor={viewColor} actionColor={actionColor} />
       <BasicButton label='悔棋' onClick={this._onRetract} />
     </div>
