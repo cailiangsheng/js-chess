@@ -1,5 +1,5 @@
 import React from 'react'
-import {HashRouter as Router, Route} from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 import ChessGame from 'components/chess-game'
 import ChessBoard from 'components/chess-board'
 import ChessBoardFlip from 'components/chess-board-flip'
@@ -10,9 +10,10 @@ import ChessGameStandalone from 'views/chess-game-standalone'
 const ChessApp = () => (
     <Router>
         <div>
+            <Route exact path='/' component={ChessGameStandalone} />
             <Route path='/online/:viewColor(red|black)?/:roomId?/:roomToken?' component={ChessGameOnline} />
             <Route path='/standalone/:viewColor(red|black)?' component={ChessGameStandalone} />
-            <Route exact path='/' component={ChessGame} />
+            <Route path='/game' component={ChessGame} />
             <Route path='/flip' component={ChessGameFlip} />
             <Route path='/board' component={ChessBoard} />
             <Route path='/board-flip' component={ChessBoardFlip} />
