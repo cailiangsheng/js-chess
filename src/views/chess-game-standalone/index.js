@@ -25,6 +25,10 @@ class ChessGameStandalone extends React.Component {
     store.dispatch(updateChessState(state))
   }
 
+  _onRestart = () => {
+    this.ai && this.ai.restart()
+  }
+
   _onRetract = () => {
     this.ai && this.ai.retract()
   }
@@ -35,7 +39,10 @@ class ChessGameStandalone extends React.Component {
     const actionColor = viewColor
     return <div className='chess-game-standalone'>
       <ChessGame viewColor={viewColor} actionColor={actionColor} />
-      <BasicButton label='悔棋' onClick={this._onRetract} />
+      <div className='buttons'>
+        <BasicButton label='新局' onClick={this._onRestart} />
+        <BasicButton label='悔棋' onClick={this._onRetract} />
+      </div>
     </div>
   }
 }

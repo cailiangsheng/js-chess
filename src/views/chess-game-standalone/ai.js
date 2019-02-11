@@ -80,6 +80,11 @@ class AI {
     }
   }
 
+  restart() {
+    this.ai.restart()
+    this._refreshState()
+  }
+
   retract() {
     this.ai.retract()
     this._refreshState()
