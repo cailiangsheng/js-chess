@@ -14,29 +14,29 @@ import {
   iccs2sqs
 } from '../../../../js-chess-ai/util'
 
+const createAI = () => {
+  var ai = new ChessAI();
+  ai.setSearch(16);
+  ai.setLevel(2); // ai.millis = 10;
+  ai.computer = 1;
+  return ai
+}
+
 class AI {
   constructor(updateState) {
     this.updateState = updateState
+    this.ai = createAI()
   }
 
-  _getAI = () => {
-    if (!this.ai) {
-      var ai = new ChessAI();
-      ai.setSearch(16);
-      ai.setLevel(2); // ai.millis = 10;
-      ai.computer = 1;
-      this.ai = ai;
-    }
-    return this.ai;
-  }
+  _isNewGame = () => this.ai.mvLast === 0
 
   _refreshState = () => {
-    const ai = this._getAI()
+    const ai = this.ai
     const fen = ai.pos.toFen()
     const iccs = move2Iccs(ai.mvLast)
     this.updateState({
       chessmans: fromFen(fen),
-      playerColor: 'red',
+      playerColor: this._isNewGame() ? '' : 'red',
       activeChessman: null,
       steppingPositions: [],
       steppedPositions: fromIccs(iccs),
@@ -53,7 +53,7 @@ class AI {
   }
 
   _isBadMove = (iccs) => {
-    const ai = this._getAI()
+    const ai = this.ai
     const sqs = iccs2sqs(iccs)
     const mv = MOVE(sqs[0], sqs[1])
     return !ai.pos.legalMove(mv) || !ai.pos.makeMove(mv)
@@ -61,7 +61,7 @@ class AI {
 
   handleStateChange(state) {
     if (state.playerColor === 'black') {
-      const ai = this._getAI()
+      const ai = this.ai
       const iccs = toIccs(state.steppedPositions)
       if (this._isBadMove(iccs)) {
         this._finalState(state, 'black')
