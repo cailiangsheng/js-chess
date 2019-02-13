@@ -20,6 +20,8 @@ import CHESS_MAN from 'components/chess-man/consts'
 
 import CHESS_GRID from 'components/chess-grid/consts'
 
+const ONLY_ALLOW_SAFE_GO = true
+
 // TODO: move to common util
 const getSteppingPositions = (from, chessmans) => {
   const positions = []
@@ -58,6 +60,50 @@ const getWinnerColor = (chessmans = []) => {
 }
 
 const canGo = (from, to, chessmans = []) => {
+  return (ONLY_ALLOW_SAFE_GO ? canGoSafely : canGoValidly)(from, to, chessmans)
+}
+
+const proceedGo = (from, to, chessmans) => {
+  let chessmansAfterGo = _.cloneDeep(chessmans)
+
+  const chessmanKilled = findChessMan(
+    chessmansAfterGo,
+    to.position
+  )
+  chessmansAfterGo = _.without(chessmansAfterGo, chessmanKilled)
+
+  const chessmanGoing = findChessMan(chessmansAfterGo, from.position)
+  if (chessmanGoing) {
+    chessmanGoing.position = to.position
+  }
+
+  return {
+    chessmansAfterGo,
+    chessmanGoing
+  }
+}
+
+const isColorInCheck = (color, chessmans) => {
+  const currentJiang = getJiangChessmans(chessmans).find(jiang => getColor(jiang.name) === color)
+  const chessmansToGo = _.filter(chessmans, (chessman) => getColor(chessman.name) !== color)
+  return _.some(chessmansToGo, (chessmanToGo) => canGoValidly(chessmanToGo, currentJiang, chessmans))
+}
+
+const canGoSafely = (from, to, chessmans) => {
+  if (canGoValidly(from, to, chessmans)) {
+    if (chessmans) {
+      const { chessmansAfterGo, chessmanGoing } = proceedGo(from, to, chessmans)
+      if (chessmansAfterGo && chessmanGoing) {
+        const colorGoing = getColor(chessmanGoing.name)
+        return !isColorInCheck(colorGoing, chessmansAfterGo)
+      }
+    }
+    return true
+  }
+  return false
+}
+
+const canGoValidly = (from, to, chessmans = []) => {
   if (!from || !to) {
     return false
   }
@@ -75,8 +121,8 @@ const canGo = (from, to, chessmans = []) => {
     return false
   }
 
-  const differ = differPositions({from, to})
-  const params = {from, to, differ, chessmans}
+  const differ = differPositions({ from, to })
+  const params = { from, to, differ, chessmans }
 
   switch (getType(from.name)) {
     case CHESS_MAN.TYPE.JU:
@@ -98,7 +144,7 @@ const canGo = (from, to, chessmans = []) => {
   }
 }
 
-const differPositions = ({from, to}) => ({
+const differPositions = ({ from, to }) => ({
   deltaRow: Math.abs(to.position.rowIndex - from.position.rowIndex),
   deltaCell: Math.abs(to.position.cellIndex - from.position.cellIndex),
   stepRow: Math.sign(to.position.rowIndex - from.position.rowIndex),
@@ -117,7 +163,7 @@ const isSlantByOneStep = (differ) => {
   return differ.deltaRow * differ.deltaCell === 1
 }
 
-const countStraightBlockers = ({from, to, differ, chessmans}) => {
+const countStraightBlockers = ({ from, to, differ, chessmans }) => {
   const numSteps = Math.max(differ.deltaRow, differ.deltaCell) - 1
   const position = _.cloneDeep(from.position)
   let numBlockers = 0
@@ -144,13 +190,13 @@ const canGoJu = (params) => {
   return isStraight(params.differ) && countStraightBlockers(params) === 0
 }
 
-const canGoMa = ({from, to, differ, chessmans}) => {
+const canGoMa = ({ from, to, differ, chessmans }) => {
   return differ.deltaRow * differ.deltaCell === 2 && (
     !findChessMan(chessmans,
       (
         differ.deltaRow > differ.deltaCell
-        ? {rowIndex: from.position.rowIndex + differ.stepRow, cellIndex: from.position.cellIndex}
-        : {rowIndex: from.position.rowIndex, cellIndex: from.position.cellIndex + differ.stepCell}
+          ? { rowIndex: from.position.rowIndex + differ.stepRow, cellIndex: from.position.cellIndex }
+          : { rowIndex: from.position.rowIndex, cellIndex: from.position.cellIndex + differ.stepCell }
       )
     )
   )
@@ -164,7 +210,7 @@ const canGoPao = (params) => {
   )
 }
 
-const canGoXiang = ({from, to, differ, chessmans}) => {
+const canGoXiang = ({ from, to, differ, chessmans }) => {
   if (!isXiangPosition(from.position)) {
     throw new Error('XIANG is at invalid position')
   } else if (!isXiangPosition(to.position)) {
@@ -179,7 +225,7 @@ const canGoXiang = ({from, to, differ, chessmans}) => {
   }
 }
 
-const canGoShi = ({from, to, differ, chessmans}) => {
+const canGoShi = ({ from, to, differ, chessmans }) => {
   if (!isShiPosition(from.position)) {
     throw new Error('SHI is at invalid position')
   } else if (!isShiPosition(to.position)) {
@@ -201,15 +247,15 @@ const canGoJiang = (params) => {
   }
 }
 
-const canGoZu = ({from, to, differ, chessmans}) => {
-  const jiangName = getName({color: getColor(from.name), type: CHESS_MAN.TYPE.JIANG})
+const canGoZu = ({ from, to, differ, chessmans }) => {
+  const jiangName = getName({ color: getColor(from.name), type: CHESS_MAN.TYPE.JIANG })
   const jiangChessman = chessmans.find(chessman => chessman.name === jiangName)
   if (!jiangChessman) {
     throw new Error('There\'s no ' + jiangName)
   }
 
-  const differToJiang = differPositions({from, to: jiangChessman})
-  const differToCenter = differPositions({from, to: { position: getCenterPosition() }})
+  const differToJiang = differPositions({ from, to: jiangChessman })
+  const differToCenter = differPositions({ from, to: { position: getCenterPosition() } })
 
   const stepBackward = differToJiang.stepRow
   const stepForward = -stepBackward
