@@ -3,7 +3,7 @@ import {
   ChessAI,
   move2Iccs,
   MOVE
-} from '../../../../js-chess-ai/dist/ai'
+} from 'js-chess-ai/dist/ai'
 
 import {
   fromFen,
@@ -12,7 +12,7 @@ import {
   toIccs,
   getWinnerColor,
   iccs2sqs
-} from '../../../../js-chess-ai/util'
+} from 'js-chess-ai/util'
 
 const createAI = () => {
   var ai = new ChessAI();

@@ -51,6 +51,7 @@
   },
   "homepage": "https://github.com/cailiangsheng/js-chess#readme",
   "dependencies": {
+    "js-chess-ai": "git+https://github.com/cailiangsheng/js-chess-ai.git",
     "@angular/common": "6.1.0",
     "@angular/compiler": "6.1.0",
     "@angular/core": "6.1.0",
