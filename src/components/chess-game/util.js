@@ -52,11 +52,25 @@ const getJiangChessmans = (chessmans = []) => {
   return _.filter(chessmans, (chessman) => getType(chessman.name) === CHESS_MAN.TYPE.JIANG)
 }
 
+const canColorGo = (color, chessmans) => (
+  chessmans
+  .filter(chessman => getColor(chessman.name) === color)
+  .some(chessman => getSteppingPositions(chessman, chessmans).length)
+)
+
 const getWinnerColor = (chessmans = []) => {
   const jiangChessmans = getJiangChessmans(chessmans)
-  if (jiangChessmans.length === 1) return getColor(jiangChessmans[0].name)
-  else if (jiangChessmans.length === 2) return ''
-  else return CHESS_MAN.COLOR.INVALID
+  if (jiangChessmans.length === 1) {
+    return getColor(jiangChessmans[0].name)
+  } else if (jiangChessmans.length === 2) {
+    if (!canColorGo(CHESS_MAN.COLOR.RED, chessmans)) {
+      return CHESS_MAN.COLOR.BLACK
+    } else if (!canColorGo(CHESS_MAN.COLOR.BLACK, chessmans)) {
+      return CHESS_MAN.COLOR.RED
+    } else return ''
+  } else {
+    return CHESS_MAN.COLOR.INVALID
+  }
 }
 
 const canGo = (from, to, chessmans = []) => {
