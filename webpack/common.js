@@ -41,11 +41,6 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loader: ['cache-loader', 'babel-loader'],
-				include: [/node_modules\/js-chess-ai/]
-			},
-			{
-				test: /\.js$/,
-				loader: ['cache-loader', 'babel-loader'],
 				exclude: [/node_modules/, /assets/]
 			},
 			{
