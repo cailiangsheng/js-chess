@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import AI from 'js-chess-ai'
 import BasicButton from 'components/button/basic'
 import ChessGame, { store, updateChessState } from 'components/chess-game'
-import AI from './ai'
 import './style.less'
 
 class ChessGameStandalone extends React.Component {
