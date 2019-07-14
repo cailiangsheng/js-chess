@@ -1,19 +1,53 @@
-@board-cell-size: 30px;
+@board-cell-size: 60px;
+@thick-width: @board-cell-size * 0.05;
+@thin-width: @board-cell-size * 0.02;
 
 .chess-board {
-  border: solid 2px black;
-  padding: 2px;
+  width: @board-cell-size * 10 + @thick-width * 2 + @thin-width * 10;
+  height: @board-cell-size * 11 + @thick-width * 2;
+  background-color: white;
+  border: solid @thick-width black;
 
   table {
-    border: solid 1px black;
+    border: solid @thin-width black;
     border-spacing: 0;
   }
 
   .cell {
     width: @board-cell-size;
+    min-width: @board-cell-size;
+    max-width: @board-cell-size;
     height: @board-cell-size;
-    border-right: solid 1px black;
-    border-bottom: solid 1px black;
+    min-height: @board-cell-size;
+    max-height: @board-cell-size;
+    border-right: solid @thin-width black;
+    border-bottom: solid @thin-width black;
     padding: 0;
+  }
+}
+
+.chess-board {
+  position: relative;
+
+  .grid {
+    position: absolute;
+    border: solid @thick-width black;
+  }
+
+  .grid.fore {
+    top: 0;
+    left: 0;
+    padding: @board-cell-size / 2;
+    border-color: transparent !important;
+
+    table, .cell {
+      border-color: transparent !important;
+    }
+  }
+
+  .grid.back {
+    top: @board-cell-size - @thick-width;
+    left: @board-cell-size - @thick-width;
+    padding: @thick-width;
   }
 }

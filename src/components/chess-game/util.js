@@ -14,11 +14,14 @@ import {
   isShiPosition,
   isXiangPosition,
   findChessMan
-} from 'components/chess-grid/util'
+} from './pos'
 
 import CHESS_MAN from 'components/chess-man/consts'
 
-import CHESS_GRID from 'components/chess-grid/consts'
+const CHESS_GRID = {
+  NUM_ROWS: 10,
+  NUM_CELLS: 9
+}
 
 const ONLY_ALLOW_SAFE_GO = true
 

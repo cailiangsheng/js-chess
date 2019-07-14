@@ -8,14 +8,16 @@
   .row:last-child .cell {
     border-bottom: none;
   }
+}
 
+.chess-board.normal .grid.back {
   .row:nth-child(5) .cell {
     border-right: none;
     position: relative;
 
     &:before {
       line-height: @board-cell-size;
-      font-size: 22px;
+      font-size: @board-cell-size * 0.5;
       color: black;
     }
 

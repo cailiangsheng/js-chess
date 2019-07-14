@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {CLICK_CHESS_GRID, UPDATE_CHESS_STATE} from './actions'
-import {findChessMan} from 'components/chess-grid/util'
+import {findChessMan} from '../pos'
 
 import {
   isValid,
